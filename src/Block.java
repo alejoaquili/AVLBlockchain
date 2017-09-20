@@ -9,31 +9,42 @@ public class Block <T>{
     private long nounce;
     private String prevHash;
     private  String hash;
+    private  String zeros;
     /**
      *Creates a {@code Block} object for a {@code Blockchain}.
-     * @param index index of this node on the blockchain.
-     * @param data information to store in this block.
-     * @param prevHash the hash encoded in SHA-256 of the previous block.
+     * @param index index of this node on the Blockchain.
+     * @param data information to store in this Block.
+     * @param prevHash the hash encoded in SHA-256 of the previous Block.
      */
-    public Block(long index, T data, String prevHash){
-        if(index < 0 || prevHash == null){
-            throw new IllegalArgumentException("index or previous hash were incorrect");
-        }
-
+    public Block(long index, T data, String prevHash, int zeros){
+        if(index < 0 ) throw new IllegalArgumentException("index were incorrect");
+        if(prevHash == null ) throw new IllegalArgumentException("previous hash were incorrect");
+        if(zeros < 0 ) throw new IllegalArgumentException("zeros were incorrect");
         this.data = data;
         this.index = index;
         this.prevHash = prevHash;
+        this.zeros = generateExpReg(zeros);
         nounce = 0;
         hash = Encoder.getSha256(Long.toString(index) + data.toString() + prevHash);   //checkear como se hace
     }
 
+    private String generateExpReg(int zeros){
+        StringBuffer expReg = new StringBuffer(zeros +3);
+        expReg.append('^');
+        for (int i = 0 ; i < zeros ; i++)
+            expReg.append('0');
+        expReg.append('.');
+        expReg.append('*');
+        return new String(expReg);
+    }
+
     /**
-     * This method  figured out the nounce number that valid the hash of this block
+     * This method figured out the nounce number that valid the hash of this Block.
      */
     public void mine() {
         long nounceTry = 0;
         hash = Encoder.getSha256(hash + Long.toString(nounce));
-        while(!hash.matches("^0000.*")){
+        while(!hash.matches(this.zeros)){
             nounceTry++;
             hash = Encoder.getSha256(hash + Long.toString(nounce));
         }
@@ -41,11 +52,11 @@ public class Block <T>{
     }
 
     /**
-     *This method validate the hash of the {@code Block} object
+     *This method validate the hash of the {@code Block} object.
      * @return true if the hash of this block begins with the specified number of zeros, false otherwise.
      */
     public boolean isValidHash() {
-        return hash.matches("^0000.*");
+        return hash.matches(this.zeros);
     }
 
     /**
