@@ -65,6 +65,9 @@ public class Blockchain <T> {
         public Node next;
 
         public Node(Block<T> block){
+            if(block == null){
+                throw  new IllegalArgumentException("a block must not be null");
+            }
             this.block = block;
         }
     }
