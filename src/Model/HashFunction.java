@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
  */
 
 public class HashFunction {
-
+    private int prueba;
     private MessageDigest md;
     private static HashFunction encoder;
 
