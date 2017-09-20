@@ -6,10 +6,15 @@ public class Blockchain <T> {
 
     private Node lastNode;
     public final String GENESIS = "0000000000000000000000000000000";
+    private int zeros;
 
-
-    public Blockchain(){
+    public Blockchain(int zeros){
+        if( zeros < 0){
+            throw  new IllegalArgumentException();
+        }
+        this.zeros = zeros;
         lastNode = null;
+
     }
 
     public void add(T data){
@@ -18,7 +23,8 @@ public class Blockchain <T> {
             b = createGenesis(data);
         }else{
             Block<T> prev = lastNode.block;
-            b = new Block<T>(prev.getIndex()+1, data, prev.getHash());
+            b = new Block<T>(prev.getIndex()+1, data, prev.getHash(), zeros);
+            b.mine();
         }
 
         Node n = new Node(b);
@@ -27,7 +33,8 @@ public class Blockchain <T> {
     }
 
     public Block<T> createGenesis(T data){
-        Block<T> b = new Block<T>(0, data, GENESIS);
+        Block<T> b = new Block<T>(0, data, GENESIS, zeros);
+        b.mine();
         return b;
     }
 
@@ -68,9 +75,10 @@ public class Blockchain <T> {
 
 
     public static void  main(String[] args){
-        Blockchain<Integer> b = new Blockchain<>();
-        for (int i = 0; i < 100000; i++) {
+        Blockchain<Integer> b = new Blockchain<>(7);
+        for (int i = 0; i < 10; i++) {
             b.add(i);
+            System.out.println("finish proccessing "+ i);
         }
         System.out.println(b.verify());
     }
