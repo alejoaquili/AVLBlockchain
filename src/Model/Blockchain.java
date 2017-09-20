@@ -1,3 +1,6 @@
+package Model;
+
+import java.security.NoSuchAlgorithmException;
 
 /*
 * Created by levensworth
@@ -5,17 +8,30 @@
 public class Blockchain <T> {
 
     private Node lastNode;
-    public final String GENESIS = "0000000000000000000000000000000";
-    private int zeros;
+    public final static String HASH_FUNCTION = "SHA-256";
+    public final static String GENESIS = "0000000000000000000000000000000";
+    private String zeros;
+    public HashFunction encoder;
 
-    public Blockchain(int zeros){
+    public Blockchain(int zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
         if( zeros < 0){
             throw  new IllegalArgumentException();
         }
-        this.zeros = zeros;
+        this.encoder = HashFunction.getSingletonInstance(HASH_FUNCTION);
+        this.zeros = generateExpReg(zeros);
         lastNode = null;
-
     }
+
+    private static String generateExpReg(int zeros){
+        StringBuffer expReg = new StringBuffer(zeros +3);
+        expReg.append('^');
+        for (int i = 0 ; i < zeros ; i++)
+            expReg.append('0');
+        expReg.append('.');
+        expReg.append('*');
+        return new String(expReg);
+    }
+
 
     public void add(T data){
         Block<T> b = null;
@@ -57,7 +73,6 @@ public class Blockchain <T> {
     }
 
 
-
     /*
     * @deprecated
     * do not use , stack memory problems with chains bigger than 10 000 elements
@@ -74,8 +89,8 @@ public class Blockchain <T> {
     }
 
 
-    public static void  main(String[] args){
-        Blockchain<Integer> b = new Blockchain<>(7);
+    public static void  main(String[] args) throws NoSuchAlgorithmException, CloneNotSupportedException {
+        Blockchain<Integer> b = new Blockchain<>(4);
         for (int i = 0; i < 10; i++) {
             b.add(i);
             System.out.println("finish proccessing "+ i);
@@ -84,9 +99,8 @@ public class Blockchain <T> {
     }
 
     private class Node {
-
-        public Block<T> block;
-        public Node next;
+        Block<T> block;
+        Node next;
 
         public Node(Block<T> block){
             if(block == null){
