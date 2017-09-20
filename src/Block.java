@@ -47,7 +47,7 @@ public class Block <T>{
     public void mine() {
         long nounce = 0;
         hash = Encoder.getSha256(hash + Long.toString(nounce));
-        while(!hash.matches("^0000.*")){
+        while(!hash.matches(this.zeros)){
             nounce++;
             hash = Encoder.getSha256(hash + Long.toString(nounce));
         }
@@ -58,7 +58,7 @@ public class Block <T>{
      * @return true if the hash of this block begins with the specified number of zeros, false otherwise.
      */
     public boolean isValidHash() {
-        return hash.matches("^0000.*");
+        return hash.matches(this.zeros);
     }
 
     /**
