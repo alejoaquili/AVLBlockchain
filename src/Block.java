@@ -9,6 +9,7 @@ public class Block <T>{
     private long nounce;
     private String prevHash;
     private String hash;
+    private String zeros;
 
     /**
      *Creates a {@code Block} object for a {@code Blockchain}.
@@ -16,16 +17,28 @@ public class Block <T>{
      * @param data information to store in this block.
      * @param prevHash the hash encoded in SHA-256 of the previous block.
      */
-    public Block(long index, T data, String prevHash){
-        if(index <= 0 || prevHash == null){
-            throw new IllegalArgumentException("index or previous hash were incorrect");
-        }
-
+    public Block(long index, T data, String prevHash, int zeros){
+        if(index < 0)throw new IllegalArgumentException("index were incorrect");
+        if(prevHash == null) throw new IllegalArgumentException("previous hash were incorrect");
+        if(zeros < 0) throw new IllegalArgumentException("zeros were incorrect");
         this.data = data;
         this.index = index;
         this.prevHash = prevHash;
+        this.zeros = generateRegEx(zeros);
         nounce = 0;
         hash = Encoder.getSha256(Long.toString(index) + data.toString() + prevHash);   //checkear como se hace
+    }
+
+    private String generateRegEx(int zeros){
+        StringBuffer expReg = new StringBuffer(zeros+5);
+        expReg.append('"');
+        expReg.append('^');
+        for (int i = 0 ; i < zeros ; i++)
+            expReg.append('0');
+        expReg.append('.');
+        expReg.append('*');
+        expReg.append('"');
+        return new String(expReg);
     }
 
     /**
