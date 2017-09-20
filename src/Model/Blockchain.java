@@ -1,10 +1,15 @@
+/**
+ * this class represetns the blockchain object
+ * @param <T> is the type of object that each block will store.
+ */
 package Model;
 
 import java.security.NoSuchAlgorithmException;
 
-/*
-* Created by levensworth
-* */
+/**
+ * This class represents the blockchain object
+ * @param <T> is the data type that is each block will store
+ */
 public class Blockchain <T> {
 
     private Node lastNode;
@@ -13,6 +18,10 @@ public class Blockchain <T> {
     private String zeros;
     public HashFunction encoder;
 
+    /**
+     * this cinstructor will create an empty blockchain
+     * @param zeros are the number of zeros thta the hash of each block must have
+     */
     public Blockchain(int zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
         if( zeros < 0){
             throw  new IllegalArgumentException();
@@ -31,6 +40,12 @@ public class Blockchain <T> {
         expReg.append('*');
         return new String(expReg);
     }
+
+
+    /**
+     * adds data to the blockchain in a new block
+     * @param data the data to ve insert
+     */
 
 
     public void add(T data){
@@ -73,6 +88,7 @@ public class Blockchain <T> {
     }
 
 
+
     /*
     * @deprecated
     * do not use , stack memory problems with chains bigger than 10 000 elements
@@ -111,3 +127,4 @@ public class Blockchain <T> {
     }
 
 }
+
