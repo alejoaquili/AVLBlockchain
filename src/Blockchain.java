@@ -36,9 +36,25 @@ public class Blockchain <T> {
             return true;
         }
 
-        return verify(lastNode.next, lastNode.block.getPrevHash());
+        Node current = lastNode;
+        Block<T> b ;
+        while( current != null && current.next != null){
+            b = current.block;
+            Block<T> next = current.next.block;
+            if(!b.getPrevHash().equals(next.getHash())){
+                return false;
+            }
+            current = current.next;
+        }
+        return true;
     }
 
+
+
+    /*
+    * @deprecated
+    * do not use , stack memory problems with chains bigger than 10 000 elements
+    * */
     private boolean verify(Node n, String hash){
         if(n == null || n.block.getPrevHash().equals(GENESIS)){
             return  true;
@@ -53,7 +69,7 @@ public class Blockchain <T> {
 
     public static void  main(String[] args){
         Blockchain<Integer> b = new Blockchain<>();
-        for (int i = 0; i < 1100; i++) {
+        for (int i = 0; i < 100000; i++) {
             b.add(i);
         }
         System.out.println(b.verify());
