@@ -41,30 +41,26 @@ public class AVLTree<T> {
         return n;
     }
 
-    public void delete(T element){
-        if(element != null){
-           head = delete(head, element );
+
+
+
+    public boolean remove(T value) {
+        if (head == null)
+            return false;
+        else {
+            if (cmp.compare(head.element, value) == 0) {
+                Node auxRoot = new Node(null);
+                auxRoot.left = head;
+                boolean result = head.remove(value, auxRoot);
+                head = auxRoot.left;
+                return result;
+            } else {
+                return head.remove(value, null);
+            }
         }
-
-
     }
 
 
-
-
-    }
-
-    private Node findReplace(Node n){
-        if(n.left == null && n.right == null){
-            return n;
-        }
-
-
-    }
-
-    public boolean contains(T element){
-        return true;
-    }
 
 
 
@@ -94,7 +90,7 @@ public class AVLTree<T> {
                     return false;
             } else {
                 if (left != null && right != null) {
-                    this.element = right.minValue();
+                    this.element = left.minValue();
                     right.remove(this.element, this);
                 } else if (parent.left == this) {
                     parent.left = (left != null) ? left : right;
@@ -106,7 +102,7 @@ public class AVLTree<T> {
         }
 
         public T minValue() {
-            if (left == null)
+            if (right == null)
                 return element;
             else
                 return left.minValue();
