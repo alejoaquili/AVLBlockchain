@@ -1,3 +1,5 @@
+package Model.DataStructures;
+
 import java.util.Comparator;
 
 /**
@@ -64,7 +66,7 @@ public class AVLTree<T> {
 
 
 
-    private class Node{
+    private class Node {
 
         T element;
         Node left;

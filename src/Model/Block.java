@@ -10,8 +10,8 @@ public class Block <T>{
     private T data;
     private long nounce;
     private String prevHash;
-    private  String hash;
-    private  String zeros;
+    private String hash;
+    private String zeros;
 
     /**
      *Creates a {@code Model.Block} object for a {@code Model.Blockchain}.
