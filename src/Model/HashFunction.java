@@ -3,6 +3,10 @@ package Model;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ *  This class represents a singleton object for a hash function.
+ */
+
 public class HashFunction {
 
     private MessageDigest md;
@@ -18,6 +22,13 @@ public class HashFunction {
         }
     }
 
+    /**
+     * Creates the singleton {@code HashFunction} object.
+     * @param algorithm the specified algorithm used for the coding.
+     * @return a reference of the singleton instance of the {@code HashFunction} object.
+     * @throws NoSuchAlgorithmException if the specified algorithm were invalid.
+     * @throws CloneNotSupportedException if a new instance of {@code HashFunction} is required.
+     */
     public static HashFunction getSingletonInstance(String algorithm) throws NoSuchAlgorithmException, CloneNotSupportedException {
         if(encoder == null) {
             encoder = new HashFunction(algorithm);
@@ -26,6 +37,10 @@ public class HashFunction {
         return encoder;
     }
 
+    /**
+     * Returns the singleton instance.
+     * @return the reference of singleton {@code HashFunction} object.
+     */
     public static HashFunction getSingletonInstance() {
         return encoder;
     }
@@ -37,6 +52,11 @@ public class HashFunction {
         return result.toString();
     }
 
+    /**
+     * This method provided the hash code for a specified value.
+     * @param value a {@code String} with specified value.
+     * @return a {@code String} with the encoded value.
+     */
     public String encode(String value) {
         try{
             md.update(value.getBytes());
