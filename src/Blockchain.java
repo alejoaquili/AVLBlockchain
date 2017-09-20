@@ -53,7 +53,7 @@ public class Blockchain <T> {
 
     public static void  main(String[] args){
         Blockchain<Integer> b = new Blockchain<>();
-        for (int i = 0; i < 11000; i++) {
+        for (int i = 0; i < 1100; i++) {
             b.add(i);
         }
         System.out.println(b.verify());
