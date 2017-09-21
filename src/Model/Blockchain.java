@@ -46,8 +46,6 @@ public class Blockchain <T> {
      * adds data to the blockchain in a new block
      * @param data the data to ve insert
      */
-
-
     public void add(T data){
         Block<T> b = null;
         if(lastNode == null){
