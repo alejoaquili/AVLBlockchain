@@ -26,7 +26,11 @@ public class AVLTree<T> {
     }
 
     private int height(AVLNode node) {
-        return (node == null) ? -1 : node.height;
+        return (node == null) ? 0 : node.height;
+    }
+
+    private int getBalance(AVLNode node) {
+        return height(node.right) - height(node.left);
     }
 
     public void  insert(T element){
@@ -45,16 +49,20 @@ public class AVLTree<T> {
         if(result > 0){
             node.left = insert(node.left, element);
             if (getBalance(node) == -2) {
-                node = simpleRotateL(node);
-            } else {
-                node = doubleRotateL(node);
+                if (cmp.compare(node.left.element, element) > 0) {
+                    node = simpleRotateL(node);
+                } else {
+                    node = doubleRotateL(node);
+                }
             }
         }else if (result < 0){
             node.right = insert(node.right, element);
             if (getBalance(node) == 2) {
-                node = simpleRotateR(node);
-            } else {
-                node = doubleRotateR(node);
+                if (cmp.compare(node.right.element, element) < 0) {
+                    node = simpleRotateR(node);
+                } else {
+                    node = doubleRotateR(node);
+                }
             }
         }
         node.height = max(height(node.right), height(node.left)) + 1;
@@ -99,10 +107,6 @@ public class AVLTree<T> {
         return node;
     }
 
-    private int getBalance(AVLNode node) {
-        return height(node.right) - height(node.left);
-    }
-
     public void remove(T element) {
         if (head != null) {
             head = remove(head, element);
@@ -110,14 +114,17 @@ public class AVLTree<T> {
     }
 
     private AVLNode remove(AVLNode node, T element) {
+        if (node == null) {
+            return node;
+        }
+
         int result = cmp.compare(node.element, element);
         if (result > 0) {
             node.left = remove(node.left, element);
             if (getBalance(node) == 2) {
                 if(getBalance(node.right) < 0) {
                     doubleRotateR(node);
-                }
-                else {
+                } else {
                     simpleRotateR(node);
                 }
             }
@@ -127,8 +134,7 @@ public class AVLTree<T> {
             if (getBalance(node) == -2) {
                 if(getBalance(node.left) > 0) {
                     doubleRotateL(node);
-                }
-                else {
+                } else {
                     simpleRotateL(node);
                 }
             }
@@ -138,13 +144,11 @@ public class AVLTree<T> {
                 AVLNode aux = null;
                 if (node.left == null) {
                     aux = node.right;
-                }
-                else {
+                } else {
                     aux = node.left;
                 }
                 node = aux;
-            }
-            else {
+            } else {
                 AVLNode aux = maxValueNode(node.left);
                 node.element = aux.element;
                 node.left = remove(node.left, aux.element);
@@ -162,6 +166,13 @@ public class AVLTree<T> {
         String r = toString(node.right);
         return l + node.element.toString() + r;
     }
+    public void print(AVLNode node){
+        if(node != null){
+            print(node.left);
+            System.out.println(node.element);
+            print(node.right);
+        }
+    }
     public static void main(String[] args){
         AVLTree<Integer> b = new AVLTree<>(new Comparator<Integer>() {
             @Override
@@ -176,8 +187,17 @@ public class AVLTree<T> {
         b.insert(2);
         b.remove(5);
         b.remove(4);
+        b.insert(2);
+        b.insert(10);
+        b.remove(7);
+        b.insert(200);
+        b.insert(300);
+        b.insert(400);
+        b.insert(100);
+        b.insert(40);
+        b.remove(100);
 
-        System.out.println(b.toString(b.head));
+        b.print(b.head);
     }
 
     private class AVLNode {
