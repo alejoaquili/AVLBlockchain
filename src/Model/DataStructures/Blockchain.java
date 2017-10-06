@@ -5,8 +5,10 @@
 package Model.DataStructures;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
-    /**
+/**
      * This class represents the {@code Blockcahin} object.
      * @param <T> is the data type that is each {@code Block} will store.
      */
@@ -118,6 +120,18 @@ public class Blockchain <T> {
             return verify(n.next, n.block.getPrevHash());
         }
         return  false;
+    }
+
+    public <S> List<Long> findBlocks(S element){
+        List<Long> indeces = new ArrayList<>();
+
+        Node current = lastNode;
+        while(current != null){
+            if(current.block.contains(element)){
+                indeces.add(current.block.getIndex());
+            }
+        }
+        return indeces;
     }
 
 

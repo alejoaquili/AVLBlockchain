@@ -58,6 +58,7 @@ public class BlockData <T> {
         this.removedElement = removedElement;
     }
 
+
     public String toString(){
         String result;
         if(searchElement != null){
@@ -67,8 +68,25 @@ public class BlockData <T> {
             result += "- Modified: " + modifiedElements + "\n";
         }
 
-        result += " -  "+ result;
+        result += " -  result: "+ this.result;
         return  result;
 
+    }
+
+
+    public boolean equals(Object o){
+        if(o == null ){
+            return false;
+        }
+
+        if(o.equals(searchElement) || o.equals(addedElemnt) || o.equals(removedElement)){
+            return true;
+        }
+
+        if(modifiedElements.contains(o)){
+            return true;
+        }
+
+        return false;
     }
 }

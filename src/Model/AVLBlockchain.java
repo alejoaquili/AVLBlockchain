@@ -31,7 +31,7 @@ public class AVLBlockchain<T> {
         blockchain.add(data);
     }
 
-    public List<Integer> lookup(T element) {
+    public List<Long> lookup(T element) {
         BlockData<T> data = tree.search(element);
         blockchain.add(data);
 

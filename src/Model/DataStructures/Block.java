@@ -94,4 +94,7 @@ public class Block <S>{
         return prevHash;
     }
 
+    public boolean contains(Object element){
+        return this.data.equals(element);
+    }
 }
