@@ -5,13 +5,6 @@ package Model.DataStructures;
  * @param <S> The parameter is a generic for the  type of data stored.
  */
 public class Block < S extends BlockDataInterface> {
-    /**
-     * This class represents the nodes of a {@code Blockchain}
-     * @param <S> The parameter is a generic for the  type of data stored.
-     */
-
-public class Block <S extends BlockDataInterface> {
-
     private long index;
     private S data;
     private long nounce;
