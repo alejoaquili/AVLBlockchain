@@ -5,7 +5,7 @@ package Model.DataStructures;
      * @param <S> The parameter is a generic for the  type of data stored.
      */
 
-public class Block < S extends BlockDataInterface> {
+public class Block <S extends BlockDataInterface> {
 
     private long index;
     private S data;
