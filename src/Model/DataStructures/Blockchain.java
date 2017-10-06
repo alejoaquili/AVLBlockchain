@@ -9,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-     * This class represents the {@code Blockcahin} object.
-     * @param <T> is the data type that is each {@code Block} will store.
-     */
-
+ * This class represents the {@code Blockcahin} object.
+ * @param <T> is the data type that is each {@code Block} will store.
+ */
 public class Blockchain <T extends BlockDataInterface> {
-
     private Node lastNode;
     public final static String HASH_FUNCTION = "SHA-256";
     public final static String GENESIS = "0000000000000000000000000000000";
@@ -25,7 +23,6 @@ public class Blockchain <T extends BlockDataInterface> {
      * This constructor method will create an empty {@code Blockchain} object.
      * @param zeros are the number of zeros that the hash of each {@code Block} must have
      */
-
     public Blockchain(int zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
         if( zeros < 0){
             throw  new IllegalArgumentException();
@@ -45,12 +42,10 @@ public class Blockchain <T extends BlockDataInterface> {
         return new String(expReg);
     }
 
-
     /**
      * This method adds data to the {@BlockChain} in a new {@code Block}.
      * @param data the data to ve insert.
      */
-
     public void add(T data){
         Block<T> b = null;
         if(lastNode == null){
@@ -71,7 +66,6 @@ public class Blockchain <T extends BlockDataInterface> {
      * @param data the data to be insert.
      * @return a new GENESIS {@code Block}.
      */
-
     public Block<T> createGenesis(T data){
         Block<T> b = new Block<T>(0, data, GENESIS, zeros);
         b.mine();
@@ -82,8 +76,7 @@ public class Blockchain <T extends BlockDataInterface> {
      * This method verify the consistency of the {@Blockchain}.
      * @return true if all the {@code Block} of the {@code Blockchain} are consistent. Otherwise return false.
      */
-
-    public boolean verify(){
+     public boolean verify(){
         if(lastNode == null || lastNode.block.getPrevHash().equals(GENESIS)){
             return true;
         }
@@ -99,9 +92,9 @@ public class Blockchain <T extends BlockDataInterface> {
             current = current.next;
         }
         return true;
-    }
+     }
 
-    /**
+     /**
      *This method for verify the consistency of the {@code Blockchain} has been deprecated because it works recursive
      * causing stack memory problems with chains bigger than 10 000 elements.
      * Use {@link #verify()} instead.
@@ -109,9 +102,8 @@ public class Blockchain <T extends BlockDataInterface> {
      * @param hash a {@code String} with the hash.
      * @return true if all the {@code Block} of the {@code Blockchain} are consistent. Otherwise return false.
      */
-
-   @Deprecated
-    private boolean verify(Node n, String hash){
+     @Deprecated
+     private boolean verify(Node n, String hash){
         if(n == null || n.block.getPrevHash().equals(GENESIS)){
             return  true;
         }
@@ -120,22 +112,26 @@ public class Blockchain <T extends BlockDataInterface> {
             return verify(n.next, n.block.getPrevHash());
         }
         return  false;
-    }
+     }
 
-    public <S> List<Long> findBlocks(S element){
-        List<Long> indeces = new ArrayList<>();
+     /**
+      * This method look up for all the {@code Blocks} in the {@code Blockchain} that contains the element that has been
+      * modified.
+     * @param element the element of the modified node of the chain.
+     * @param <S> the generic data type of the {@code Blocks}.
+     * @return a {@code List<Long>} with the indices of the {@code Blocks} involved.
+     */
+     public <S> List<Long> findBlocks(S element){
+        List<Long> indices = new ArrayList<>();
 
         Node current = lastNode;
         while(current != null){
             if(current.block.contains(element)){
-                indeces.add(current.block.getIndex());
+                indices.add(current.block.getIndex());
             }
         }
-        return indeces;
+        return indices;
     }
-
-
-
 
     private class Node {
         Block<T> block;

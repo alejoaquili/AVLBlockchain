@@ -4,21 +4,23 @@ package Model.DataStructures;
 import java.util.Comparator;
 import java.util.Random;
 
-    /**
-     * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
-     * @param <T> the type of data to be store in each node of the tree
-     */
+/**
+ * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
+ * @param <T> the type of data to be store in each node of the tree.
+ */
 public class AVLTree<T> {
 
 
     private AVLNode head;
     private Comparator<T> cmp;
 
+    /**
+     * Returns a new {@code AVLTree} object.
+     * @param cmp a {@code Comparator<T>} that represents the sorting criteria of the tree.
+     */
     public AVLTree(Comparator<T> cmp){
 
-        if(cmp == null){
-            throw new IllegalArgumentException("Comparator should not be null");
-        }
+        if(cmp == null) throw new IllegalArgumentException("Comparator should not be null");
         head = null;
         this.cmp = cmp;
     }
@@ -35,6 +37,11 @@ public class AVLTree<T> {
         return height(node.right) - height(node.left);
     }
 
+    /**
+     * This method insert a generic T element in the tree.
+     * @param element an specified element to be inserted in the tree.
+     * @return a {@code BlockData<T>} that specified the operation.
+     */
     public BlockData<T> insert(T element){
         BlockData<T> data = new BlockData<T>();
         data.setAddedElemnt(element);
@@ -128,6 +135,11 @@ public class AVLTree<T> {
         return node;
     }
 
+    /**
+     * This method remove a generic T element of the {@code AVLTree} object.
+     * @param element a generic element to be removed.
+     * @return a {@code BlockData<T>} that specified the operation.
+     */
     public BlockData<T> remove(T element) {
         BlockData<T> data = new BlockData<T>();
         data.setRemovedElement(element);
@@ -180,6 +192,11 @@ public class AVLTree<T> {
         return node;
     }
 
+    /**
+     * This method search a generic type element in the {@code AVLTree} Object.
+     * @param element a generic type element to be searched.
+     * @return a {@code BlockData<T>} that specified the operation.
+     */
     public BlockData<T> search(T element){
         return search(head, element);
     }
@@ -222,14 +239,7 @@ public class AVLTree<T> {
 
 
     //Cosas a borrar
-    public String toString(AVLNode node){
-        if(node == null){
-            return "";
-        }
-        String l = toString(node.left);
-        String r = toString(node.right);
-        return l + node.element.toString() + r;
-    }
+
     public void print(AVLNode node){
         if(node != null){
             print(node.left);

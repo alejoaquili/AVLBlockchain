@@ -1,7 +1,5 @@
 package Model.DataStructures;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,6 @@ import java.util.List;
  */
 
 public class BlockData <T> implements BlockDataInterface{
-    // these are the modify blocks , we store their content as a way of searching them later
     private List<T> modifiedElements ;
     private T addedElemnt;
     private  T removedElement;

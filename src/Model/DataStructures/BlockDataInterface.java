@@ -1,9 +1,8 @@
 package Model.DataStructures;
 
 /**
- * Created by SB on 06/10/2017.
+ * This interface represents the requirement to conform the data of a {@code Block}.
  */
 public interface BlockDataInterface {
-
      boolean contains(Object o);
 }
