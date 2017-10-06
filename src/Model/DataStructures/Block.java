@@ -1,7 +1,7 @@
 package Model.DataStructures;
 
     /**
-     * This class represents the nodes of a {@code Model.DataStructures.Blockchain}
+     * This class represents the nodes of a {@code Blockchain}
      * @param <T> The parameter is a generic for the type of the stored {@code BlockData} object.
      */
 public class Block <T>{
@@ -74,7 +74,7 @@ public class Block <T>{
      *This method return the data of the {@code Model.DataStructures.Block}.
      * @return a T object with the stored data in the {@code Model.DataStructures.Block}.
      */
-    public T getData(){
+    public BlockData<T> getData(){
         return data;
     }
 
