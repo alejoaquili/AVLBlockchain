@@ -124,6 +124,8 @@ public class FileReader implements Iterable<String>  {
     }
 
 
+
+
     //cosas para borrar
 
     public static void  main(String[] args) throws IOException {
