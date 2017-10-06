@@ -7,8 +7,8 @@ package Model.DataStructures;
 import java.security.NoSuchAlgorithmException;
 
     /**
-     * This class represents the blockchain object
-     * @param <T> is the data type that is each block will store
+     * This class represents the {@code Blockcahin} object.
+     * @param <T> is the data type that is each {@code Block} will store.
      */
 public class Blockchain <T> {
 
@@ -19,8 +19,8 @@ public class Blockchain <T> {
     public HashFunction encoder;
 
     /**
-     * this cinstructor will create an empty blockchain
-     * @param zeros are the number of zeros thta the hash of each block must have
+     * This constructor method will create an empty {@code Blockchain} object.
+     * @param zeros are the number of zeros that the hash of each {@code Block} must have
      */
     public Blockchain(int zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
         if( zeros < 0){
@@ -43,8 +43,8 @@ public class Blockchain <T> {
 
 
     /**
-     * adds data to the blockchain in a new block
-     * @param data the data to ve insert
+     * This method adds data to the {@BlockChain} in a new {@code Block}.
+     * @param data the data to ve insert.
      */
     public void add(T data){
         Block<T> b = null;
