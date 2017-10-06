@@ -37,6 +37,7 @@ public class AVLTree<T> {
 
     public BlockData<T> insert(T element){
         BlockData<T> data = new BlockData<T>();
+        data.setAddedElemnt(element);
 
         if (element != null) {
             head = insert(head, element, data);
@@ -47,7 +48,7 @@ public class AVLTree<T> {
     private AVLNode insert(AVLNode node, T element, BlockData<T> data) {
         if(node == null){
             AVLNode aux = new AVLNode(element);
-            data.setAddedElemnt(element);
+            data.setResult(true);
             return aux;
         }
         int result = cmp.compare(node.element, element);
@@ -129,6 +130,7 @@ public class AVLTree<T> {
 
     public BlockData<T> remove(T element) {
         BlockData<T> data = new BlockData<T>();
+        data.setRemovedElement(element);
         if (head != null) {
             head = remove(head, element, data);
         }
@@ -163,7 +165,7 @@ public class AVLTree<T> {
             }
         }
         else {
-            data.setRemovedElement(node.element);
+            data.setResult(true);
             if (node.left != null && node.right != null) {
                 AVLNode aux = maxValueNode(node.left);
                 node.element = aux.element;
@@ -178,13 +180,15 @@ public class AVLTree<T> {
         return node;
     }
 
-    public boolean search(T element){
+    public BlockData<T> search(T element){
         return search(head, element);
     }
 
-    private boolean search(AVLNode node, T element){
+    private BlockData<T> search(AVLNode node, T element){
+        BlockData<T> data = new BlockData<T>();
+        data.setSearchElement(element);
         if(node == null){
-            return false;
+            return data;
         }
 
         int result = cmp.compare(node.element, element);
@@ -196,7 +200,8 @@ public class AVLTree<T> {
             return search(node.right, element);
         }
 
-        return true;
+        data.setResult(true);
+        return  data;
     }
 
     private class AVLNode {

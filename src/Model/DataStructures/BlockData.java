@@ -13,9 +13,28 @@ public class BlockData <T> {
     // these are the modify blocks , we store their content as a way of searching them later
     private List<T> modifiedElements ;
     private T addedElemnt;
-    private T removedElement;
+    private  T removedElement;
+    private T searchElement;
+    private boolean result;
+
+    public T getSearched() {
+        return searchElement;
+    }
+
+    public void setSearchElement(T searched) {
+        this.searchElement = searched;
+    }
+
+    public boolean getResult(){
+        return result;
+    }
+
+    public void setResult(boolean result) {
+        this.result = result;
+    }
 
     public BlockData(){
+        result = false;
         modifiedElements = new ArrayList<T>();
     }
 
@@ -40,10 +59,15 @@ public class BlockData <T> {
     }
 
     public String toString(){
-        String result = (addedElemnt == null) ? "Added: " + addedElemnt: "Removed: " + removedElement;
+        String result;
+        if(searchElement != null){
+               result = "Searched Element: " + searchElement;
+        }else {
+            result = (addedElemnt == null) ? "Added: " + addedElemnt : "Removed: " + removedElement;
+            result += "- Modified: " + modifiedElements + "\n";
+        }
 
-        result += "- Modified: " + modifiedElements + "\n";
-
+        result += " -  "+ result;
         return  result;
 
     }

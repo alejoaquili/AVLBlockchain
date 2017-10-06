@@ -1,3 +1,7 @@
+/**
+ * this class represetns the blockchain object
+ * @param <T> is the type of object that each block will store.
+ */
 package Model.DataStructures;
 
 import java.security.NoSuchAlgorithmException;
@@ -42,7 +46,7 @@ public class Blockchain <T> {
 
     /**
      * This method adds data to the {@BlockChain} in a new {@code Block}.
-     * @param data the data to be insert.
+     * @param data the data to ve insert.
      */
 
     public void add(T data){
