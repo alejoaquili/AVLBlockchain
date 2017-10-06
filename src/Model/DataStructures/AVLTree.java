@@ -45,6 +45,30 @@ public class AVLTree<T> {
         return data;
     }
 
+
+    public boolean search(T element){
+        return search(head, element);
+    }
+
+    private boolean search(AVLNode node, T element){
+        if(node == null){
+            return false;
+        }
+
+        int result = cmp.compare(node.element, element);
+
+        if(result > 0 ){
+            return search(node.left, element);
+        }
+        if(result < 0 ){
+            return search(node.right, element);
+        }
+
+        return true;
+
+    }
+
+
     private AVLNode insert(AVLNode node, T element, BlockData<T> data) {
         if(node == null){
             AVLNode aux = new AVLNode(element);
@@ -219,8 +243,8 @@ public class AVLTree<T> {
             resultRight = cmp.compare(node.element, node.right.element);
         }
 
-        boolean imVerified = resultLeft > 0 && resultRight < 0;
-        return (imVerified && verifyTree(node.left) && verifyTree(node.right));
+        boolean iamVerified = resultLeft > 0 && resultRight < 0;
+        return (iamVerified && verifyTree(node.left) && verifyTree(node.right));
 
     }
 
@@ -264,18 +288,6 @@ public class AVLTree<T> {
             left = null;
             right = null;
             height = 0;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o.getClass().equals(getClass()))) return false;
-
-            AVLNode avlNode = (AVLNode) o;
-
-            if (element != null ? !element.equals(avlNode.element) : avlNode.element != null) return false;
-            if (left != null ? !left.equals(avlNode.left) : avlNode.left != null) return false;
-            return right != null ? right.equals(avlNode.right) : avlNode.right == null;
         }
 
 
