@@ -2,12 +2,12 @@ package Model.DataStructures;
 
     /**
      * This class represents the nodes of a {@code Blockchain}
-     * @param <T> The parameter is a generic for the type of the stored {@code BlockData} object.
+     * @param <S> The parameter is a generic for the  type of data stored.
      */
-public class Block <T>{
+public class Block <S>{
 
     private long index;
-    private BlockData<T> data;
+    private S data;
     private long nounce;
     private String prevHash;
     private String hash;
@@ -19,7 +19,7 @@ public class Block <T>{
      * @param data information to store in this Block.
      * @param prevHash the hash encoded in SHA-256 of the previous Block.
      */
-    public Block(long index, BlockData<T> data, String prevHash, String zeros){
+    public Block(long index, S data, String prevHash, String zeros){
         if(index < 0 ) throw new IllegalArgumentException("index were incorrect");
         if(prevHash == null ) throw new IllegalArgumentException("previous hash were incorrect");
         if(zeros == null) throw new IllegalArgumentException("zeros were incorrect");
@@ -71,10 +71,10 @@ public class Block <T>{
     }
 
     /**
-     *This method return the {@code BlockData<T>} object of the {@code Block}.
-     * @return a {@code BlockData<T>} object with the stored data in the {@code Block}.
+     *This method return the data generic object of the {@code Block}.
+     * @return a object with the stored data in the {@code Block}.
      */
-    public BlockData<T> getData(){
+    public S getData(){
         return data;
     }
 
