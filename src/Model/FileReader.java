@@ -13,19 +13,24 @@ public class FileReader implements Iterable<String>  {
     private String path;
     private RandomAccessFile fileReader;
 
-    /** Creates a {@code FileReader} with the specified path for the file.
+    /**
+     * Creates a {@code FileReader} with the specified path for the file.
      * @param path The path of the file.
      * @throws FileNotFoundException if the specified path is empty.
      */
+
     public FileReader(String path) throws FileNotFoundException {
         if(path == null) throw  new IllegalArgumentException("The path argument is null");
         this.path = path;
         this.fileReader = new RandomAccessFile(path, "r");
     }
-    /**Returns a {@code String} with the data read from the line where file reader is pointing to.
+
+    /**
+     * Returns a {@code String} with the data read from the line where file reader is pointing to.
      * @return a new {@code String} with the data read from the line where file reader is pointing to.
      * @throws IOException if an I/O error occurs.
      */
+
     public String getLine() throws IOException {
         if(!feof()){
             String line = fileReader.readLine();
@@ -35,12 +40,14 @@ public class FileReader implements Iterable<String>  {
         }
 
 
-    /**Returns a {@code String} with the data read from the specified line of the file.
+    /**
+     * Returns a {@code String} with the data read from the specified line of the file.
      * The line is counted from the beginning of the file, number zero stands for the first line.
      * @param lineNumber the number of the line of the file.
      * @return a new {@code String} with the data read from the specified line.
      * @throws IOException if an I/O error occurs.
      */
+
     public String getLine(long lineNumber) throws IOException {
        if(lineNumber < 0) throw  new IndexOutOfBoundsException();
         while(--lineNumber != 0) {
@@ -55,16 +62,21 @@ public class FileReader implements Iterable<String>  {
         throw new RuntimeException("There are not more lines to read");
     }
 
-    /** Puts the file reader pointer to the beginning of the file.
+    /**
+     * Puts the file reader pointer to the beginning of the file.
      * @throws IOException if the pos parameter in seek method is less than 0 or if an I/O error occurs.
      */
+
     public void resetFilePointer() throws IOException {
         fileReader.seek(0L);
     }
-    /**Returns false if there are more lines to read. Otherwise return true.
+
+    /**
+     * Returns false if there are more lines to read. Otherwise return true.
      * @return a boolean that represent if there are more lines to read (true) or not (false).
      * @throws IOException if an I/O error occurs.
      */
+
     public boolean feof() throws IOException {
         boolean isEof = true;
         long lastPointer = fileReader.getFilePointer();
@@ -76,11 +88,13 @@ public class FileReader implements Iterable<String>  {
 
         return isEof;
     }
+
     /**
      * Returns a {@code FileReader} Custom Iterator, allows a {@code FileReader} Object to be the target of
      * the "for-each loop" statement.
      * @return an {@code Iterator<String>}.
      */
+
     @Override
     public Iterator<String> iterator() {
         return new FileReaderIterator();

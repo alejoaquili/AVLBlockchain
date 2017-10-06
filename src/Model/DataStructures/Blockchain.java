@@ -1,7 +1,3 @@
-/**
- * this class represetns the blockchain object
- * @param <T> is the type of object that each block will store.
- */
 package Model.DataStructures;
 
 import java.security.NoSuchAlgorithmException;
@@ -10,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
      * This class represents the {@code Blockcahin} object.
      * @param <T> is the data type that is each {@code Block} will store.
      */
+
 public class Blockchain <T> {
 
     private Node lastNode;
@@ -22,6 +19,7 @@ public class Blockchain <T> {
      * This constructor method will create an empty {@code Blockchain} object.
      * @param zeros are the number of zeros that the hash of each {@code Block} must have
      */
+
     public Blockchain(int zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
         if( zeros < 0){
             throw  new IllegalArgumentException();
@@ -44,8 +42,9 @@ public class Blockchain <T> {
 
     /**
      * This method adds data to the {@BlockChain} in a new {@code Block}.
-     * @param data the data to ve insert.
+     * @param data the data to be insert.
      */
+
     public void add(T data){
         Block<T> b = null;
         if(lastNode == null){
@@ -61,11 +60,22 @@ public class Blockchain <T> {
         lastNode = n;
     }
 
+    /**
+     * This method creates a GENESIS (The first {@code Block} of the {@code Blockchain}){@code Block} for the {@code Blockchain}.
+     * @param data the data to be insert.
+     * @return a new GENESIS {@code Block}.
+     */
+
     public Block<T> createGenesis(T data){
         Block<T> b = new Block<T>(0, data, GENESIS, zeros);
         b.mine();
         return b;
     }
+
+    /**
+     * This method verify the consistency of the {@Blockchain}.
+     * @return true if all the {@code Block} of the {@code Blockchain} are consistent. Otherwise return false.
+     */
 
     public boolean verify(){
         if(lastNode == null || lastNode.block.getPrevHash().equals(GENESIS)){
@@ -85,10 +95,16 @@ public class Blockchain <T> {
         return true;
     }
 
-    /*
-    * @deprecated
-    * do not use , stack memory problems with chains bigger than 10 000 elements
-    * */
+    /**
+     *This method for verify the consistency of the {@code Blockchain} has been deprecated because it works recursive
+     * causing stack memory problems with chains bigger than 10 000 elements.
+     * Use {@link #verify()} instead.
+     * @param n the specified {@code Node}.
+     * @param hash a {@code String} with the hash.
+     * @return true if all the {@code Block} of the {@code Blockchain} are consistent. Otherwise return false.
+     */
+
+   @Deprecated
     private boolean verify(Node n, String hash){
         if(n == null || n.block.getPrevHash().equals(GENESIS)){
             return  true;

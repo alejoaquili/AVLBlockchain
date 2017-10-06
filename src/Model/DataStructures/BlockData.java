@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the data that each block of a blockchain stores
- *
- *
+ * This class represents the data that each block of a blockchain stores.
  */
+
 public class BlockData <T> {
     // these are the modify blocks , we store their content as a way of searching them later
     private List<T> modifiedElements ;
