@@ -1,5 +1,7 @@
 package Model.DataStructures;
 
+import Model.Exceptions.NodeException;
+
 import java.util.Comparator;
 import java.util.Random;
 
@@ -34,35 +36,39 @@ public class AVLTree<T> {
         return height(node.right) - height(node.left);
     }
 
-    public void  insert(T element){
-        if(element != null){
-            head = insert(head, element);
+    public BlockData<T> insert(T element){
+        BlockData<T> data = new BlockData<T>();
+
+        if (element != null) {
+            head = insert(head, element, data);
         }
+        return data;
     }
 
-    private AVLNode insert(AVLNode node, T element){
+    private AVLNode insert(AVLNode node, T element, BlockData<T> data) {
         if(node == null){
             AVLNode aux = new AVLNode(element);
+            data.setAddedElemnt(element);
             return aux;
         }
         int result = cmp.compare(node.element, element);
 
         if(result > 0){
-            node.left = insert(node.left, element);
+            node.left = insert(node.left, element, data);
             if (getBalance(node) == -2) {
                 if (getBalance(node.left) < 0) {
-                    node = singleRotateLeftChild(node);
+                    node = singleRotateLeftChild(node, data);
                 } else {
-                    node = doubleRotateLeftChild(node);
+                    node = doubleRotateLeftChild(node,data);
                 }
             }
         }else if (result < 0){
-            node.right = insert(node.right, element);
+            node.right = insert(node.right, element,data);
             if (getBalance(node) == 2) {
                 if (getBalance(node.right) > 0) {
-                    node = singleRotateRightChild(node);
+                    node = singleRotateRightChild(node,data);
                 } else {
-                    node = doubleRotateRightChild(node);
+                    node = doubleRotateRightChild(node,data);
                 }
             }
         }
@@ -70,32 +76,46 @@ public class AVLTree<T> {
         return node;
     }
 
-    private AVLNode singleRotateLeftChild(AVLNode node) {
+    private AVLNode singleRotateLeftChild(AVLNode node, BlockData<T> data) {
         AVLNode aux = node.left;
         node.left = aux.right;
         aux.right = node;
         node.height = max(height(node.right), height(node.left)) + 1;
         aux.height = max(height(node.right), height(node.left)) + 1;
+        data.addModified(aux.element);
+        if(aux.left != null) {
+            data.addModified(aux.left.element);
+        }
+        if(node.left != null) {
+            data.addModified(node.left.element);
+        }
         return aux;
     }
 
-    private AVLNode singleRotateRightChild(AVLNode node) {
+    private AVLNode singleRotateRightChild(AVLNode node,BlockData<T> data) {
         AVLNode aux = node.right;
         node.right = aux.left;
         aux.left = node;
         node.height = max(height(node.right), height(node.left)) + 1;
         aux.height = max(height(node.right), height(node.left)) + 1;
+        data.addModified(aux.element);
+        if(aux.left != null) {
+            data.addModified(aux.left.element);
+        }
+        if(node.right != null) {
+            data.addModified(node.right.element);
+        }
         return aux;
     }
 
-    private AVLNode doubleRotateRightChild(AVLNode node) {
-        node.right = singleRotateLeftChild(node.right);
-        return singleRotateRightChild(node);
+    private AVLNode doubleRotateRightChild(AVLNode node,BlockData<T> data) {
+        node.right = singleRotateLeftChild(node.right,data);
+        return singleRotateRightChild(node,data);
     }
 
-    private AVLNode doubleRotateLeftChild(AVLNode node) {
-        node.left = singleRotateRightChild(node.left);
-        return singleRotateLeftChild(node);
+    private AVLNode doubleRotateLeftChild(AVLNode node,BlockData<T> data) {
+        node.left = singleRotateRightChild(node.left,data);
+        return singleRotateLeftChild(node,data);
     }
 
     private AVLNode maxValueNode(AVLNode node) {
@@ -108,13 +128,20 @@ public class AVLTree<T> {
         return node;
     }
 
-    public void remove(T element) {
-        if (head != null) {
-            head = remove(head, element);
+    public boolean remove(T element) {
+        try {
+            BlockData<T> data = new BlockData<T>();
+            if (head != null) {
+                head = remove(head, element, data);
+            }
+        }catch(NodeException n){
+            return false;
         }
+
+        return true;
     }
 
-    private AVLNode remove(AVLNode node, T element) {
+    private AVLNode remove(AVLNode node, T element, BlockData<T> data) throws NodeException {
         if (node == null) {
             return node;
         }
@@ -122,30 +149,31 @@ public class AVLTree<T> {
         int result = cmp.compare(node.element, element);
 
         if (result > 0) {
-            node.left = remove(node.left, element);
+            node.left = remove(node.left, element,data);
             if (getBalance(node) == 2) {
                 if (getBalance(node.right) < 0) {
-                    doubleRotateRightChild(node);
+                    doubleRotateRightChild(node,data);
                 } else {
-                    singleRotateRightChild(node);
+                    singleRotateRightChild(node,data);
                 }
             }
         }
         else if (result < 0) {
-            node.right = remove(node.right, element);
+            node.right = remove(node.right, element,data);
             if (getBalance(node) == -2) {
                 if (getBalance(node.left) > 0) {
-                    doubleRotateLeftChild(node);
+                    doubleRotateLeftChild(node,data);
                 } else {
-                    singleRotateLeftChild(node);
+                    singleRotateLeftChild(node,data);
                 }
             }
         }
         else {
+            data.setRemovedElement(node.element);
             if (node.left != null && node.right != null) {
                 AVLNode aux = maxValueNode(node.left);
                 node.element = aux.element;
-                node.left = remove(node.left, aux.element);
+                node.left = remove(node.left, aux.element,data);
             } else if (node.left == null) {
                 return node.right;
             } else {
@@ -192,7 +220,7 @@ public class AVLTree<T> {
         }
 
         boolean imVerified = resultLeft > 0 && resultRight < 0;
-        return (  imVerified && verifyTree(node.left) && verifyTree(node.right));
+        return (imVerified && verifyTree(node.left) && verifyTree(node.right));
 
     }
 
@@ -210,16 +238,17 @@ public class AVLTree<T> {
             int i = 0;
             for (i = 0; i < 1000; i++) {
                 if (i % 2 == 0) {
-                    b.insert(rand.nextInt() % 1000);
+                    System.out.println(b.insert(rand.nextInt() % 1000));
+
                 } else {
-                    b.remove(rand.nextInt() % 1000);
+                    System.out.println(b.remove(rand.nextInt() % 1000));
+
                 }
             }
 
         }
 
         b.print(b.head);
-        System.out.println(b.head.element);
         System.out.println(b.verifyTree());
     }
 
@@ -236,6 +265,20 @@ public class AVLTree<T> {
             right = null;
             height = 0;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o.getClass().equals(getClass()))) return false;
+
+            AVLNode avlNode = (AVLNode) o;
+
+            if (element != null ? !element.equals(avlNode.element) : avlNode.element != null) return false;
+            if (left != null ? !left.equals(avlNode.left) : avlNode.left != null) return false;
+            return right != null ? right.equals(avlNode.right) : avlNode.right == null;
+        }
+
+
     }
 
 }
