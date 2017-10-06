@@ -41,7 +41,7 @@ public class BlockData <T> {
     }
 
     public String toString(){
-        String result = (addedElemnt == null) ? "Added: " + addedElemnt: "Removed " + removedElement;
+        String result = (addedElemnt == null) ? "Added: " + addedElemnt: "Removed: " + removedElement;
 
         result += "- Modified: " + modifiedElements;
 
