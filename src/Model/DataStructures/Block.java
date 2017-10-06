@@ -28,7 +28,7 @@ public class Block <T>{
         this.prevHash = prevHash;
         this.zeros = zeros;
         nounce = 0;
-        hash = HashFunction.getSingletonInstance().encode(Long.toString(index) + data.toString() + prevHash);   //checkear como se hace
+        hash = HashFunction.getSingletonInstance().encode(Long.toString(index) + data.toString() + prevHash);
     }
 
     /**
