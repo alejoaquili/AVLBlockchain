@@ -45,30 +45,6 @@ public class AVLTree<T> {
         return data;
     }
 
-
-    public boolean search(T element){
-        return search(head, element);
-    }
-
-    private boolean search(AVLNode node, T element){
-        if(node == null){
-            return false;
-        }
-
-        int result = cmp.compare(node.element, element);
-
-        if(result > 0 ){
-            return search(node.left, element);
-        }
-        if(result < 0 ){
-            return search(node.right, element);
-        }
-
-        return true;
-
-    }
-
-
     private AVLNode insert(AVLNode node, T element, BlockData<T> data) {
         if(node == null){
             AVLNode aux = new AVLNode(element);
@@ -152,20 +128,15 @@ public class AVLTree<T> {
         return node;
     }
 
-    public boolean remove(T element) {
-        try {
-            BlockData<T> data = new BlockData<T>();
-            if (head != null) {
-                head = remove(head, element, data);
-            }
-        }catch(NodeException n){
-            return false;
+    public BlockData<T> remove(T element) {
+        BlockData<T> data = new BlockData<T>();
+        if (head != null) {
+            head = remove(head, element, data);
         }
-
-        return true;
+        return data;
     }
 
-    private AVLNode remove(AVLNode node, T element, BlockData<T> data) throws NodeException {
+    private AVLNode remove(AVLNode node, T element, BlockData<T> data) {
         if (node == null) {
             return node;
         }
@@ -208,6 +179,45 @@ public class AVLTree<T> {
         return node;
     }
 
+    public boolean search(T element){
+        return search(head, element);
+    }
+
+    private boolean search(AVLNode node, T element){
+        if(node == null){
+            return false;
+        }
+
+        int result = cmp.compare(node.element, element);
+
+        if(result > 0 ){
+            return search(node.left, element);
+        }
+        if(result < 0 ){
+            return search(node.right, element);
+        }
+
+        return true;
+    }
+
+    private class AVLNode {
+
+        T element;
+        AVLNode left;
+        AVLNode right;
+        int height;
+
+        public AVLNode(T element) {
+            this.element = element;
+            left = null;
+            right = null;
+            height = 0;
+        }
+
+    }
+
+
+    //Cosas a borrar
     public String toString(AVLNode node){
         if(node == null){
             return "";
@@ -243,9 +253,8 @@ public class AVLTree<T> {
             resultRight = cmp.compare(node.element, node.right.element);
         }
 
-        boolean iamVerified = resultLeft > 0 && resultRight < 0;
-        return (iamVerified && verifyTree(node.left) && verifyTree(node.right));
-
+        boolean imVerified = resultLeft > 0 && resultRight < 0;
+        return (imVerified && verifyTree(node.left) && verifyTree(node.right));
     }
 
     public static void main(String[] args){
@@ -274,23 +283,6 @@ public class AVLTree<T> {
 
         b.print(b.head);
         System.out.println(b.verifyTree());
-    }
-
-    private class AVLNode {
-
-        T element;
-        AVLNode left;
-        AVLNode right;
-        int height;
-
-        public AVLNode(T element){
-            this.element = element;
-            left = null;
-            right = null;
-            height = 0;
-        }
-
-
     }
 
 }

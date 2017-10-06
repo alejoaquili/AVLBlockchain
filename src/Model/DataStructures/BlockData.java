@@ -12,15 +12,16 @@ import java.util.List;
  */
 public class BlockData <T> {
     // these are the modify blocks , we store their content as a way of searching them later
-    private List<T> modifiedBlocks ;
+    private List<T> modifiedElements ;
     private T addedElemnt;
     private  T removedElement;
+
     public BlockData(){
-        modifiedBlocks = new ArrayList<T>();
+        modifiedElements = new ArrayList<T>();
     }
 
     public void addModified(T element){
-        modifiedBlocks.add(element);
+        modifiedElements.add(element);
     }
 
     public T getAddedElemnt() {
@@ -41,7 +42,7 @@ public class BlockData <T> {
 
     public String toString(){
         String result = " Modified: ";
-        result += modifiedBlocks;
+        result += modifiedElements;
 
         result+= "\n" + "added: " + getAddedElemnt();
 
