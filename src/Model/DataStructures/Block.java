@@ -1,7 +1,7 @@
-package Model;
+package Model.DataStructures;
 
 /**
- * This class represents the nodes of a {@code Model.Blockchain}
+ * This class represents the nodes of a {@code Model.DataStructures.Blockchain}
  * @param <T> The parameter is a generic for the type of the stored data.
  */
 public class Block <T>{
@@ -14,10 +14,10 @@ public class Block <T>{
     private String zeros;
 
     /**
-     *Creates a {@code Model.Block} object for a {@code Model.Blockchain}.
-     * @param index index of this node on the Model.Blockchain.
-     * @param data information to store in this Model.Block.
-     * @param prevHash the hash encoded in SHA-256 of the previous Model.Block.
+     *Creates a {@code Model.DataStructures.Block} object for a {@code Model.DataStructures.Blockchain}.
+     * @param index index of this node on the Model.DataStructures.Blockchain.
+     * @param data information to store in this Model.DataStructures.Block.
+     * @param prevHash the hash encoded in SHA-256 of the previous Model.DataStructures.Block.
      */
     public Block(long index, T data, String prevHash, String zeros){
         if(index < 0 ) throw new IllegalArgumentException("index were incorrect");
@@ -32,7 +32,7 @@ public class Block <T>{
     }
 
     /**
-     * This method figured out the nounce number that valid the hash of this Model.Block.
+     * This method figured out the nounce number that valid the hash of this Model.DataStructures.Block.
      */
     public void mine() {
         nounce = 0;
@@ -45,7 +45,7 @@ public class Block <T>{
     }
 
     /**
-     *This method validate the hash of the {@code Model.Block} object.
+     *This method validate the hash of the {@code Model.DataStructures.Block} object.
      * @return true if the hash of this block begins with the specified number of zeros, false otherwise.
      */
     public boolean isValidHash() {
@@ -55,15 +55,15 @@ public class Block <T>{
     }
 
     /**
-     *This method return the index of the {@code Model.Block}.
-     * @return a copy of the {@code Model.Block} index in a {@code long}  integer.
+     *This method return the index of the {@code Model.DataStructures.Block}.
+     * @return a copy of the {@code Model.DataStructures.Block} index in a {@code long}  integer.
      */
     public long getIndex(){
         return index;
     }
 
     /**
-     * This method return the hash of the {@code Model.Block}.
+     * This method return the hash of the {@code Model.DataStructures.Block}.
      * @return a {@code String} with the hash of the block expressed in hexadecimal.
      */
     public String getHash(){
@@ -71,16 +71,16 @@ public class Block <T>{
     }
 
     /**
-     *This method return the data of the {@code Model.Block}.
-     * @return a T object with the stored data in the {@code Model.Block}.
+     *This method return the data of the {@code Model.DataStructures.Block}.
+     * @return a T object with the stored data in the {@code Model.DataStructures.Block}.
      */
     public T getData(){
         return data;
     }
 
     /**
-     *This method return the hash of the previous {@code Model.Block}.
-     * @return a {@code String} with the hash of the previous {@code Model.Block}.
+     *This method return the hash of the previous {@code Model.DataStructures.Block}.
+     * @return a {@code String} with the hash of the previous {@code Model.DataStructures.Block}.
      */
     public String getPrevHash(){
         return prevHash;

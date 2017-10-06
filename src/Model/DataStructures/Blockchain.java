@@ -2,7 +2,7 @@
  * this class represetns the blockchain object
  * @param <T> is the type of object that each block will store.
  */
-package Model;
+package Model.DataStructures;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -84,8 +84,6 @@ public class Blockchain <T> {
         }
         return true;
     }
-
-
 
     /*
     * @deprecated

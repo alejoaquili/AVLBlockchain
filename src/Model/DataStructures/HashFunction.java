@@ -1,4 +1,4 @@
-package Model;
+package Model.DataStructures;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
