@@ -3,9 +3,9 @@ package Model;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- *  This class represents a singleton object for a hash function.
- */
+    /**
+     *  This class represents a singleton object for a hash function.
+    */
 
 public class HashFunction {
     private MessageDigest md;

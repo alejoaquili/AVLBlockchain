@@ -6,10 +6,10 @@ package Model;
 
 import java.security.NoSuchAlgorithmException;
 
-/**
- * This class represents the blockchain object
- * @param <T> is the data type that is each block will store
- */
+    /**
+     * This class represents the blockchain object
+     * @param <T> is the data type that is each block will store
+     */
 public class Blockchain <T> {
 
     private Node lastNode;

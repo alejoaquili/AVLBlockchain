@@ -3,10 +3,10 @@ package Model.DataStructures;
 import java.util.Comparator;
 import java.util.Random;
 
-/**
- * represents a binary tree which verify the AVL structure
- * @param <T> the type of data to be store in each node of the tree
- */
+    /**
+     * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
+     * @param <T> the type of data to be store in each node of the tree
+     */
 public class AVLTree<T> {
 
 
