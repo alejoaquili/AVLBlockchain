@@ -4,6 +4,7 @@ package Model.DataStructures;
      * This class represents the nodes of a {@code Blockchain}
      * @param <S> The parameter is a generic for the  type of data stored.
      */
+
 public class Block <S>{
 
     private long index;
