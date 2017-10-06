@@ -1,6 +1,5 @@
 package Model.DataStructures;
 
-import Model.Exceptions.NodeException;
 
 import java.util.Comparator;
 import java.util.Random;

@@ -13,7 +13,7 @@ public class BlockData <T> {
     // these are the modify blocks , we store their content as a way of searching them later
     private List<T> modifiedElements ;
     private T addedElemnt;
-    private  T removedElement;
+    private T removedElement;
 
     public BlockData(){
         modifiedElements = new ArrayList<T>();
