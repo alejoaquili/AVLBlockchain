@@ -9,7 +9,7 @@ import java.util.List;
  * This class represents the data that each block of a blockchain stores.
  */
 
-public class BlockData <T> {
+public class BlockData <T> implements BlockDataInterface{
     // these are the modify blocks , we store their content as a way of searching them later
     private List<T> modifiedElements ;
     private T addedElemnt;
@@ -74,7 +74,7 @@ public class BlockData <T> {
     }
 
 
-    public boolean equals(Object o){
+    public boolean contains(Object o){
         if(o == null ){
             return false;
         }
@@ -89,4 +89,6 @@ public class BlockData <T> {
 
         return false;
     }
+
+
 }

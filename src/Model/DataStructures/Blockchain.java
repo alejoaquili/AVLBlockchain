@@ -13,7 +13,7 @@ import java.util.List;
      * @param <T> is the data type that is each {@code Block} will store.
      */
 
-public class Blockchain <T> {
+public class Blockchain <T extends BlockDataInterface> {
 
     private Node lastNode;
     public final static String HASH_FUNCTION = "SHA-256";
@@ -135,14 +135,7 @@ public class Blockchain <T> {
     }
 
 
-    public static void  main(String[] args) throws NoSuchAlgorithmException, CloneNotSupportedException {
-        Blockchain<Integer> b = new Blockchain<>(4);
-        for (int i = 0; i < 10; i++) {
-            b.add(i);
-            System.out.println("finish proccessing "+ i);
-        }
-        System.out.println(b.verify());
-    }
+
 
     private class Node {
         Block<T> block;

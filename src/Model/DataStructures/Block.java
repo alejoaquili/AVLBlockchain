@@ -5,7 +5,7 @@ package Model.DataStructures;
      * @param <S> The parameter is a generic for the  type of data stored.
      */
 
-public class Block <S>{
+public class Block < S extends BlockDataInterface> {
 
     private long index;
     private S data;
@@ -95,6 +95,6 @@ public class Block <S>{
     }
 
     public boolean contains(Object element){
-        return this.data.equals(element);
+        return this.data.contains(element);
     }
 }
