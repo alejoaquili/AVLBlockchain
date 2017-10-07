@@ -4,6 +4,7 @@ import Model.DataStructures.AVLTree;
 import Model.DataStructures.BlockData;
 import Model.DataStructures.Blockchain;
 
+import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.List;
@@ -38,4 +39,15 @@ public class AVLBlockchain<T> {
         return blockchain.findBlocks(element);
     }
 
+    public void modify(long index, String filePath) throws FileNotFoundException {
+        FileReader fr = new FileReader(filePath);
+        StringBuffer info = new StringBuffer("");
+        for(String each : fr)
+            info.append(each);
+        String data = new String(info);
+        // FALTA ALGUN METODO Q DEVUELVA EL NODO N DE LA BLOCKCHAIN.
+    }
+    public void modify(long index){
+
+    }
 }

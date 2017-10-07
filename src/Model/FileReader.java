@@ -128,7 +128,7 @@ public class FileReader implements Iterable<String>  {
 
     public static void  main(String[] args) throws IOException {
 
-        FileReader fr = new FileReader("/Users/alejoaquili/IdeaProjects/Blockchain/src/Model/FileReaderTest");
+        FileReader fr = new FileReader("/Users/alejoaquili/IdeaProjects/Blockchain/src/Model/FileReaderTestData");
         for(String each : fr){
             System.out.println(each);
         }

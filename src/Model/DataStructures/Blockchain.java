@@ -24,9 +24,7 @@ public class Blockchain <T extends BlockDataInterface> {
      * @param zeros are the number of zeros that the hash of each {@code Block} must have
      */
     public Blockchain(int zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
-        if( zeros < 0){
-            throw  new IllegalArgumentException();
-        }
+        if( zeros < 0) throw  new IllegalArgumentException();
         this.encoder = HashFunction.getSingletonInstance(HASH_FUNCTION);
         this.zeros = generateExpReg(zeros);
         lastNode = null;

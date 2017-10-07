@@ -1,42 +1,76 @@
 package Model.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import Model.FileReader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+class FileReaderTest{
 
-class FileReaderTest {
-    @org.junit.jupiter.api.Test
-    void getLine() throws IOException {
+    @Test
+    void getLineTest() throws IOException {
         FileReader fr = null;
         try {
-            fr = new FileReader("Model/Test/FileReaderTest");
+            fr = new FileReader("./src/Model/Test/FileReaderTestData");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         finally {
-            String read = fr.getLine();
-            String expected = "My Text";
-            assertEquals(expected, read, "getLine Test OK");
+            String actual = fr.getLine();
+            assertEquals("My Text", actual);
         }
     }
 
-    @org.junit.jupiter.api.Test
-    void getLine1() {
+    @Test
+    void fileReaderIteratorTest(){
+        FileReader fr = null;
+        try {
+            fr = new FileReader("./src/Model/Test/FileReaderTestData");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            int count = 0;
+            for(String each : fr)
+                count ++;
+            assertEquals(9, count);
+        }
     }
 
-    @org.junit.jupiter.api.Test
-    void resetFilePointer() {
+    @Test
+    void feofTest() throws IOException {
+        FileReader fr = null;
+        try {
+            fr = new FileReader("./src/Model/Test/FileReaderTestData");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            for (int i = 0 ; i < 9 ; i ++)
+                fr.getLine();
+            assertEquals(fr.feof(), true);
+        }
     }
 
-    @org.junit.jupiter.api.Test
-    void feof() {
-    }
+    @Test
+    void getNLineTest() throws IOException {
+        FileReader fr = null;
+        try {
+            fr = new FileReader("./src/Model/Test/FileReaderTestData");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            String actual = null;
+            try {
+                actual = fr.getLine(-2);
+            }
+            catch (IndexOutOfBoundsException e){
+                assertEquals(actual, null);
+            }
 
-    @org.junit.jupiter.api.Test
-    void iterator() {
+        }
     }
-
 }
