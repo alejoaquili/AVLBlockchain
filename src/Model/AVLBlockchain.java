@@ -8,9 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by franciscosanguineti on 6/10/17.
- */
 public class AVLBlockchain<T> {
 
     private Blockchain<BlockData<T>> blockchain;
@@ -40,8 +37,5 @@ public class AVLBlockchain<T> {
         }
         return blockchain.findBlocks(element);
     }
-
-
-
 
 }

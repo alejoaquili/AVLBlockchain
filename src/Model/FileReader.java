@@ -70,7 +70,7 @@ public class FileReader implements Iterable<String>  {
      * @return a boolean that represent if there are more lines to read (true) or not (false).
      * @throws IOException if an I/O error occurs.
      */
-     public boolean feof() throws IOException {
+    public boolean feof() throws IOException {
         boolean isEof = true;
         long lastPointer = fileReader.getFilePointer();
 
@@ -80,7 +80,7 @@ public class FileReader implements Iterable<String>  {
         fileReader.seek(lastPointer);
 
         return isEof;
-     }
+    }
 
     /**
      * Returns a {@code FileReader} Custom Iterator, allows a {@code FileReader} Object to be the target of
@@ -124,9 +124,7 @@ public class FileReader implements Iterable<String>  {
     }
 
 
-
-
-    //cosas para borrar
+    //Cosas para borrar
 
     public static void  main(String[] args) throws IOException {
 
