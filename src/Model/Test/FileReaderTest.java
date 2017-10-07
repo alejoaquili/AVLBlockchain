@@ -1,58 +1,42 @@
 package Model.Test;
 
 import Model.FileReader;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-@RunWith(Arquillian.class)
-public class FileReaderTest {
-    @Before
-    public void setUp() throws Exception {
+import static org.junit.jupiter.api.Assertions.*;
+
+class FileReaderTest {
+    @org.junit.jupiter.api.Test
+    void getLine() throws IOException {
+        FileReader fr = null;
+        try {
+            fr = new FileReader("Model/Test/FileReaderTest");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        finally {
+            String read = fr.getLine();
+            String expected = "My Text";
+            assertEquals(expected, read, "getLine Test OK");
+        }
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @org.junit.jupiter.api.Test
+    void getLine1() {
     }
 
-    @Test
-    public void getLine() throws Exception {
-
-        String testFileName = "Model/Test/FileReaderTest";
-        String expected = "My Test";
-        FileReader searchPhrase = new FileReader(testFileName);
-        String result = searchPhrase.getLine();
-        assertEquals(expected, result);
-    }
-    @Test
-    public void getLine1() throws Exception {
+    @org.junit.jupiter.api.Test
+    void resetFilePointer() {
     }
 
-    @Test
-    public void resetFilePointer() throws Exception {
+    @org.junit.jupiter.api.Test
+    void feof() {
     }
 
-    @Test
-    public void feof() throws Exception {
-    }
-
-    @Test
-    public void iterator() throws Exception {
-
-    }
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(Model.FileReader.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    @org.junit.jupiter.api.Test
+    void iterator() {
     }
 
 }
