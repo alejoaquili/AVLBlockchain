@@ -18,7 +18,6 @@ public class AVLBlockchain<T> {
 
     private Blockchain<AVLData<T>> blockchain;
     private AVLTree<T> tree;
-    private AVLData<T> voidSentinelAVLData;
 
     public AVLBlockchain(int zeros, Comparator<T> cmp) throws CloneNotSupportedException, NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
@@ -39,7 +38,7 @@ public class AVLBlockchain<T> {
         AVLData<T> data = tree.search(element);
         blockchain.add(data);
 
-        if(data.getResult()) {
+        if (data.getResult()) {
             return null;
         }
         return findBlocks(element);
@@ -48,8 +47,8 @@ public class AVLBlockchain<T> {
     private List<Long> findBlocks(T element) {
         List<Long> list = new ArrayList<>();
         long index = 0;
-        for(AVLData<T> data: blockchain) {
-            if (data.contains(element)){
+        for (AVLData<T> data : blockchain) {
+            if (data.contains(element)) {
                 list.add(index);
             }
             index++;
@@ -60,16 +59,18 @@ public class AVLBlockchain<T> {
     public void modify(int index, String filePath) throws FileNotFoundException {
         FileReader fr = new FileReader(filePath);
         StringBuffer info = new StringBuffer("");
-        for(String each : fr)
+        for (String each : fr)
             info.append(each);
         String data = new String(info);
         AVLData<T> newdata = new AVLData<>();
         //REVISAR CONSIGNA!
-        newdata.addModified(((T)data));
+        newdata.addModified(((T) data));
         blockchain.setBlock(index, newdata);
     }
-    public void modify(int index){
+
+    public void modify(int index) {
         AVLData<T> voidSentinelAVLData = new AVLData<>();
-        blockchain.setBlock(index, this.voidSentinelAVLData);
+        blockchain.setBlock(index, voidSentinelAVLData);
     }
+
 }
