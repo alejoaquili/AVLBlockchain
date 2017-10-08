@@ -10,7 +10,6 @@ import java.util.Random;
  */
 public class AVLTree<T> {
 
-
     private AVLNode head;
     private Comparator<T> cmp;
 
@@ -25,17 +24,32 @@ public class AVLTree<T> {
         this.cmp = cmp;
     }
 
+    /**
+     * Returns the biggest element between a and b.
+     * @param a first element.
+     * @param b second element.
+     * @return a if a > b; b otherwise.
+     */
+
     private static int max(int a, int b) {
         return (a > b)? a : b;
     }
 
-    private int height(AVLNode node) {
-        return (node == null) ? -1 : node.height;
-    }
+    /**
+     * Method to get the height of a certain node.
+     * @param node Node of the AVL tree (AVLNode).
+     * @return int i that represents the height of the tree.
+     */
 
-    private int getBalance(AVLNode node) {
-        return height(node.right) - height(node.left);
-    }
+    private int height(AVLNode node) { return (node == null) ? -1 : node.height; }
+
+    /**
+     * Method to get the balance number of a node.
+     * @param node Node of the AVL tree (AVLNode).
+     * @return int i that represents the balance of that sub-tree.
+     */
+
+    private int getBalance(AVLNode node) { return height(node.right) - height(node.left); }
 
     /**
      * This method insert a generic T element in the tree.
@@ -237,6 +251,10 @@ public class AVLTree<T> {
 
     }
 
+    public void print(){
+        print(head);
+    }
+
 
     //Cosas a borrar
 
@@ -252,24 +270,25 @@ public class AVLTree<T> {
         return verifyTree(head);
     }
 
-    private boolean verifyTree(AVLNode node){
-        if(node == null){
+    private boolean verifyTree(AVLNode node) {
+        if (node == null) {
             return true;
         }
 
         int resultLeft = 1;
         int resultRight = -1;
 
-        if(node.left != null) {
+        if (node.left != null) {
             resultLeft = cmp.compare(node.element, node.left.element);
         }
-        if(node.right != null) {
+        if (node.right != null) {
             resultRight = cmp.compare(node.element, node.right.element);
         }
 
         boolean imVerified = resultLeft > 0 && resultRight < 0;
         return (imVerified && verifyTree(node.left) && verifyTree(node.right));
     }
+
 
     public static void main(String[] args){
         AVLTree<Integer> b = new AVLTree<>(new Comparator<Integer>() {
@@ -281,9 +300,9 @@ public class AVLTree<T> {
 
         Random rand = new Random();
 
-        for (int j = 0; j < 10000; j++) {
+        for (int j = 0; j < 2; j++) {
             int i = 0;
-            for (i = 0; i < 1000; i++) {
+            for (i = 0; i < 2; i++) {
                 if (i % 2 == 0) {
                     System.out.println(b.insert(rand.nextInt() % 1000));
 
@@ -292,9 +311,7 @@ public class AVLTree<T> {
 
                 }
             }
-
         }
-
         b.print(b.head);
         System.out.println(b.verifyTree());
     }

@@ -45,7 +45,7 @@ public class AVLBlockchain<T> {
         for(String each : fr)
             info.append(each);
         String data = new String(info);
-        // FALTA ALGUN METODO Q DEVUELVA EL NODO N DE LA BLOCKCHAIN.
+        // FALTA ALGUN METODO Q DEVUELVA EL NODO N DE LA BLOCKCHAIN. -> Ya se hizo? es getNode() ? o falta hacer?
     }
     public void modify(long index){
 

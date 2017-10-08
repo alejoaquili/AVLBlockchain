@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the data that each {@Block} of a {@code Blockchain} stores.
+ * This class represents the data that each {@code Block} of a {@code Blockchain} stores.
  */
 public class BlockData <T> implements BlockDataInterface {
     private List<T> modifiedElements ;
@@ -39,7 +39,7 @@ public class BlockData <T> implements BlockDataInterface {
 
     /**
      * Returns true if the Operation in the {@code AVLTree} result successful. Return false otherwise.
-     * @return a boolean with the state of the success of putting into effect an Operation linked with a {@AVLTree}
+     * @return a boolean with the state of the success of putting into effect an Operation linked with a {@code AVLTree}
      * object.
      */
     public boolean getResult(){
@@ -48,7 +48,7 @@ public class BlockData <T> implements BlockDataInterface {
 
     /**
      * This method set the state of the implementation of an Operation in a {@code AVLTree}.
-     * @param result the state of the success of putting into effect an Operation linked with a {@AVLTree}
+     * @param result the state of the success of putting into effect an Operation linked with a {@code AVLTree}
      * object.
      */
     public void setResult(boolean result) {
@@ -105,15 +105,12 @@ public class BlockData <T> implements BlockDataInterface {
         if(o == null ){
             return false;
         }
-
         if(o.equals(searchElement) || o.equals(addedElemnt) || o.equals(removedElement)){
             return true;
         }
-
         if(modifiedElements.contains(o)){
             return true;
         }
-
         return false;
     }
 

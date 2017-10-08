@@ -130,7 +130,7 @@ public class Blockchain <T extends BlockDataInterface> {
     }
 
     /**
-     * This method verify the consistency of the {@Blockchain}.
+     * This method verify the consistency of the {@code Blockchain}.
      * @return true if all the {@code Block} of the {@code Blockchain} are consistent. Otherwise return false.
      * Complexity: O(n).
      */

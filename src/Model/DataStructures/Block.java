@@ -17,6 +17,7 @@ public class Block < S extends BlockDataInterface> {
      * @param index index of this node on the Blockchain.
      * @param data information to store in this Block.
      * @param prevHash the hash encoded in MD5 of the previous Block.
+     * @param zeros the number of zeros that the block has to validate.
      */
     public Block(long index, S data, String prevHash, String zeros){
         if(index < 0 ) throw new IllegalArgumentException("index were incorrect");
