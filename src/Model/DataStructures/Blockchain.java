@@ -91,8 +91,6 @@ public class Blockchain <T extends BlockDataInterface> {
             return true;
         }
 
-
-
         Node current = lastNode;
         Block<T> b ;
         while( current != null && current.next != null){
