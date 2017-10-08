@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the data that each {@Block} of a {@code Blockchain} stores.
+ * This class represents the data that each {@code Block} of a {@code Blockchain} stores.
  */
 public class BlockData <T> implements BlockDataInterface {
     private List<T> modifiedElements ;
