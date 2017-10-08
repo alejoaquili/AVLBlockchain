@@ -91,8 +91,10 @@ public class Blockchain <T> implements Iterable<T> {
         if(blocks.size() == 0 || blocks.get(blocks.size() - 1).getPrevHash().equals(GENESIS)){
             return true;
         }
-
-
+        for(int i = 0 ; i < blocks.size() - 1 ; i++){
+            if(!blocks.get(i).getHash().equals(blocks.get(i+1).getPrevHash()))
+                return  false;
+        }
         return true;
      }
 
