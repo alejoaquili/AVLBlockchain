@@ -48,7 +48,7 @@ public class Blockchain <T extends BlockDataInterface> {
     }
 
     /**
-     * This method adds data to the {@Blockchain} in a new {@code Block}.
+     * This method adds data to the {@code Blockchain} in a new {@code Block}.
      * @param data the data to be inserted.
      */
     public void add(T data){
@@ -89,10 +89,10 @@ public class Blockchain <T extends BlockDataInterface> {
     }
 
     /**
-     * This method return the node in a specified index, checking the consistency of the {@Blockchain}
+     * This method return the node in a specified index, checking the consistency of the {@code Blockchain}
      * during the process.
      * @param index a long with the specified index.
-     * @return  the specific {@Node} required.
+     * @return  the specific {@code Node} required.
      * @throws InvalidBlockChainException if the {@code Blockchain} is invalid.
      */
     private Node getNode(long index) throws InvalidBlockChainException {
