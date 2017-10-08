@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * This class provides a Object.
+ * @param <T>
+ */
 public class AVLBlockchain<T> {
 
     private Blockchain<AVLData<T>> blockchain;
