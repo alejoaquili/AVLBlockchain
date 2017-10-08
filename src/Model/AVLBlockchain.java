@@ -60,7 +60,7 @@ public class AVLBlockchain<T> {
             info.append(each);
         String data = new String(info);
         AVLData<T> newdata = new AVLData<>();
-        //REVISAR CONSIGNA
+        //REVISAR CONSIGNA!
         newdata.addModified(((T)data));
         blockchain.setBlock(index, newdata);
     }
