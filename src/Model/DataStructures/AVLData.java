@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the data that each {@code Block} of a {@code Blockchain} stores.
+ * This class represents the data of the operation done in a {@code AVLTree}that each {@code Block}
+ * of a {@code Blockchain} stores.
  */
 public class AVLData<T> {
     private List<T> modifiedElements ;
@@ -14,7 +15,7 @@ public class AVLData<T> {
     private boolean result;
 
     /**
-     *Returns a new {@code BlocData} object.
+     *Returns a new {@code AVLData} object.
      */
     public AVLData(){
         result = false;
@@ -39,7 +40,7 @@ public class AVLData<T> {
 
     /**
      * Returns true if the Operation in the {@code AVLTree} result successful. Return false otherwise.
-     * @return a boolean with the state of the success of putting into effect an Operation linked with a {@AVLTree}
+     * @return a boolean with the state of the success of putting into effect an Operation linked with a {@code AVLTree}
      * object.
      */
     public boolean getResult(){
@@ -48,7 +49,7 @@ public class AVLData<T> {
 
     /**
      * This method set the state of the implementation of an Operation in a {@code AVLTree}.
-     * @param result the state of the success of putting into effect an Operation linked with a {@AVLTree}
+     * @param result the state of the success of putting into effect an Operation linked with a {@code AVLTree}
      * object.
      */
     public void setResult(boolean result) {

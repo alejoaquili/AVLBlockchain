@@ -2,7 +2,6 @@ package Model;
 
 import Model.DataStructures.AVLData;
 import Model.DataStructures.AVLTree;
-import Model.DataStructures.Block;
 import Model.DataStructures.Blockchain;
 
 import java.io.FileNotFoundException;
@@ -15,10 +14,12 @@ public class AVLBlockchain<T> {
 
     private Blockchain<AVLData<T>> blockchain;
     private AVLTree<T> tree;
+    private AVLData<T> voidSentinelAVLData;
 
     public AVLBlockchain(int zeros, Comparator<T> cmp) throws CloneNotSupportedException, NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
         this.tree = new AVLTree<>(cmp);
+        this.voidSentinelAVLData = new AVLData<T>();
     }
 
     public void add(T element) {
@@ -53,15 +54,17 @@ public class AVLBlockchain<T> {
         return list;
     }
 
-    public void modify(long index, String filePath) throws FileNotFoundException {
+    public void modify(int index, String filePath) throws FileNotFoundException {
         FileReader fr = new FileReader(filePath);
         StringBuffer info = new StringBuffer("");
         for(String each : fr)
             info.append(each);
         String data = new String(info);
-        // FALTA ALGUN METODO Q DEVUELVA EL NODO N DE LA BLOCKCHAIN. -> Ya se hizo? es getNode() ? o falta hacer?
+        AVLData<T> newdata = new AVLData<T>();
+        newdata.addModified(((Object)data));
+        blockchain.setBlock(index, newdata);
     }
-    public void modify(long index){
-
+    public void modify(int index){
+        blockchain.setBlock(index, this.voidSentinelAVLData);
     }
 }
