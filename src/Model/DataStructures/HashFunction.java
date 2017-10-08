@@ -16,7 +16,7 @@ public class HashFunction {
      * @throws NoSuchAlgorithmException if the specified algorithm is invalid.
      */
     private HashFunction(String algorithm) throws NoSuchAlgorithmException {
-        if (algorithm == null) throw new IllegalArgumentException("Invalid algorithm. \n");
+        if (algorithm == null) throw new IllegalArgumentException("Invalid algorithm.");
         try {
             md = MessageDigest.getInstance(algorithm);
         } catch (NoSuchAlgorithmException e) {

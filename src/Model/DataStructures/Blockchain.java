@@ -63,7 +63,7 @@ public class Blockchain <T> implements Iterable<T> {
      * @param data the new data the be set.
      */
     public void setBlock(int index, T data){
-        if(index < 0 || index >= blocks.size()) throw  new IndexOutOfBoundsException("Wrong index.");
+        if(index < 0 || index >= blocks.size()) throw  new IndexOutOfBoundsException("Invalid index.");
         Block<T> oldBlock = blocks.get(index);
         Block<T> newBlock = new Block<>(oldBlock.getIndex(), data, oldBlock.getPrevHash(), zeros);
         blocks.add(index, newBlock);

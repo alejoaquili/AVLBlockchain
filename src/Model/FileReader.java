@@ -18,7 +18,7 @@ public class FileReader implements Iterable<String>  {
      * @throws FileNotFoundException if the specified path is empty.
      */
      public FileReader(String path) throws FileNotFoundException {
-        if(path == null) throw  new IllegalArgumentException("The path argument is null");
+        if(path == null) throw  new IllegalArgumentException("The path argument is null.");
         this.path = path;
         this.fileReader = new RandomAccessFile(path, "r");
      }
@@ -33,7 +33,7 @@ public class FileReader implements Iterable<String>  {
             String line = fileReader.readLine();
             return line;
         }
-        throw new RuntimeException("There are not more lines to read");
+        throw new RuntimeException("There are not more lines to read.");
      }
 
     /**
@@ -54,7 +54,7 @@ public class FileReader implements Iterable<String>  {
             return line;
         }
         resetFilePointer();
-        throw new RuntimeException("There are not more lines to read");
+        throw new RuntimeException("There are not more lines to read.");
      }
 
     /**

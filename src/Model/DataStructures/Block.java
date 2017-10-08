@@ -20,9 +20,9 @@ public class Block <S> {
      * @param zeros the number of zeros that the block has to validate.
      */
     public Block(long index, S data, String prevHash, String zeros){
-        if(index < 0 ) throw new IllegalArgumentException("Index were incorrect. \n");
-        if(prevHash == null ) throw new IllegalArgumentException("Previous hash were incorrect. \n");
-        if(zeros == null) throw new IllegalArgumentException("Zeros were incorrect. \n");
+        if(index < 0 ) throw new IllegalArgumentException("Index were incorrect.");
+        if(prevHash == null ) throw new IllegalArgumentException("Previous hash were incorrect.");
+        if(zeros == null) throw new IllegalArgumentException("Zeros were incorrect.");
         this.data = data;
         this.index = index;
         this.prevHash = prevHash;

@@ -19,7 +19,7 @@ public class AVLTree<T> {
      */
     public AVLTree(Comparator<T> cmp){
 
-        if(cmp == null) throw new IllegalArgumentException("Comparator should not be null");
+        if(cmp == null) throw new IllegalArgumentException("Comparator should not be null.");
         head = null;
         this.cmp = cmp;
     }

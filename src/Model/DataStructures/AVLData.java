@@ -129,10 +129,10 @@ public class AVLData<T> {
                result = "Searched Element: " + searchElement;
         }else {
             result = (addedElemnt == null) ? "Added: " + addedElemnt : "Removed: " + removedElement;
-            result += "- Modified: " + modifiedElements + "\n";
+            result += " - Modified: " + modifiedElements;
         }
 
-        result += " -  result: "+ this.result;
+        result += " -  Result: "+ this.result + "\n";
         return  result;
 
     }
