@@ -6,9 +6,9 @@ import java.util.List;
 /**
  * This class represents the data that each {@code Block} of a {@code Blockchain} stores.
  */
-public class BlockData <T> implements BlockDataInterface {
+public class BlockData <T> {
     private List<T> modifiedElements ;
-    private T addedElemnt;
+    private T addedElement;
     private  T removedElement;
     private T searchElement;
     private boolean result;
@@ -67,16 +67,16 @@ public class BlockData <T> implements BlockDataInterface {
      * This method returns the added element in the {@code BlockData} if there are a added element.
      * @return the added element.
      */
-    public T getAddedElemnt() {
-        return addedElemnt;
+    public T getAddedElement() {
+        return addedElement;
     }
 
     /**
      * Set the added element.
-     * @param addedElemnt the added element.
+     * @param addedElement the added element.
      */
-    public void setAddedElemnt(T addedElemnt) {
-        this.addedElemnt = addedElemnt;
+    public void setAddedElement(T addedElement) {
+        this.addedElement = addedElement;
     }
 
     /**
@@ -105,7 +105,7 @@ public class BlockData <T> implements BlockDataInterface {
         if(o == null ){
             return false;
         }
-        if(o.equals(searchElement) || o.equals(addedElemnt) || o.equals(removedElement)){
+        if(o.equals(searchElement) || o.equals(addedElement) || o.equals(removedElement)){
             return true;
         }
         if(modifiedElements.contains(o)){
@@ -124,7 +124,7 @@ public class BlockData <T> implements BlockDataInterface {
         if(searchElement != null){
                result = "Searched Element: " + searchElement;
         }else {
-            result = (addedElemnt == null) ? "Added: " + addedElemnt : "Removed: " + removedElement;
+            result = (addedElement == null) ? "Added: " + addedElement : "Removed: " + removedElement;
             result += "- Modified: " + modifiedElements + "\n";
         }
 

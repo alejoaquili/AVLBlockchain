@@ -2,7 +2,6 @@ package Model.DataStructures;
 
 
 import java.util.Comparator;
-import java.util.Random;
 
 /**
  * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
@@ -58,7 +57,7 @@ public class AVLTree<T> {
      */
     public BlockData<T> insert(T element){
         BlockData<T> data = new BlockData<T>();
-        data.setAddedElemnt(element);
+        data.setAddedElement(element);
 
         if (element != null) {
             head = insert(head, element, data);
@@ -287,33 +286,6 @@ public class AVLTree<T> {
 
         boolean imVerified = resultLeft > 0 && resultRight < 0;
         return (imVerified && verifyTree(node.left) && verifyTree(node.right));
-    }
-
-
-    public static void main(String[] args){
-        AVLTree<Integer> b = new AVLTree<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1-o2;
-            }
-        });
-
-        Random rand = new Random();
-
-        for (int j = 0; j < 2; j++) {
-            int i = 0;
-            for (i = 0; i < 2; i++) {
-                if (i % 2 == 0) {
-                    System.out.println(b.insert(rand.nextInt() % 1000));
-
-                } else {
-                    System.out.println(b.remove(rand.nextInt() % 1000));
-
-                }
-            }
-        }
-        b.print(b.head);
-        System.out.println(b.verifyTree());
     }
 
 }
