@@ -18,7 +18,6 @@ public class AVLBlockchain<T> {
 
     private Blockchain<AVLData<T>> blockchain;
     private AVLTree<T> tree;
-    private AVLData<T> voidSentinelAVLData;
 
     public AVLBlockchain(int zeros, Comparator<T> cmp) throws CloneNotSupportedException, NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
@@ -70,6 +69,6 @@ public class AVLBlockchain<T> {
     }
     public void modify(int index){
         AVLData<T> voidSentinelAVLData = new AVLData<>();
-        blockchain.setBlock(index, this.voidSentinelAVLData);
+        blockchain.setBlock(index, voidSentinelAVLData);
     }
 }
