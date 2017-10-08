@@ -24,6 +24,10 @@ public class AVLBlockchain<T> {
         this.tree = new AVLTree<>(cmp);
     }
 
+    /**
+     *
+     * @param element
+     */
     public void add(T element) {
         AVLData<T> data = tree.insert(element);
         blockchain.add(data);
