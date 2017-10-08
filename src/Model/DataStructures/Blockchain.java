@@ -97,10 +97,14 @@ public class Blockchain <T> implements Iterable<T> {
         return true;
      }
 
+    /**
+     * Returns a Custom  Data Iterator, allows a {@code Blockchain} Object to be the target of
+     * the "for-each loop" statement.
+     * @return an {@code Iterator<T>}.
+     */
     public Iterator<T> iterator() {
         return new DataIterator<T>(blocks.iterator());
     }
-
 
     private class DataIterator<T> implements Iterator<T> {
 
