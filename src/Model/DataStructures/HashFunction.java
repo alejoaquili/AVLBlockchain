@@ -72,27 +72,4 @@ public class HashFunction {
         }
     }
 
-    //Cosas a borrar
-
-
-    public static void main(String[] args) throws Exception {
-
-        long magic = 0;
-        String data = "hello";
-        System.out.println("Data: " + data);
-
-        HashFunction.getSingletonInstance("SHA-256");
-        String hash = HashFunction.getSingletonInstance().encode(data + Long.toString(magic));
-
-        long alg1 = System.currentTimeMillis();
-
-        while(!hash.matches("^0000.*")) {
-            magic++;
-            hash = HashFunction.getSingletonInstance().encode(data + Long.toString(magic));
-        }
-        System.out.println("Hash: " + hash);
-        System.out.println("Time: " + (System.currentTimeMillis() - alg1));
-
-    }
-
 }
