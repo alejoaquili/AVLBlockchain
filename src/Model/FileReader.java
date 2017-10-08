@@ -123,15 +123,4 @@ public class FileReader implements Iterable<String>  {
         }
     }
 
-
-    //Cosas para borrar
-
-    public static void  main(String[] args) throws IOException {
-
-        FileReader fr = new FileReader("/Users/alejoaquili/IdeaProjects/Blockchain/src/Model/FileReaderTestData");
-        for(String each : fr){
-            System.out.println(each);
-        }
-        System.out.println(fr.getLine(8));
-    }
 }
