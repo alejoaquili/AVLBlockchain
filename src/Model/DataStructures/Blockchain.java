@@ -31,7 +31,6 @@ public class Blockchain <T> implements Iterable<T> {
      * Method to create a regular expression of the type: "^@zeros.*" .
      * Example of output: Input: 3 -> Output: "^000.*" .
      */
-
     private static String generateExpReg(long zeros){
         StringBuffer expReg = new StringBuffer((int)(zeros) + 3);
         expReg.append('^');

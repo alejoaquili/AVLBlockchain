@@ -2,10 +2,12 @@ package Model;
 
 import Model.DataStructures.AVLData;
 import Model.DataStructures.AVLTree;
+import Model.DataStructures.Block;
 import Model.DataStructures.Blockchain;
 
 import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,7 +38,19 @@ public class AVLBlockchain<T> {
         if(data.getResult()) {
             return null;
         }
-        return blockchain.findBlocks(element);
+        return findBlocks(element);
+    }
+
+    private List<Long> findBlocks(T element) {
+        List<Long> list = new ArrayList<>();
+        long index = 0;
+        for(AVLData<T> data: blockchain) {
+            if (data.contains(element)){
+                list.add(index);
+            }
+            index++;
+        }
+        return list;
     }
 
     public void modify(long index, String filePath) throws FileNotFoundException {
