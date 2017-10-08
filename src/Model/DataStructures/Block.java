@@ -16,7 +16,7 @@ public class Block < S extends BlockDataInterface> {
      *Creates a {@code Block} object for a {@code Blockchain}.
      * @param index index of this node on the Blockchain.
      * @param data information to store in this Block.
-     * @param prevHash the hash encoded in SHA-256 of the previous Block.
+     * @param prevHash the hash encoded in MD5 of the previous Block.
      */
     public Block(long index, S data, String prevHash, String zeros){
         if(index < 0 ) throw new IllegalArgumentException("index were incorrect");

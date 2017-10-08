@@ -48,6 +48,9 @@ public class HashFunction {
         return encoder;
     }
 
+
+    //TODO: falta comentar este método con javadoc
+
     private static String bytesToHex(byte[] bytes) {
         StringBuffer result = new StringBuffer();
         for (byte b : bytes)

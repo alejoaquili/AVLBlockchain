@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents the {@code Blockcahin} object.
+ * This class represents the {@code Blockchain} object.
  * @param <T> is the data type that is each {@code Block} will store.
  */
 public class Blockchain <T extends BlockDataInterface> {
     private Node lastNode;
-    public final static String HASH_FUNCTION = "SHA-256";
+    public final static String HASH_FUNCTION = "MD5";
     public final static String GENESIS = "0000000000000000000000000000000";
     private String zeros;
     public HashFunction encoder;
@@ -32,6 +32,11 @@ public class Blockchain <T extends BlockDataInterface> {
         this.size = 0L;
     }
 
+    /**
+     * Method to create a regular expression of the type: "^@zeros.*" .
+     * Example of output: Input: 3 -> Output: "^000.*" .
+     */
+
     private static String generateExpReg(int zeros){
         StringBuffer expReg = new StringBuffer(zeros +3);
         expReg.append('^');
@@ -43,8 +48,8 @@ public class Blockchain <T extends BlockDataInterface> {
     }
 
     /**
-     * This method adds data to the {@BlockChain} in a new {@code Block}.
-     * @param data the data to ve insert.
+     * This method adds data to the {@Blockchain} in a new {@code Block}.
+     * @param data the data to be inserted.
      */
     public void add(T data){
         Block<T> b = null;
@@ -63,7 +68,8 @@ public class Blockchain <T extends BlockDataInterface> {
     }
 
     /**
-     * This method creates a GENESIS (The first {@code Block} of the {@code Blockchain}){@code Block} for the {@code Blockchain}.
+     * This method creates a GENESIS (The first {@code Block} of the {@code Blockchain}) {@code Block} for
+     * the {@code Blockchain}.
      * @param data the data to be insert.
      * @return a new GENESIS {@code Block}.
      */
@@ -116,6 +122,8 @@ public class Blockchain <T extends BlockDataInterface> {
         }
         return current;
     }
+
+
 //TERMINAR!
     public void setNode(long index, T data) throws InvalidBlockChainException {
         Node aux = getNode(index);
@@ -124,12 +132,12 @@ public class Blockchain <T extends BlockDataInterface> {
     /**
      * This method verify the consistency of the {@Blockchain}.
      * @return true if all the {@code Block} of the {@code Blockchain} are consistent. Otherwise return false.
+     * Complexity: O(n).
      */
      public boolean verify(){
         if(lastNode == null || lastNode.block.getPrevHash().equals(GENESIS)){
             return true;
         }
-
         Node current = lastNode;
         Block<T> b ;
         while( current != null && current.next != null){
@@ -156,7 +164,6 @@ public class Blockchain <T extends BlockDataInterface> {
         if(n == null || n.block.getPrevHash().equals(GENESIS)){
             return  true;
         }
-
         if(n.block.getHash().equals(hash)){
             return verify(n.next, n.block.getPrevHash());
         }
@@ -172,7 +179,6 @@ public class Blockchain <T extends BlockDataInterface> {
      */
      public <S> List<Long> findBlocks(S element){
         List<Long> indices = new ArrayList<>();
-
         Node current = lastNode;
         while(current != null){
             if(current.block.contains(element)){
@@ -185,7 +191,6 @@ public class Blockchain <T extends BlockDataInterface> {
     private class Node {
         Block<T> block;
         Node next;
-
         public Node(Block<T> block){
             if(block == null){
                 throw  new IllegalArgumentException("A block must not be null.");
