@@ -19,7 +19,6 @@ public class AVLBlockchain<T> {
     public AVLBlockchain(int zeros, Comparator<T> cmp) throws CloneNotSupportedException, NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
         this.tree = new AVLTree<>(cmp);
-        this.voidSentinelAVLData = new AVLData<T>();
     }
 
     public void add(T element) {
@@ -60,12 +59,13 @@ public class AVLBlockchain<T> {
         for(String each : fr)
             info.append(each);
         String data = new String(info);
-        AVLData<T> newdata = new AVLData<T>();
+        AVLData<T> newdata = new AVLData<>();
         //REVISAR CONSIGNA
         newdata.addModified(((T)data));
         blockchain.setBlock(index, newdata);
     }
     public void modify(int index){
+        AVLData<T> voidSentinelAVLData = new AVLData<>();
         blockchain.setBlock(index, this.voidSentinelAVLData);
     }
 }
