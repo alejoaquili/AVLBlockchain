@@ -97,24 +97,24 @@ public class Blockchain <T> implements Iterable<T> {
      }
 
     public Iterator<T> iterator() {
-        return new BlockIterator<T>();
+        return new DataIterator<T>(blocks.iterator());
     }
 
 
-    private class BlockIterator<T> implements Iterator<T> {
+    private class DataIterator<T> implements Iterator<T> {
 
-        private Iterator<Block<T>> it;
+        private Iterator<Block<T>> iterator;
 
-        public BlockIterator() {
-            it = blocks.iterator();
+        public DataIterator(Iterator<Block<T>> iterator) {
+            this.iterator = iterator;
         }
 
         public boolean hasNext() {
-            return false;
+            return iterator.hasNext();
         }
 
         public T next() {
-            return null;
+            return iterator.next().getData();
         }
     }
 
