@@ -2,11 +2,12 @@ package Model.DataStructures;
 
 
 import java.util.Comparator;
+import java.util.Random;
 
-/**
- * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
- * @param <T> the type of data to be store in each node of the tree.
- */
+    /**
+     * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
+     * @param <T> the type of data to be store in each node of the tree
+     */
 public class AVLTree<T> {
 
     private AVLNode head;
@@ -23,41 +24,26 @@ public class AVLTree<T> {
         this.cmp = cmp;
     }
 
-    /**
-     * Returns the biggest element between a and b.
-     * @param a first element.
-     * @param b second element.
-     * @return a if a > b; b otherwise.
-     */
-
     private static int max(int a, int b) {
         return (a > b)? a : b;
     }
 
-    /**
-     * Method to get the height of a certain node.
-     * @param node Node of the AVL tree (AVLNode).
-     * @return int i that represents the height of the tree.
-     */
+    private int height(AVLNode node) {
+        return (node == null) ? -1 : node.height;
+    }
 
-    private int height(AVLNode node) { return (node == null) ? -1 : node.height; }
-
-    /**
-     * Method to get the balance number of a node.
-     * @param node Node of the AVL tree (AVLNode).
-     * @return int i that represents the balance of that sub-tree.
-     */
-
-    private int getBalance(AVLNode node) { return height(node.right) - height(node.left); }
+    private int getBalance(AVLNode node) {
+        return height(node.right) - height(node.left);
+    }
 
     /**
      * This method insert a generic T element in the tree.
      * @param element an specified element to be inserted in the tree.
-     * @return a {@code BlockData<T>} that specified the operation.
+     * @return a {@code AVLData<T>} that specified the operation.
      */
-    public BlockData<T> insert(T element){
-        BlockData<T> data = new BlockData<T>();
-        data.setAddedElement(element);
+    public AVLData<T> insert(T element){
+        AVLData<T> data = new AVLData<T>();
+        data.setAddedElemnt(element);
 
         if (element != null) {
             head = insert(head, element, data);
@@ -65,7 +51,7 @@ public class AVLTree<T> {
         return data;
     }
 
-    private AVLNode insert(AVLNode node, T element, BlockData<T> data) {
+    private AVLNode insert(AVLNode node, T element, AVLData<T> data) {
         if(node == null){
             AVLNode aux = new AVLNode(element);
             data.setResult(true);
@@ -96,7 +82,7 @@ public class AVLTree<T> {
         return node;
     }
 
-    private AVLNode singleRotateLeftChild(AVLNode node, BlockData<T> data) {
+    private AVLNode singleRotateLeftChild(AVLNode node, AVLData<T> data) {
         AVLNode aux = node.left;
         node.left = aux.right;
         aux.right = node;
@@ -112,7 +98,7 @@ public class AVLTree<T> {
         return aux;
     }
 
-    private AVLNode singleRotateRightChild(AVLNode node,BlockData<T> data) {
+    private AVLNode singleRotateRightChild(AVLNode node,AVLData<T> data) {
         AVLNode aux = node.right;
         node.right = aux.left;
         aux.left = node;
@@ -128,12 +114,12 @@ public class AVLTree<T> {
         return aux;
     }
 
-    private AVLNode doubleRotateRightChild(AVLNode node,BlockData<T> data) {
+    private AVLNode doubleRotateRightChild(AVLNode node,AVLData<T> data) {
         node.right = singleRotateLeftChild(node.right,data);
         return singleRotateRightChild(node,data);
     }
 
-    private AVLNode doubleRotateLeftChild(AVLNode node,BlockData<T> data) {
+    private AVLNode doubleRotateLeftChild(AVLNode node,AVLData<T> data) {
         node.left = singleRotateRightChild(node.left,data);
         return singleRotateLeftChild(node,data);
     }
@@ -151,10 +137,10 @@ public class AVLTree<T> {
     /**
      * This method remove a generic T element of the {@code AVLTree} object.
      * @param element a generic element to be removed.
-     * @return a {@code BlockData<T>} that specified the operation.
+     * @return a {@code AVLData<T>} that specified the operation.
      */
-    public BlockData<T> remove(T element) {
-        BlockData<T> data = new BlockData<T>();
+    public AVLData<T> remove(T element) {
+        AVLData<T> data = new AVLData<T>();
         data.setRemovedElement(element);
         if (head != null) {
             head = remove(head, element, data);
@@ -162,7 +148,7 @@ public class AVLTree<T> {
         return data;
     }
 
-    private AVLNode remove(AVLNode node, T element, BlockData<T> data) {
+    private AVLNode remove(AVLNode node, T element, AVLData<T> data) {
         if (node == null) {
             return node;
         }
@@ -208,14 +194,14 @@ public class AVLTree<T> {
     /**
      * This method search a generic type element in the {@code AVLTree} Object.
      * @param element a generic type element to be searched.
-     * @return a {@code BlockData<T>} that specified the operation.
+     * @return a {@code AVLData<T>} that specified the operation.
      */
-    public BlockData<T> search(T element){
+    public AVLData<T> search(T element){
         return search(head, element);
     }
 
-    private BlockData<T> search(AVLNode node, T element){
-        BlockData<T> data = new BlockData<T>();
+    private AVLData<T> search(AVLNode node, T element){
+        AVLData<T> data = new AVLData<T>();
         data.setSearchElement(element);
         if(node == null){
             return data;
@@ -250,10 +236,6 @@ public class AVLTree<T> {
 
     }
 
-    public void print(){
-        print(head);
-    }
-
 
     //Cosas a borrar
 
@@ -269,23 +251,51 @@ public class AVLTree<T> {
         return verifyTree(head);
     }
 
-    private boolean verifyTree(AVLNode node) {
-        if (node == null) {
+    private boolean verifyTree(AVLNode node){
+        if(node == null){
             return true;
         }
 
         int resultLeft = 1;
         int resultRight = -1;
 
-        if (node.left != null) {
+        if(node.left != null) {
             resultLeft = cmp.compare(node.element, node.left.element);
         }
-        if (node.right != null) {
+        if(node.right != null) {
             resultRight = cmp.compare(node.element, node.right.element);
         }
 
         boolean imVerified = resultLeft > 0 && resultRight < 0;
         return (imVerified && verifyTree(node.left) && verifyTree(node.right));
+    }
+
+    public static void main(String[] args){
+        AVLTree<Integer> b = new AVLTree<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+
+        Random rand = new Random();
+
+        for (int j = 0; j < 10000; j++) {
+            int i = 0;
+            for (i = 0; i < 1000; i++) {
+                if (i % 2 == 0) {
+                    System.out.println(b.insert(rand.nextInt() % 1000));
+
+                } else {
+                    System.out.println(b.remove(rand.nextInt() % 1000));
+
+                }
+            }
+
+        }
+
+        b.print(b.head);
+        System.out.println(b.verifyTree());
     }
 
 }

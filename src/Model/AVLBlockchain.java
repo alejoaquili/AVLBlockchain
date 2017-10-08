@@ -1,7 +1,7 @@
 package Model;
 
+import Model.DataStructures.AVLData;
 import Model.DataStructures.AVLTree;
-import Model.DataStructures.BlockData;
 import Model.DataStructures.Blockchain;
 
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AVLBlockchain<T> {
 
-    private Blockchain<BlockData<T>> blockchain;
+    private Blockchain<AVLData<T>> blockchain;
     private AVLTree<T> tree;
 
     public AVLBlockchain(int zeros, Comparator<T> cmp) throws CloneNotSupportedException, NoSuchAlgorithmException {
@@ -20,17 +20,17 @@ public class AVLBlockchain<T> {
     }
 
     public void add(T element) {
-        BlockData<T> data = tree.insert(element);
+        AVLData<T> data = tree.insert(element);
         blockchain.add(data);
     }
 
     public void remove(T element) {
-        BlockData<T> data = tree.remove(element);
+        AVLData<T> data = tree.remove(element);
         blockchain.add(data);
     }
 
     public List<Long> lookup(T element) {
-        BlockData<T> data = tree.search(element);
+        AVLData<T> data = tree.search(element);
         blockchain.add(data);
 
         if(data.getResult()) {

@@ -6,9 +6,9 @@ import java.util.List;
 /**
  * This class represents the data that each {@code Block} of a {@code Blockchain} stores.
  */
-public class BlockData <T> {
+public class AVLData<T> {
     private List<T> modifiedElements ;
-    private T addedElement;
+    private T addedElemnt;
     private  T removedElement;
     private T searchElement;
     private boolean result;
@@ -16,7 +16,7 @@ public class BlockData <T> {
     /**
      *Returns a new {@code BlocData} object.
      */
-    public BlockData(){
+    public AVLData(){
         result = false;
         modifiedElements = new ArrayList<T>();
     }
@@ -39,7 +39,7 @@ public class BlockData <T> {
 
     /**
      * Returns true if the Operation in the {@code AVLTree} result successful. Return false otherwise.
-     * @return a boolean with the state of the success of putting into effect an Operation linked with a {@code AVLTree}
+     * @return a boolean with the state of the success of putting into effect an Operation linked with a {@AVLTree}
      * object.
      */
     public boolean getResult(){
@@ -48,7 +48,7 @@ public class BlockData <T> {
 
     /**
      * This method set the state of the implementation of an Operation in a {@code AVLTree}.
-     * @param result the state of the success of putting into effect an Operation linked with a {@code AVLTree}
+     * @param result the state of the success of putting into effect an Operation linked with a {@AVLTree}
      * object.
      */
     public void setResult(boolean result) {
@@ -64,24 +64,24 @@ public class BlockData <T> {
     }
 
     /**
-     * This method returns the added element in the {@code BlockData} if there are a added element.
+     * This method returns the added element in the {@code AVLData} if there are a added element.
      * @return the added element.
      */
-    public T getAddedElement() {
-        return addedElement;
+    public T getAddedElemnt() {
+        return addedElemnt;
     }
 
     /**
      * Set the added element.
-     * @param addedElement the added element.
+     * @param addedElemnt the added element.
      */
-    public void setAddedElement(T addedElement) {
-        this.addedElement = addedElement;
+    public void setAddedElemnt(T addedElemnt) {
+        this.addedElemnt = addedElemnt;
     }
 
     /**
      * This method return the removed element.
-     * @return the removed element in the {@code BlockData}.
+     * @return the removed element in the {@code AVLData}.
      */
     public T getRemovedElement() {
         return removedElement;
@@ -97,7 +97,7 @@ public class BlockData <T> {
 
     /**
      * This method returns true if the object o is contained in the searched added or removed element of the
-     * {@code BlockData} or if o is contained in the list of modified elements.
+     * {@code AVLData} or if o is contained in the list of modified elements.
      * @param o an {@code Object} that is the element to evaluate.
      * @return a boolean that is true if the element is contained.
      */
@@ -105,18 +105,21 @@ public class BlockData <T> {
         if(o == null ){
             return false;
         }
-        if(o.equals(searchElement) || o.equals(addedElement) || o.equals(removedElement)){
+
+        if(o.equals(searchElement) || o.equals(addedElemnt) || o.equals(removedElement)){
             return true;
         }
+
         if(modifiedElements.contains(o)){
             return true;
         }
+
         return false;
     }
 
     /**
-     * This method returns the {@code String} representation of the {@code BlockData}.
-     * @return a {@code String} that represents the {@code BlockData} object.
+     * This method returns the {@code String} representation of the {@code AVLData}.
+     * @return a {@code String} that represents the {@code AVLData} object.
      */
     @Override
     public String toString(){
@@ -124,7 +127,7 @@ public class BlockData <T> {
         if(searchElement != null){
                result = "Searched Element: " + searchElement;
         }else {
-            result = (addedElement == null) ? "Added: " + addedElement : "Removed: " + removedElement;
+            result = (addedElemnt == null) ? "Added: " + addedElemnt : "Removed: " + removedElement;
             result += "- Modified: " + modifiedElements + "\n";
         }
 

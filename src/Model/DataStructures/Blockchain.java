@@ -2,13 +2,14 @@ package Model.DataStructures;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * This class represents the {@code Blockchain} object.
  * @param <T> is the data type that is each {@code Block} will store.
  */
-public class Blockchain <T extends BlockDataInterface> {
+public class Blockchain <T> implements Iterable<T> {
     private List<Block<T>> blocks;
     private final static String HASH_FUNCTION = "MD5";
     private final static String GENESIS = "0000000000000000000000000000000";
@@ -62,7 +63,7 @@ public class Blockchain <T extends BlockDataInterface> {
      * @param index the specified index.
      * @param data the new data the be set.
      */
-    public void setBlock(long index, T data){
+    public void setBlock(int index, T data){
         if(index < 0 || index >= blocks.size()) throw  new IndexOutOfBoundsException("Wrong index.");
         Block<T> oldBlock = blocks.get(index);
         Block<T> newBlock = new Block<>(oldBlock.getIndex(), data, oldBlock.getPrevHash(), zeros);
@@ -91,18 +92,31 @@ public class Blockchain <T extends BlockDataInterface> {
             return true;
         }
 
-        Node current = lastNode;
-        Block<T> b ;
-        while( current != null && current.next != null){
-            b = current.block;
-            Block<T> next = current.next.block;
-            if(!b.getPrevHash().equals(next.getHash())){
-                return false;
-            }
-            current = current.next;
-        }
+
         return true;
      }
+
+    public Iterator<T> iterator() {
+        return new BlockIterator<T>();
+    }
+
+
+    private class BlockIterator<T> implements Iterator<T> {
+
+        private Iterator<Block<T>> it;
+
+        public BlockIterator() {
+            it = blocks.iterator();
+        }
+
+        public boolean hasNext() {
+            return false;
+        }
+
+        public T next() {
+            return null;
+        }
+    }
 
 }
 

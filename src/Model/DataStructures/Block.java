@@ -4,7 +4,7 @@ package Model.DataStructures;
  * This class represents the nodes of a {@code Blockchain}
  * @param <S> The parameter is a generic for the  type of data stored.
  */
-public class Block < S extends BlockDataInterface> {
+public class Block <S> {
     private long index;
     private S data;
     private long nounce;
@@ -20,9 +20,9 @@ public class Block < S extends BlockDataInterface> {
      * @param zeros the number of zeros that the block has to validate.
      */
     public Block(long index, S data, String prevHash, String zeros){
-        if(index < 0 ) throw new IllegalArgumentException("index were incorrect");
-        if(prevHash == null ) throw new IllegalArgumentException("previous hash were incorrect");
-        if(zeros == null) throw new IllegalArgumentException("zeros were incorrect");
+        if(index < 0 ) throw new IllegalArgumentException("Index were incorrect. \n");
+        if(prevHash == null ) throw new IllegalArgumentException("Previous hash were incorrect. \n");
+        if(zeros == null) throw new IllegalArgumentException("Zeros were incorrect. \n");
         this.data = data;
         this.index = index;
         this.prevHash = prevHash;
@@ -86,13 +86,4 @@ public class Block < S extends BlockDataInterface> {
         return prevHash;
     }
 
-    /**
-     * This method return true if the data (which is a Object that implements {@code BlockDataInterface})
-     * of the {@code Block} contains element.
-     * @param element an {@code Object} to verify
-     * @return a boolean to evaluate if the element is contained.
-     */
-    public boolean contains(Object element){
-        return this.data.contains(element);
-    }
 }

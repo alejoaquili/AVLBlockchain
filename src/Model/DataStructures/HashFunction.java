@@ -16,7 +16,7 @@ public class HashFunction {
      * @throws NoSuchAlgorithmException if the specified algorithm is invalid.
      */
     private HashFunction(String algorithm) throws NoSuchAlgorithmException {
-        if (algorithm == null) throw new IllegalArgumentException("Invalid algorithm");
+        if (algorithm == null) throw new IllegalArgumentException("Invalid algorithm. \n");
         try {
             md = MessageDigest.getInstance(algorithm);
         } catch (NoSuchAlgorithmException e) {
@@ -47,9 +47,6 @@ public class HashFunction {
     public static HashFunction getSingletonInstance() {
         return encoder;
     }
-
-
-    //TODO: falta comentar este método con javadoc
 
     private static String bytesToHex(byte[] bytes) {
         StringBuffer result = new StringBuffer();
