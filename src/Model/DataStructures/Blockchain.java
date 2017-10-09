@@ -47,10 +47,10 @@ public class Blockchain <T> implements Iterable<T> {
      */
     public void add(T data){
         Block<T> b = null;
-        if(blocks == null){
+        if(blocks.size() == 0){
             b = createGenesis(data);
         }else{
-            Block<T> prev = blocks.get(blocks.size() - 1);
+            Block<T> prev = blocks.get(blocks.size() -1);
             b = new Block<>(prev.getIndex()+1, data, prev.getHash(), zeros);
             b.mine();
         }
