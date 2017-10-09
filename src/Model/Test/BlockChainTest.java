@@ -1,6 +1,6 @@
 package Model.Test;
 
-import Model.DataStructures.Blockchain;
+import Model.DataStructures.Blockchain.Blockchain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

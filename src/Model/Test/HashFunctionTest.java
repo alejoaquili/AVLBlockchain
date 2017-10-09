@@ -1,7 +1,7 @@
 package Model.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import Model.DataStructures.HashFunction;
+import Model.DataStructures.Blockchain.HashFunction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

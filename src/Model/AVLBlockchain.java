@@ -1,8 +1,8 @@
 package Model;
 
-import Model.DataStructures.AVLData;
-import Model.DataStructures.AVLTree;
-import Model.DataStructures.Blockchain;
+import Model.DataStructures.AVL.AVLData;
+import Model.DataStructures.AVL.AVLTree;
+import Model.DataStructures.Blockchain.Blockchain;
 
 import java.io.FileNotFoundException;
 import java.security.NoSuchAlgorithmException;
@@ -134,7 +134,7 @@ public class AVLBlockchain<T> {
                 numbers.add(rand.nextInt());
                 b.add(numbers.get(i));
                 if(i % (max / 10) == 0) {
-                    System.out.println(i % (max/100) + "%");
+                    System.out.println(i / 10 + "%");
                 }
 
             }
@@ -145,7 +145,6 @@ public class AVLBlockchain<T> {
             for(AVLData<Integer> d : b.blockchain){
                 System.out.println(d);
             }
-
 
         }catch(CloneNotSupportedException e){
             System.out.println("clone");
@@ -158,7 +157,7 @@ public class AVLBlockchain<T> {
 
             Random rand = new Random();
             List<Integer> numbers = new ArrayList<>();
-            int max = 1000;
+            int max = 100;
             for (int i = 0; i < max; i++) {
                 numbers.add(rand.nextInt());
                 b.add(numbers.get(i));

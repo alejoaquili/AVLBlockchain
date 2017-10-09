@@ -1,8 +1,7 @@
-package Model.DataStructures;
+package Model.DataStructures.AVL;
 
 
 import java.util.Comparator;
-import java.util.Random;
 
 /**
      * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
@@ -46,7 +45,8 @@ public class AVLTree<T> {
      */
     public AVLData<T> insert(T element){
         AVLData<T> data = new AVLData<T>();
-        data.setAddedElement(element);
+        data.setElement(element);
+        data.setOperation(AVLData.insert);
 
         if (element != null) {
             head = insert(head, element, data);
@@ -144,7 +144,8 @@ public class AVLTree<T> {
      */
     public AVLData<T> remove(T element) {
         AVLData<T> data = new AVLData<T>();
-        data.setRemovedElement(element);
+        data.setElement(element);
+        data.setOperation(AVLData.remove);
         if (head != null) {
             head = remove(head, element, data);
         }
@@ -205,7 +206,8 @@ public class AVLTree<T> {
 
     private AVLData<T> search(AVLNode node, T element){
         AVLData<T> data = new AVLData<T>();
-        data.setSearchElement(element);
+        data.setElement(element);
+        data.setOperation(AVLData.search);
         if(node == null){
             return data;
         }

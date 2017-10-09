@@ -1,4 +1,4 @@
-package Model.DataStructures;
+package Model.DataStructures.Blockchain;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;

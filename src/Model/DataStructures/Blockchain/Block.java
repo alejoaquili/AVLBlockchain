@@ -1,4 +1,4 @@
-package Model.DataStructures;
+package Model.DataStructures.Blockchain;
 
 /**
  * This class represents the nodes of a {@code Blockchain}
