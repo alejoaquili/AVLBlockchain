@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class AVLData<T> {
     private List<T> modifiedElements ;
-    private T addedElemnt;
+    private T addedElement;
     private  T removedElement;
     private T searchElement;
     private boolean result;
@@ -68,16 +68,16 @@ public class AVLData<T> {
      * This method returns the added element in the {@code AVLData} if there are a added element.
      * @return the added element.
      */
-    public T getAddedElemnt() {
-        return addedElemnt;
+    public T getAddedElement() {
+        return addedElement;
     }
 
     /**
      * Set the added element.
-     * @param addedElemnt the added element.
+     * @param addedElement the added element.
      */
-    public void setAddedElemnt(T addedElemnt) {
-        this.addedElemnt = addedElemnt;
+    public void setAddedElement(T addedElement) {
+        this.addedElement = addedElement;
     }
 
     /**
@@ -107,7 +107,7 @@ public class AVLData<T> {
             return false;
         }
 
-        if(o.equals(searchElement) || o.equals(addedElemnt) || o.equals(removedElement)){
+        if(o.equals(searchElement) || o.equals(addedElement) || o.equals(removedElement)){
             return true;
         }
 
@@ -128,7 +128,7 @@ public class AVLData<T> {
         if(searchElement != null){
                result = "Searched Element: " + searchElement;
         }else {
-            result = (addedElemnt == null) ? "Added: " + addedElemnt : "Removed: " + removedElement;
+            result = (addedElement == null) ? "Added: " + addedElement : "Removed: " + removedElement;
             result += " - Modified: " + modifiedElements;
         }
 
