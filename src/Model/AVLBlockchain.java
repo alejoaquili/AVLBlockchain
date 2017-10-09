@@ -129,9 +129,13 @@ public class AVLBlockchain<T> {
 
             Random rand = new Random();
             List<Integer> numbers = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
+            int max = 100;
+            for (int i = 0; i < max; i++) {
                 numbers.add(rand.nextInt());
                 b.add(numbers.get(i));
+                if(i % (max / 10) == 0) {
+                    System.out.println(i % (max/100) + "%");
+                }
 
             }
             List<Long> l = b.lookup(numbers.get(2));
@@ -142,15 +146,38 @@ public class AVLBlockchain<T> {
                 System.out.println(d);
             }
 
-            System.out.println(numbers);
 
         }catch(CloneNotSupportedException e){
             System.out.println("clone");
         }catch (NoSuchAlgorithmException e){
             System.out.println("no algorithm matches the request");
         }
+        // este es para ver solo blockchain
+        try {
+            Blockchain<Integer> b = new Blockchain<Integer>(4);
+
+            Random rand = new Random();
+            List<Integer> numbers = new ArrayList<>();
+            int max = 1000;
+            for (int i = 0; i < max; i++) {
+                numbers.add(rand.nextInt());
+                b.add(numbers.get(i));
+                if(i % (max / 10) == 0) {
+                    System.out.println(i / (max/100) + "%");
+                }
+
+            }
 
 
+            for(Integer i : b){
+                System.out.println(i);
+            }
+
+        } catch(CloneNotSupportedException e){
+            System.out.println("clone");
+        }catch (NoSuchAlgorithmException e){
+            System.out.println("no algorithm matches the request");
+        }
     }
 
 }
