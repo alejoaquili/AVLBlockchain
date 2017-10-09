@@ -128,7 +128,7 @@ public class AVLData<T> {
         if(searchElement != null){
                result = "Searched Element: " + searchElement;
         }else {
-            result = (addedElement == null) ? "Added: " + addedElement : "Removed: " + removedElement;
+            result = (addedElement != null) ? "Added: " + addedElement : "Removed: " + removedElement;
             result += " - Modified: " + modifiedElements;
         }
 

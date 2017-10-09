@@ -2,6 +2,7 @@ package Model.DataStructures;
 
 
 import java.util.Comparator;
+import java.util.Random;
 
 /**
      * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
@@ -22,6 +23,9 @@ public class AVLTree<T> {
         head = null;
         this.cmp = cmp;
     }
+
+
+
 
     private static int max(int a, int b) {
         return (a > b)? a : b;
@@ -234,5 +238,9 @@ public class AVLTree<T> {
         }
 
     }
+
+    
+
+
 
 }

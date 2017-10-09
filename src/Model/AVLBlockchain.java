@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class represents a {@code AVLTree} with a {@code Blockchain} to register all the operations in
@@ -60,7 +61,7 @@ public class AVLBlockchain<T> {
         AVLData<T> data = tree.search(element);
         blockchain.add(data);
 
-        if (data.getResult()) {
+        if (!data.getResult()) {
             return null;
         }
         return findBlocks(element);
@@ -113,6 +114,43 @@ public class AVLBlockchain<T> {
     public void modify(int index){
         AVLData<T> voidSentinelAVLData = new AVLData<>();
         blockchain.setBlock(index, voidSentinelAVLData);
+    }
+
+
+
+    public static void main(String[] args){
+        try {
+            AVLBlockchain<Integer> b = new AVLBlockchain<>(4, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return o1 - o2;
+                }
+            });
+
+            Random rand = new Random();
+            List<Integer> numbers = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                numbers.add(rand.nextInt());
+                b.add(numbers.get(i));
+
+            }
+            List<Long> l = b.lookup(numbers.get(2));
+
+            System.out.println(l);
+
+            for(AVLData<Integer> d : b.blockchain){
+                System.out.println(d);
+            }
+
+            System.out.println(numbers);
+
+        }catch(CloneNotSupportedException e){
+            System.out.println("clone");
+        }catch (NoSuchAlgorithmException e){
+            System.out.println("no algorithm matches the request");
+        }
+
+
     }
 
 }
