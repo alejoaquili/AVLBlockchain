@@ -8,9 +8,6 @@ import java.security.NoSuchAlgorithmException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/**
- * Created by lautaro on 09/10/17.
- */
 public class BlockChainTest
 {
     private static Blockchain<Integer> b;
