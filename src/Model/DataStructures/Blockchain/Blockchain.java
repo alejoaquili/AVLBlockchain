@@ -1,5 +1,6 @@
 package Model.DataStructures.Blockchain;
 
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,11 +10,11 @@ import java.util.List;
  * This class represents the {@code Blockchain} object.
  * @param <T> is the data type that is each {@code Block} will store.
  */
-public class Blockchain <T> implements Iterable<T> {
-    private List<Block<T>> blocks;
-    private final static String HASH_FUNCTION = "MD5";
-    private final static String GENESIS = "0000000000000000000000000000000";
-    private String zeros;
+public class Blockchain <T extends Serializable> implements Iterable<T>, Serializable {
+    private transient List<Block<T>> blocks;
+    private final transient static String HASH_FUNCTION = "MD5";
+    private final transient String GENESIS = "0000000000000000000000000000000";
+    private  transient String zeros;
 
 
     /**
@@ -97,6 +98,22 @@ public class Blockchain <T> implements Iterable<T> {
         return true;
      }
 
+    public void saveFile(String path) throws IOException {
+        if(path == null) throw new IllegalArgumentException("Wrong path.");
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
+        oos.writeObject(blocks);
+        oos.flush();
+    }
+
+    private boolean readFile(String path) throws IOException, ClassNotFoundException {
+        if(path == null) throw new IllegalArgumentException("Wrong path.");
+        ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
+        Object  obj = oos.readObject();
+        if(!(obj instanceof List)) return false;
+        this.blocks = (List<Block<T>>) obj;
+        return  true;
+    }
+
     /**
      * Returns a Custom  Data Iterator, allows a {@code Blockchain} Object to be the target of
      * the "for-each loop" statement.
@@ -106,7 +123,7 @@ public class Blockchain <T> implements Iterable<T> {
         return new DataIterator<T>(blocks.iterator());
     }
 
-    private class DataIterator<T> implements Iterator<T> {
+    private class DataIterator<T extends Serializable> implements Iterator<T> {
 
         private Iterator<Block<T>> iterator;
 

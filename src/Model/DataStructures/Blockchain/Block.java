@@ -1,10 +1,13 @@
 package Model.DataStructures.Blockchain;
 
+import java.io.Serializable;
+
+
 /**
  * This class represents the nodes of a {@code Blockchain}
  * @param <S> The parameter is a generic for the  type of data stored.
  */
-public class Block <S> {
+public class Block <S extends Serializable> implements Serializable{
     private long index;
     private S data;
     private long nounce;
