@@ -106,7 +106,7 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         oos.flush();
     }
 
-    private boolean readFile(String path) throws IOException, ClassNotFoundException {
+    public boolean readFile(String path) throws IOException, ClassNotFoundException {
         if(path == null) throw new IllegalArgumentException("Wrong path.");
         ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
         Object  obj = oos.readObject();

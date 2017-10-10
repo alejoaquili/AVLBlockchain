@@ -6,6 +6,7 @@ import Model.DataStructures.AVL.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -128,6 +129,7 @@ public class AVLBlockchain<T extends Serializable> {
 
 
     public static void main(String[] args){
+        /*
         try {
             AVLBlockchain<Integer> b = new AVLBlockchain<>(4, new Comparator<Integer>() {
                 @Override
@@ -155,13 +157,16 @@ public class AVLBlockchain<T extends Serializable> {
                 System.out.println(d);
             }
 
+
         }catch(CloneNotSupportedException e){
             System.out.println("clone");
         }catch (NoSuchAlgorithmException e){
             System.out.println("no algorithm matches the request");
         }
+        */
         // este es para ver solo blockchain
         try {
+
             Blockchain<Integer> b = new Blockchain<Integer>(4);
 
             Random rand = new Random();
@@ -176,6 +181,10 @@ public class AVLBlockchain<T extends Serializable> {
 
             }
 
+            b.saveFile("/Users/franciscosanguineti/Desktop/archivo.txt");
+
+            b = new Blockchain<>(4);
+            System.out.println(b.readFile("/Users/franciscosanguineti/Desktop/archivo.txt"));
 
             for(Integer i : b){
                 System.out.println(i);
@@ -185,6 +194,11 @@ public class AVLBlockchain<T extends Serializable> {
             System.out.println("clone");
         }catch (NoSuchAlgorithmException e){
             System.out.println("no algorithm matches the request");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            System.out.println("hola");
+            e.printStackTrace();
         }
     }
 
