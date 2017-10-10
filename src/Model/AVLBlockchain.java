@@ -8,6 +8,7 @@ import Model.DataStructures.Blockchain.Blockchain;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -94,18 +95,16 @@ public class AVLBlockchain<T extends Serializable> {
      * @param filePath the specify absolute path of the file.
      * @throws FileNotFoundException if the specified path is empty.
      */
-    public void modify(int index, String filePath) throws FileNotFoundException {
-        FileReader fr = new FileReader(filePath);
-        StringBuffer info = new StringBuffer("");
-        for (String each : fr)
-            info.append(each);
-        String data = new String(info);
-        AVLOperationData<T> newdata = new AVLOperationData<>();
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!REVISAR CONSIGNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        newdata.addModified(((T)data));
+    public void modify(int index, String filePath) throws IOException, ClassNotFoundException {
+        if(filePath == null) throw new IllegalArgumentException("Wrong path.");
+        ObjectInputStream oos = new ObjectInputStream(new FileInputStream(filePath));
+        Object  obj = oos.readObject();
+        if(!(obj instanceof AVLOperationData)){
+            throw new ClassCastException("The object read is not a AVLOperationData.");
+        }
+        AVLOperationData<T> newdata = (AVLOperationData<T>)obj;
         blockchain.setBlock(index, newdata);
+
     }
 
     /**

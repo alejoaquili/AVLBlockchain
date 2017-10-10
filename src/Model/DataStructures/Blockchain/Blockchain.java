@@ -99,6 +99,11 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         return true;
      }
 
+    /**
+     * This method save the {@code Blockchain} which is {@code Serializable} in an output steam file.
+     * @param path the file path to save the {@code Blockchain}.
+     * @throws IOException if an I/O error occurs.
+     */
     public void saveFile(String path) throws IOException {
         if(path == null) throw new IllegalArgumentException("Wrong path.");
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
@@ -106,6 +111,13 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         oos.flush();
     }
 
+    /**
+     * This method read a {@code Blockchain} from a specific text file.
+     * @param path the file path.
+     * @return true if the {@code Blockchain} was read without error. Return false otherwise.
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassNotFoundException if the read object is not compatible.
+     */
     public boolean readFile(String path) throws IOException, ClassNotFoundException {
         if(path == null) throw new IllegalArgumentException("Wrong path.");
         ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));

@@ -31,7 +31,7 @@ public class HashFunction {
      * @return a reference of the singleton instance of the {@code HashFunction} object.
      * @throws NoSuchAlgorithmException if the specified algorithm were invalid.
      */
-    public static HashFunction getSingletonInstance(String algorithm) throws NoSuchAlgorithmException {
+    public static HashFunction getSingletonInstance(String algorithm) throws NoSuchAlgorithmException{
         if(encoder == null) {
             encoder = new HashFunction(algorithm);
         }
