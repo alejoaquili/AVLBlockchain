@@ -130,6 +130,16 @@ public class AVLBlockchain<T extends Serializable> {
         return blockchain.verify();
     }
 
+
+    public void save(String path) throws IOException {
+        blockchain.saveFile(path);
+    }
+
+
+    public void read(String path) throws IOException, ClassNotFoundException {
+        blockchain.readFile(path);
+    }
+
     public static void main(String[] args){
         /*
         try {

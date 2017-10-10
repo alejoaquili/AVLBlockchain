@@ -81,8 +81,20 @@ public class AVLInterface {
                         }else{
                             System.out.println("Raped.... so sorry");
                         }
+                        break;
 
+                    case "save":
+                        System.out.println("specify path: ");
+                        String pathToSave = sc.next();
+                        b.save(pathToSave);
+                        break;
 
+                    case "read":
+                        System.out.println("getting the blockchain from..");
+                        System.out.println("specify the path");
+                        String pathToRead = sc.next();
+
+                        b.read(pathToRead);
                 }
             }
 
