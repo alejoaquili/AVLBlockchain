@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * This class represents a {@code AVLTree} with a {@code Blockchain} to register all the operations in
@@ -125,6 +122,13 @@ public class AVLBlockchain<T extends Serializable> {
     }
 
 
+    /**
+     * This method return true if the {@code Blockchain} integrity was preserved.
+     * @return return the result fo a {@code Blockchain} validation.
+     */
+    public boolean validate(){
+        return blockchain.verify();
+    }
 
     public static void main(String[] args){
         /*
@@ -160,6 +164,8 @@ public class AVLBlockchain<T extends Serializable> {
         }
         */
         // este es para ver solo blockchain
+
+
         try {
 
             Blockchain<Integer> b = new Blockchain<Integer>(4);
@@ -194,4 +200,7 @@ public class AVLBlockchain<T extends Serializable> {
         }
     }
 
-}
+
+
+
+    }

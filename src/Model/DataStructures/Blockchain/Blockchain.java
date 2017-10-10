@@ -133,7 +133,6 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         }
         return  true;
     }
-
     /**
      * Returns a Custom  Data Iterator, allows a {@code Blockchain} Object to be the target of
      * the "for-each loop" statement.
@@ -159,6 +158,8 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
             return iterator.next().getData();
         }
     }
+
+
 
 }
 
