@@ -5,7 +5,6 @@ import Model.DataStructures.AVL.AVLTree;
 import Model.DataStructures.AVL.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.*;
@@ -93,7 +92,8 @@ public class AVLBlockchain<T extends Serializable> {
      * and replace the data with the data of a specified file.
      * @param index the index of the {@code Block} in the {@code Blockchain}.
      * @param filePath the specify absolute path of the file.
-     * @throws FileNotFoundException if the specified path is empty.
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassCastException if the read object is not compatible.
      */
     public void modify(int index, String filePath) throws IOException, ClassNotFoundException {
         if(filePath == null) throw new IllegalArgumentException("Wrong path.");
