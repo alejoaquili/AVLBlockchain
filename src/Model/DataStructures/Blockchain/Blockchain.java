@@ -110,8 +110,15 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
         Object  obj = oos.readObject();
         if(!(obj instanceof List)) return false;
+
         List<?> list = (List<?>) obj;
 
+        for(Object o: list) {
+            if(!(o instanceof Block)) return false;
+            Block block = (Block) o;
+            this.blocks.add(block);
+
+        }
         this.blocks = (List<Block<T>>) obj;
         return  true;
     }
