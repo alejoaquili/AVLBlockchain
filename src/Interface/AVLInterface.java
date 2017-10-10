@@ -34,21 +34,26 @@ public class AVLInterface {
 
                     case "add":
                         System.out.println("which element? :> ");
-
+                        if (!isValidData(sc)) {
+                            System.out.println(" Not valid element");
+                            break;
+                        }
                         int elementToAdd = sc.nextInt();
                         b.add(elementToAdd);
                         break;
 
                     case "remove":
                         System.out.println("which element? :> ");
-
+                        if (!isValidData(sc))
+                            break;
                         int elementToRemove = sc.nextInt();
 
                         b.remove(elementToRemove);
                         break;
                     case "lookup":
                         System.out.println("which element? :> ");
-
+                        if (!isValidData(sc))
+                            break;
                         int elementToSearch = sc.nextInt();
 
                         List<Long> result =b.lookup(elementToSearch);
@@ -60,6 +65,8 @@ public class AVLInterface {
 
                     case "modify":
                         System.out.println("which block? ");
+                        if (!isValidData(sc))
+                            break;
                         int index = sc.nextInt();
                         System.out.println("which file_path ( leave black to replace for an empty block)");
                         String path = sc.next();
@@ -90,9 +97,14 @@ public class AVLInterface {
                     case "read":
                         System.out.println("getting the blockchain from..");
                         System.out.println("specify the path");
+                        if (!sc.hasNext())
+                            break;
                         String pathToRead = sc.next();
 
                         b.read(pathToRead);
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -107,5 +119,17 @@ public class AVLInterface {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    private static boolean isValidData(Scanner sc){
+        if (!sc.hasNextInt()){
+            return false;
+        }
+        if (sc.hasNext("[a-zA-Z]?")){
+            return false;
+        }
+        if (sc.hasNext("\\W")){
+            return false;
+        }
+        return true;
     }
 }
