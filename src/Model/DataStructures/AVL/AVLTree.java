@@ -23,9 +23,6 @@ public class AVLTree<T> {
         this.cmp = cmp;
     }
 
-
-
-
     private static int max(int a, int b) {
         return (a > b)? a : b;
     }
@@ -41,12 +38,12 @@ public class AVLTree<T> {
     /**
      * This method insert a generic T element in the tree.
      * @param element an specified element to be inserted in the tree.
-     * @return a {@code AVLData<T>} that specified the operation.
+     * @return a {@code AVLOperationData<T>} that specified the operation.
      */
-    public AVLData<T> insert(T element){
-        AVLData<T> data = new AVLData<T>();
+    public AVLOperationData<T> insert(T element){
+        AVLOperationData<T> data = new AVLOperationData<T>();
         data.setElement(element);
-        data.setOperation(AVLData.insert);
+        data.setOperation(AVLOperationData.insert);
 
         if (element != null) {
             head = insert(head, element, data);
@@ -54,7 +51,7 @@ public class AVLTree<T> {
         return data;
     }
 
-    private AVLNode insert(AVLNode node, T element, AVLData<T> data) {
+    private AVLNode insert(AVLNode node, T element, AVLOperationData<T> data) {
         if(node == null){
             AVLNode aux = new AVLNode(element);
             data.setResult(true);
@@ -85,7 +82,7 @@ public class AVLTree<T> {
         return node;
     }
 
-    private AVLNode singleRotateLeftChild(AVLNode node, AVLData<T> data) {
+    private AVLNode singleRotateLeftChild(AVLNode node, AVLOperationData<T> data) {
         AVLNode aux = node.left;
         node.left = aux.right;
         aux.right = node;
@@ -101,7 +98,7 @@ public class AVLTree<T> {
         return aux;
     }
 
-    private AVLNode singleRotateRightChild(AVLNode node,AVLData<T> data) {
+    private AVLNode singleRotateRightChild(AVLNode node,AVLOperationData<T> data) {
         AVLNode aux = node.right;
         node.right = aux.left;
         aux.left = node;
@@ -117,12 +114,12 @@ public class AVLTree<T> {
         return aux;
     }
 
-    private AVLNode doubleRotateRightChild(AVLNode node,AVLData<T> data) {
+    private AVLNode doubleRotateRightChild(AVLNode node,AVLOperationData<T> data) {
         node.right = singleRotateLeftChild(node.right,data);
         return singleRotateRightChild(node,data);
     }
 
-    private AVLNode doubleRotateLeftChild(AVLNode node,AVLData<T> data) {
+    private AVLNode doubleRotateLeftChild(AVLNode node,AVLOperationData<T> data) {
         node.left = singleRotateRightChild(node.left,data);
         return singleRotateLeftChild(node,data);
     }
@@ -140,19 +137,19 @@ public class AVLTree<T> {
     /**
      * This method remove a generic T element of the {@code AVLTree} object.
      * @param element a generic element to be removed.
-     * @return a {@code AVLData<T>} that specified the operation.
+     * @return a {@code AVLOperationData<T>} that specified the operation.
      */
-    public AVLData<T> remove(T element) {
-        AVLData<T> data = new AVLData<T>();
+    public AVLOperationData<T> remove(T element) {
+        AVLOperationData<T> data = new AVLOperationData<T>();
         data.setElement(element);
-        data.setOperation(AVLData.remove);
+        data.setOperation(AVLOperationData.remove);
         if (head != null) {
             head = remove(head, element, data);
         }
         return data;
     }
 
-    private AVLNode remove(AVLNode node, T element, AVLData<T> data) {
+    private AVLNode remove(AVLNode node, T element, AVLOperationData<T> data) {
         if (node == null) {
             return node;
         }
@@ -198,16 +195,16 @@ public class AVLTree<T> {
     /**
      * This method search a generic type element in the {@code AVLTree} Object.
      * @param element a generic type element to be searched.
-     * @return a {@code AVLData<T>} that specified the operation.
+     * @return a {@code AVLOperationData<T>} that specified the operation.
      */
-    public AVLData<T> search(T element){
+    public AVLOperationData<T> search(T element){
         return search(head, element);
     }
 
-    private AVLData<T> search(AVLNode node, T element){
-        AVLData<T> data = new AVLData<T>();
+    private AVLOperationData<T> search(AVLNode node, T element){
+        AVLOperationData<T> data = new AVLOperationData<T>();
         data.setElement(element);
-        data.setOperation(AVLData.search);
+        data.setOperation(AVLOperationData.search);
         if(node == null){
             return data;
         }
@@ -223,6 +220,19 @@ public class AVLTree<T> {
 
         data.setResult(true);
         return  data;
+    }
+
+    public AVLOperationData<T> apply(AVLOperationData<T> operation) throws InvalidAVLOperationDataException {
+        switch (operation.getOperation()) {
+            case AVLOperationData.insert:
+                return this.insert(operation.getElement());
+            case AVLOperationData.remove:
+                return this.remove(operation.getElement());
+            case AVLOperationData.search:
+                return this.search(operation.getElement());
+            default:
+                throw new InvalidAVLOperationDataException("The operation were invalid");
+        }
     }
 
     private class AVLNode {

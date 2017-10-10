@@ -7,7 +7,7 @@ import java.util.List;
  * This class represents the data of the operation done in a {@code AVLTree}that each {@code Block}
  * of a {@code Blockchain} stores.
  */
-public class AVLData<T> {
+public class AVLOperationData<T> {
     private List<T> modifiedElements ;
     private T element;
     private String operation;
@@ -18,9 +18,9 @@ public class AVLData<T> {
     static final String search = "Searched";
 
     /**
-     *Returns a new {@code AVLData} object.
+     *Returns a new {@code AVLOperationData} object.
      */
-    public AVLData(){
+    public AVLOperationData(){
         result = false;
         modifiedElements = new ArrayList<T>();
     }
@@ -77,7 +77,7 @@ public class AVLData<T> {
 
     /**
      * This method returns true if the object o is contained in the searched added or removed element of the
-     * {@code AVLData} or if o is contained in the list of modified elements.
+     * {@code AVLOperationData} or if o is contained in the list of modified elements.
      * @param o an {@code Object} that is the element to evaluate.
      * @return a boolean that is true if the element is contained.
      */
@@ -92,8 +92,8 @@ public class AVLData<T> {
     }
 
     /**
-     * This method returns the {@code String} representation of the {@code AVLData}.
-     * @return a {@code String} that represents the {@code AVLData} object.
+     * This method returns the {@code String} representation of the {@code AVLOperationData}.
+     * @return a {@code String} that represents the {@code AVLOperationData} object.
      */
     @Override
     public String toString(){

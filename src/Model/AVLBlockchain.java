@@ -1,6 +1,6 @@
 package Model;
 
-import Model.DataStructures.AVL.AVLData;
+import Model.DataStructures.AVL.AVLOperationData;
 import Model.DataStructures.AVL.AVLTree;
 import Model.DataStructures.Blockchain.Blockchain;
 
@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class AVLBlockchain<T> {
 
-    private Blockchain<AVLData<T>> blockchain;
+    private Blockchain<AVLOperationData<T>> blockchain;
     private AVLTree<T> tree;
 
     /**
@@ -38,7 +38,7 @@ public class AVLBlockchain<T> {
      * @param element a new element.
      */
     public void add(T element) {
-        AVLData<T> data = tree.insert(element);
+        AVLOperationData<T> data = tree.insert(element);
         blockchain.add(data);
     }
 
@@ -47,7 +47,7 @@ public class AVLBlockchain<T> {
      * @param element a element to remove.
      */
     public void remove(T element) {
-        AVLData<T> data = tree.remove(element);
+        AVLOperationData<T> data = tree.remove(element);
         blockchain.add(data);
     }
 
@@ -58,7 +58,7 @@ public class AVLBlockchain<T> {
      * @return a new {@code List<Long>} with the required indices.
      */
     public List<Long> lookup(T element) {
-        AVLData<T> data = tree.search(element);
+        AVLOperationData<T> data = tree.search(element);
         blockchain.add(data);
 
         if (!data.getResult()) {
@@ -76,7 +76,7 @@ public class AVLBlockchain<T> {
     private List<Long> findBlocks(T element) {
         List<Long> list = new ArrayList<>();
         long index = 0;
-        for (AVLData<T> data : blockchain) {
+        for (AVLOperationData<T> data : blockchain) {
             if (data.contains(element)) {
                 list.add(index);
             }
@@ -98,7 +98,7 @@ public class AVLBlockchain<T> {
         for (String each : fr)
             info.append(each);
         String data = new String(info);
-        AVLData<T> newdata = new AVLData<>();
+        AVLOperationData<T> newdata = new AVLOperationData<>();
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //!!!!!!!!!!!!!!!!!!!!!!!!!REVISAR CONSIGNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -112,7 +112,7 @@ public class AVLBlockchain<T> {
      * @param index the index of the {@code Block} in the {@code Blockchain}.
      */
     public void modify(int index){
-        AVLData<T> voidSentinelAVLData = new AVLData<>();
+        AVLOperationData<T> voidSentinelAVLData = new AVLOperationData<>();
         blockchain.setBlock(index, voidSentinelAVLData);
     }
 
@@ -142,7 +142,7 @@ public class AVLBlockchain<T> {
 
             System.out.println(l);
 
-            for(AVLData<Integer> d : b.blockchain){
+            for(AVLOperationData<Integer> d : b.blockchain){
                 System.out.println(d);
             }
 
