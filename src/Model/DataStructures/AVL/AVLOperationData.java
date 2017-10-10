@@ -1,13 +1,16 @@
 package Model.DataStructures.AVL;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * This class represents the data of the operation done in a {@code AVLTree}that each {@code Block}
  * of a {@code Blockchain} stores.
  */
-public class AVLOperationData<T> {
+public class AVLOperationData<T extends Serializable> implements Serializable{
+    static final long serialVersionUID = 42L;
     private List<T> modifiedElements ;
     private T element;
     private String operation;

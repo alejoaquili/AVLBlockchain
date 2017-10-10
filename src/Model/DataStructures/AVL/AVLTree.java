@@ -1,13 +1,14 @@
 package Model.DataStructures.AVL;
 
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
      * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
      * @param <T> the type of data to be store in each node of the tree
      */
-public class AVLTree<T> {
+public class AVLTree<T extends Serializable> {
 
     private AVLNode head;
     private Comparator<T> cmp;

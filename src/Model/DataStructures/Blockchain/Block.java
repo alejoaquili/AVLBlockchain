@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @param <S> The parameter is a generic for the  type of data stored.
  */
 public class Block <S extends Serializable> implements Serializable{
+    static final long serialVersionUID = 42L;
     private long index;
     private S data;
     private long nounce;

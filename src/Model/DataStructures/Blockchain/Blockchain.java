@@ -11,6 +11,7 @@ import java.util.List;
  * @param <T> is the data type that is each {@code Block} will store.
  */
 public class Blockchain <T extends Serializable> implements Iterable<T>, Serializable {
+    static final long serialVersionUID = 42L;
     private transient List<Block<T>> blocks;
     private final transient static String HASH_FUNCTION = "MD5";
     private final transient String GENESIS = "0000000000000000000000000000000";
