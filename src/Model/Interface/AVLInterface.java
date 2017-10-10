@@ -8,9 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by SB on 10/10/2017.
- */
+
 public class AVLInterface {
     public static void main(String [] args) {
         System.out.println("initializing blockchain... ");

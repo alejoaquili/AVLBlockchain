@@ -9,12 +9,12 @@ import java.io.Serializable;
  */
 public class Block <S extends Serializable> implements Serializable{
     static final long serialVersionUID = 42L;
-    private long index;
-    private S data;
-    private long nounce;
-    private String prevHash;
-    private String hash;
-    private String zeros;
+    private transient long index;
+    private transient S data;
+    private transient long nounce;
+    private transient String prevHash;
+    private transient String hash;
+    private transient String zeros;
 
     /**
      *Creates a {@code Block} object for a {@code Blockchain}.
