@@ -28,10 +28,9 @@ public class AVLBlockchain<T extends Serializable> {
      * This method returns a new {@code AVLBlockchain} Object.
      * @param zeros this parameter is the specified quantity of zeros for the {@code Blockchain}.
      * @param cmp the {@code Comparator<T>} for the elements in the {@code AVLTree}.
-     * @throws CloneNotSupportedException if the specified algorithm were invalid.
      * @throws NoSuchAlgorithmException if a new instance of {@code HashFunction} is required.
      */
-    public AVLBlockchain(int zeros, Comparator<T> cmp) throws CloneNotSupportedException, NoSuchAlgorithmException {
+    public AVLBlockchain(int zeros, Comparator<T> cmp) throws NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
         this.tree = new AVLTree<>(cmp);
     }
@@ -157,9 +156,6 @@ public class AVLBlockchain<T extends Serializable> {
                 System.out.println(d);
             }
 
-
-        }catch(CloneNotSupportedException e){
-            System.out.println("clone");
         }catch (NoSuchAlgorithmException e){
             System.out.println("no algorithm matches the request");
         }
@@ -190,14 +186,11 @@ public class AVLBlockchain<T extends Serializable> {
                 System.out.println(i);
             }
 
-        } catch(CloneNotSupportedException e){
-            System.out.println("clone");
         }catch (NoSuchAlgorithmException e){
             System.out.println("no algorithm matches the request");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            System.out.println("hola");
             e.printStackTrace();
         }
     }

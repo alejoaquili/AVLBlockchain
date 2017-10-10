@@ -22,7 +22,7 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
      * This constructor method will create an empty {@code Blockchain} object.
      * @param zeros are the number of zeros that the hash of each {@code Block} must have
      */
-    public Blockchain(long zeros) throws NoSuchAlgorithmException, CloneNotSupportedException {
+    public Blockchain(long zeros) throws NoSuchAlgorithmException {
         if( zeros < 0) throw  new IllegalArgumentException();
         HashFunction encoder = HashFunction.getSingletonInstance(HASH_FUNCTION);
         this.zeros = generateExpReg(zeros);

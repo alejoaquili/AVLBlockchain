@@ -18,8 +18,6 @@ public class BlockChainTest
             b = new Blockchain<Integer>(3);
         }catch (NoSuchAlgorithmException e){
             e.getStackTrace();
-        } catch (CloneNotSupportedException e){
-            e.getStackTrace();
         }
     }
 

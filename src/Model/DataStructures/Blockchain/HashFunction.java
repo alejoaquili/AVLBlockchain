@@ -30,13 +30,11 @@ public class HashFunction {
      * @param algorithm the specified algorithm used for the coding.
      * @return a reference of the singleton instance of the {@code HashFunction} object.
      * @throws NoSuchAlgorithmException if the specified algorithm were invalid.
-     * @throws CloneNotSupportedException if a new instance of {@code HashFunction} is required.
      */
-    public static HashFunction getSingletonInstance(String algorithm) throws NoSuchAlgorithmException, CloneNotSupportedException {
+    public static HashFunction getSingletonInstance(String algorithm) throws NoSuchAlgorithmException {
         if(encoder == null) {
             encoder = new HashFunction(algorithm);
         }
-        else throw new CloneNotSupportedException();
         return encoder;
     }
 
