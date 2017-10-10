@@ -2,6 +2,7 @@ package Model;
 
 import Model.DataStructures.AVL.AVLOperationData;
 import Model.DataStructures.AVL.AVLTree;
+import Model.DataStructures.AVL.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
 import java.io.FileNotFoundException;
@@ -114,6 +115,13 @@ public class AVLBlockchain<T> {
     public void modify(int index){
         AVLOperationData<T> voidSentinelAVLData = new AVLOperationData<>();
         blockchain.setBlock(index, voidSentinelAVLData);
+    }
+
+    private void rebaseTree(Comparator<T> cmp) throws InvalidAVLOperationDataException {
+        AVLTree<T> tree = new AVLTree<>(cmp);
+        for(AVLOperationData<T> opData: blockchain) {
+            tree.apply(opData);
+        }
     }
 
 

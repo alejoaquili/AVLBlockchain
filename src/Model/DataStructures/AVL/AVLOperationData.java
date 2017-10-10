@@ -59,6 +59,7 @@ public class AVLOperationData<T> {
         this.result = result;
     }
 
+    
     public String getOperation() {
         return operation;
     }

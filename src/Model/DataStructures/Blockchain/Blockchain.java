@@ -110,6 +110,8 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
         Object  obj = oos.readObject();
         if(!(obj instanceof List)) return false;
+        List<?> list = (List<?>) obj;
+
         this.blocks = (List<Block<T>>) obj;
         return  true;
     }
@@ -120,10 +122,10 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
      * @return an {@code Iterator<T>}.
      */
     public Iterator<T> iterator() {
-        return new DataIterator<T>(blocks.iterator());
+        return new DataIterator(blocks.iterator());
     }
 
-    private class DataIterator<T extends Serializable> implements Iterator<T> {
+    private class DataIterator implements Iterator<T> {
 
         private Iterator<Block<T>> iterator;
 
