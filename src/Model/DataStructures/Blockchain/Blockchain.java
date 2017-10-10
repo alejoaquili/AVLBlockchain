@@ -120,7 +120,6 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
             this.blocks.add(block);
 
         }
-        this.blocks = (List<Block<T>>) obj;
         return  true;
     }
 

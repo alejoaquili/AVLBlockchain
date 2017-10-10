@@ -6,6 +6,7 @@ import Model.DataStructures.AVL.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ import java.util.Random;
  * the {@code AVLTree}.
  * @param <T> the generic type of data for the tree.
  */
-public class AVLBlockchain<T> {
+public class AVLBlockchain<T extends Serializable> {
 
     private Blockchain<AVLOperationData<T>> blockchain;
     private AVLTree<T> tree;
@@ -72,7 +73,7 @@ public class AVLBlockchain<T> {
      * This method return a {@code List<Long>} with the indices of the {@code Block} in
      * the {@code Blockchain} that include any operation with a specified element.
      * @param element a specified element.
-     * @returna new {@code List<Long>} with the required indices.
+     * @return a new {@code List<Long>} with the required indices.
      */
     private List<Long> findBlocks(T element) {
         List<Long> list = new ArrayList<>();
