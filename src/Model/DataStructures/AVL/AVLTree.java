@@ -1,6 +1,8 @@
 package Model.DataStructures.AVL;
 
 
+import Model.Exceptions.InvalidAVLOperationDataException;
+
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -37,14 +39,14 @@ public class AVLTree<T extends Serializable> {
     }
 
     /**
-     * This method insert a generic T element in the tree.
+     * This method INSERT a generic T element in the tree.
      * @param element an specified element to be inserted in the tree.
      * @return a {@code AVLOperationData<T>} that specified the operation.
      */
     public AVLOperationData<T> insert(T element){
         AVLOperationData<T> data = new AVLOperationData<T>();
         data.setElement(element);
-        data.setOperation(AVLOperationData.insert);
+        data.setOperation(AVLOperationData.INSERT);
 
         if (element != null) {
             head = insert(head, element, data);
@@ -136,14 +138,14 @@ public class AVLTree<T extends Serializable> {
     }
 
     /**
-     * This method remove a generic T element of the {@code AVLTree} object.
+     * This method REMOVE a generic T element of the {@code AVLTree} object.
      * @param element a generic element to be removed.
      * @return a {@code AVLOperationData<T>} that specified the operation.
      */
     public AVLOperationData<T> remove(T element) {
         AVLOperationData<T> data = new AVLOperationData<T>();
         data.setElement(element);
-        data.setOperation(AVLOperationData.remove);
+        data.setOperation(AVLOperationData.REMOVE);
         if (head != null) {
             head = remove(head, element, data);
         }
@@ -194,7 +196,7 @@ public class AVLTree<T extends Serializable> {
     }
 
     /**
-     * This method search a generic type element in the {@code AVLTree} Object.
+     * This method SEARCH a generic type element in the {@code AVLTree} Object.
      * @param element a generic type element to be searched.
      * @return a {@code AVLOperationData<T>} that specified the operation.
      */
@@ -205,7 +207,7 @@ public class AVLTree<T extends Serializable> {
     private AVLOperationData<T> search(AVLNode node, T element){
         AVLOperationData<T> data = new AVLOperationData<T>();
         data.setElement(element);
-        data.setOperation(AVLOperationData.search);
+        data.setOperation(AVLOperationData.SEARCH);
         if(node == null){
             return data;
         }
@@ -225,11 +227,11 @@ public class AVLTree<T extends Serializable> {
 
     public AVLOperationData<T> apply(AVLOperationData<T> operation) throws InvalidAVLOperationDataException {
         switch (operation.getOperation()) {
-            case AVLOperationData.insert:
+            case AVLOperationData.INSERT:
                 return this.insert(operation.getElement());
-            case AVLOperationData.remove:
+            case AVLOperationData.REMOVE:
                 return this.remove(operation.getElement());
-            case AVLOperationData.search:
+            case AVLOperationData.SEARCH:
                 return this.search(operation.getElement());
             default:
                 throw new InvalidAVLOperationDataException("The operation were invalid");

@@ -16,9 +16,9 @@ public class AVLOperationData<T extends Serializable> implements Serializable{
     private transient String operation;
     private transient boolean result;
 
-    static transient final String insert = "Added";
-    static transient final String remove = "Removed";
-    static transient final String search = "Searched";
+    static transient final String INSERT = "Added";
+    static transient final String REMOVE = "Removed";
+    static transient final String SEARCH = "Searched";
 
     /**
      *Returns a new {@code AVLOperationData} object.

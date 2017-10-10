@@ -2,7 +2,7 @@ package Model;
 
 import Model.DataStructures.AVL.AVLOperationData;
 import Model.DataStructures.AVL.AVLTree;
-import Model.DataStructures.AVL.InvalidAVLOperationDataException;
+import Model.Exceptions.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package Model.DataStructures.AVL;
+package Model.Exceptions;
 
 public class InvalidAVLOperationDataException extends Exception {
 
