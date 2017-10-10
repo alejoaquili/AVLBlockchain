@@ -1,4 +1,4 @@
-#Blockchain
+#AVL Tree Blockchain
 this project aims to reppresent an AVL tree using a blockchain for it
 
 ##Data structures:
@@ -27,6 +27,6 @@ this project aims to reppresent an AVL tree using a blockchain for it
     This class is a interface between the cryptofunction included in java 
     and the project.
     
-fell free to contribute
+feel free to contribute
  
 
