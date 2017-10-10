@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class AVLInterface {
     public static void main(String [] args) {
-        System.out.println("initializing blockchain... ");
-        System.out.println("how many zeros do you want the blocks to mine for? ");
+        System.out.println("Initializing blockchain... ");
+        System.out.print("How many zeros do you want the blocks to mine for? :> ");
 
         Scanner sc = new Scanner(System.in);
 
@@ -27,13 +27,13 @@ public class AVLInterface {
 
 
             while (true) {
-                System.out.print("what do you want to do? :> ");
+                System.out.print("What do you want to do? (add, remove, lookup, modify, verify, save or read) :> ");
                 String answer = sc.next().toLowerCase();
 
                 switch (answer) {
 
                     case "add":
-                        System.out.println("which element? :> ");
+                        System.out.print("Which element? :> ");
                         if (!isValidData(sc)) {
                             System.out.println(" Not valid element");
                             break;
@@ -43,7 +43,7 @@ public class AVLInterface {
                         break;
 
                     case "remove":
-                        System.out.println("which element? :> ");
+                        System.out.print("Which element? :> ");
                         if (!isValidData(sc))
                             break;
                         int elementToRemove = sc.nextInt();
@@ -51,24 +51,24 @@ public class AVLInterface {
                         b.remove(elementToRemove);
                         break;
                     case "lookup":
-                        System.out.println("which element? :> ");
+                        System.out.print("Which element? :> ");
                         if (!isValidData(sc))
                             break;
                         int elementToSearch = sc.nextInt();
 
                         List<Long> result =b.lookup(elementToSearch);
-                        System.out.println("here are the blocks");
+                        System.out.println("Here are the blocks");
                         System.out.println(result);
 
 
                         break;
 
                     case "modify":
-                        System.out.println("which block? ");
+                        System.out.print("Which block? :> ");
                         if (!isValidData(sc))
                             break;
                         int index = sc.nextInt();
-                        System.out.println("which file_path ( leave black to replace for an empty block)");
+                        System.out.println("Which file_path (leave black to replace for an empty block)");
                         String path = sc.next();
                         System.out.println(path);
                         if(path.matches("^[./].*"))
@@ -79,7 +79,7 @@ public class AVLInterface {
                         break;
 
                     case "verify":
-                        System.out.println("the blockchain is ...");
+                        System.out.println("The blockchain is ...");
 
                         if(b.validate()){
                             System.out.println("Safe");
@@ -89,14 +89,14 @@ public class AVLInterface {
                         break;
 
                     case "save":
-                        System.out.println("specify path: ");
+                        System.out.println("Specify path :> ");
                         String pathToSave = sc.next();
                         b.save(pathToSave);
                         break;
 
                     case "read":
-                        System.out.println("getting the blockchain from..");
-                        System.out.println("specify the path");
+                        System.out.println("Getting the blockchain from..");
+                        System.out.println("Specify the path");
                         if (!sc.hasNext())
                             break;
                         String pathToRead = sc.next();
@@ -109,11 +109,11 @@ public class AVLInterface {
             }
 
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("fuck man ... there was something wrong");
+            System.out.println("Fuck man ... there was something wrong");
 
         }
         catch (IllegalArgumentException e){
-            System.out.println("you enter an invalid path");
+            System.out.println("You enter an invalid path");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -5,11 +5,15 @@ import Model.DataStructures.AVL.AVLTree;
 import Model.Exceptions.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.io.*;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * This class represents a {@code AVLTree} with a {@code Blockchain} to register all the operations in
@@ -147,6 +151,7 @@ public class AVLBlockchain<T extends Serializable> {
      */
     public void read(String path) throws IOException, ClassNotFoundException {
         blockchain.readFile(path);
+        //falta
     }
 
     //Cosas para borrar
@@ -220,8 +225,5 @@ public class AVLBlockchain<T extends Serializable> {
             e.printStackTrace();
         }
     }
-
-
-
 
     }
