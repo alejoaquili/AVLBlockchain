@@ -9,7 +9,7 @@ import java.util.List;
  * This class represents the data of the operation done in a {@code AVLTree}that each {@code Block}
  * of a {@code Blockchain} stores.
  */
-public class AVLOperationData<T extends Serializable> implements Serializable{
+public class AVLOperationData<T extends Serializable> implements Serializable {
     static final long serialVersionUID = 42L;
     private transient List<T> modifiedElements ;
     private transient T element;

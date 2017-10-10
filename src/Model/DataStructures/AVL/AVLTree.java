@@ -68,16 +68,16 @@ public class AVLTree<T extends Serializable> {
                 if (getBalance(node.left) < 0) {
                     node = singleRotateLeftChild(node, data);
                 } else {
-                    node = doubleRotateLeftChild(node,data);
+                    node = doubleRotateLeftChild(node, data);
                 }
             }
         }else if (result < 0){
-            node.right = insert(node.right, element,data);
+            node.right = insert(node.right, element, data);
             if (getBalance(node) == 2) {
                 if (getBalance(node.right) > 0) {
-                    node = singleRotateRightChild(node,data);
+                    node = singleRotateRightChild(node, data);
                 } else {
-                    node = doubleRotateRightChild(node,data);
+                    node = doubleRotateRightChild(node, data);
                 }
             }
         }
@@ -101,7 +101,7 @@ public class AVLTree<T extends Serializable> {
         return aux;
     }
 
-    private AVLNode singleRotateRightChild(AVLNode node,AVLOperationData<T> data) {
+    private AVLNode singleRotateRightChild(AVLNode node, AVLOperationData<T> data) {
         AVLNode aux = node.right;
         node.right = aux.left;
         aux.left = node;
@@ -117,14 +117,14 @@ public class AVLTree<T extends Serializable> {
         return aux;
     }
 
-    private AVLNode doubleRotateRightChild(AVLNode node,AVLOperationData<T> data) {
-        node.right = singleRotateLeftChild(node.right,data);
-        return singleRotateRightChild(node,data);
+    private AVLNode doubleRotateRightChild(AVLNode node, AVLOperationData<T> data) {
+        node.right = singleRotateLeftChild(node.right, data);
+        return singleRotateRightChild(node, data);
     }
 
-    private AVLNode doubleRotateLeftChild(AVLNode node,AVLOperationData<T> data) {
-        node.left = singleRotateRightChild(node.left,data);
-        return singleRotateLeftChild(node,data);
+    private AVLNode doubleRotateLeftChild(AVLNode node, AVLOperationData<T> data) {
+        node.left = singleRotateRightChild(node.left, data);
+        return singleRotateLeftChild(node, data);
     }
 
     private AVLNode maxValueNode(AVLNode node) {
@@ -160,22 +160,22 @@ public class AVLTree<T extends Serializable> {
         int result = cmp.compare(node.element, element);
 
         if (result > 0) {
-            node.left = remove(node.left, element,data);
+            node.left = remove(node.left, element, data);
             if (getBalance(node) == 2) {
                 if (getBalance(node.right) < 0) {
-                    doubleRotateRightChild(node,data);
+                    doubleRotateRightChild(node, data);
                 } else {
-                    singleRotateRightChild(node,data);
+                    singleRotateRightChild(node, data);
                 }
             }
         }
         else if (result < 0) {
-            node.right = remove(node.right, element,data);
+            node.right = remove(node.right, element, data);
             if (getBalance(node) == -2) {
                 if (getBalance(node.left) > 0) {
-                    doubleRotateLeftChild(node,data);
+                    doubleRotateLeftChild(node, data);
                 } else {
-                    singleRotateLeftChild(node,data);
+                    singleRotateLeftChild(node, data);
                 }
             }
         }

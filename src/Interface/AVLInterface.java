@@ -1,4 +1,4 @@
-package Model.Interface;
+package Interface;
 
 import Model.AVLBlockchain;
 
