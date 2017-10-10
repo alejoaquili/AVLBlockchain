@@ -113,14 +113,12 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         if(!(obj instanceof List)) return false;
 
         List<?> list = (List<?>) obj;
-
-        for(Object o: list) {
-            if(!(o instanceof Block)) return false;
-            Block block = (Block) o;
+        blocks = new ArrayList<>();
+        for(Object elem: list) {
+            if(!(elem instanceof Block)) return false;
+            Block block = (Block) elem;
             this.blocks.add(block);
-
         }
-        this.blocks = (List<Block<T>>) obj;
         return  true;
     }
 
