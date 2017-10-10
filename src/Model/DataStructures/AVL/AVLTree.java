@@ -39,7 +39,7 @@ public class AVLTree<T extends Serializable> {
     }
 
     /**
-     * This method INSERT a generic T element in the tree.
+     * This method insert a generic T element in the tree.
      * @param element an specified element to be inserted in the tree.
      * @return a {@code AVLOperationData<T>} that specified the operation.
      */

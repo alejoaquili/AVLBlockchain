@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import Model.FileReader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

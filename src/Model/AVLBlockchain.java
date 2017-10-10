@@ -130,15 +130,26 @@ public class AVLBlockchain<T extends Serializable> {
         return blockchain.verify();
     }
 
-
+    /**
+     * This method save the {@code Blockchain} in a specific file.
+     * @param path the absolute path of the file.
+     * @throws IOException if an I/O error occurs.
+     */
     public void save(String path) throws IOException {
         blockchain.saveFile(path);
     }
 
-
+    /**
+     * This method read a {@code Blockchain} from a specific file.
+     * @param path the absolute path of the file.
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassNotFoundException if an invalid cast occurs.
+     */
     public void read(String path) throws IOException, ClassNotFoundException {
         blockchain.readFile(path);
     }
+
+    //Cosas para borrar
 
     public static void main(String[] args){
         /*
