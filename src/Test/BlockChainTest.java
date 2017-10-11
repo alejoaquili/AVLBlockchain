@@ -23,18 +23,6 @@ public class BlockChainTest
         }
     }
 
-    /*@Test
-    public void singleBlockchainTest() throws NoSuchAlgorithmException{
-        Blockchain<Integer> b2;
-        Exception ex = null;
-        try{
-            b2 = new Blockchain<>(3);
-        }catch (CloneNotSupportedException e){
-            ex = e;
-        }
-        assertNotNull(ex);
-    }*/
-
     @Test
     public void verifyWithoutAddingTest(){
         assertTrue(b.verify());
@@ -73,7 +61,7 @@ public class BlockChainTest
 
     @Test
     public void iteratorTest(){
-        Object array[] = new Object[18];
+        Object array[] = new Object[17];
         for(int i = 0 ; i < 3; i++){
             b.add(new Integer(i));
         }
@@ -82,8 +70,8 @@ public class BlockChainTest
         while(it.hasNext()){
             array[j++] = it.next();
         }
-        assertTrue(array[17] != null && array[16] != null &&
-        array[15] != null );
+        assertTrue(array[13] != null && array[12] != null &&
+        array[11] != null);
     }
 
     @Test
