@@ -79,7 +79,7 @@ public class BlockChainTest
     public void saveTest(){
         Exception ex = null;
         try{
-            b.save("src/Model/ads.txt");
+            b.save("src/Test/ads.txt");
         }catch(IOException e) {
             ex = e;
         }
@@ -91,7 +91,7 @@ public class BlockChainTest
         boolean bool = false;
         Exception ex = null;
         try{
-            bool = b.readFile("src/Model/ads.txt");
+            bool = b.readFile("src/Test/ads.txt");
         }catch (IOException e){
             ex = e;
         } catch (ClassNotFoundException e) {
