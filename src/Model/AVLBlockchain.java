@@ -62,12 +62,14 @@ public class AVLBlockchain<T extends Serializable> {
      */
     public List<Long> lookup(T element) {
         AVLOperationData<T> data = tree.search(element);
-        blockchain.add(data);
+
 
         if (!data.getResult()) {
             return null;
         }
-        return findBlocks(element);
+        List<Long> result = findBlocks(element);
+        blockchain.add(data);
+        return  result;
     }
 
     /**
@@ -156,74 +158,74 @@ public class AVLBlockchain<T extends Serializable> {
 
     //Cosas para borrar
 
-    public static void main(String[] args){
-        /*
-        try {
-            AVLBlockchain<Integer> b = new AVLBlockchain<>(4, new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o1 - o2;
-                }
-            });
-
-            Random rand = new Random();
-            List<Integer> numbers = new ArrayList<>();
-            int max = 100;
-            for (int i = 0; i < max; i++) {
-                numbers.add(rand.nextInt());
-                b.add(numbers.get(i));
-                if(i % (max / 10) == 0) {
-                    System.out.println(i / 10 + "%");
-                }
-
-            }
-            List<Long> l = b.lookup(numbers.get(2));
-
-            System.out.println(l);
-
-            for(AVLOperationData<Integer> d : b.blockchain){
-                System.out.println(d);
-            }
-
-        }catch (NoSuchAlgorithmException e){
-            System.out.println("no algorithm matches the request");
-        }
-        */
-        // este es para ver solo blockchain
-
-
-        try {
-
-            Blockchain<Integer> b = new Blockchain<Integer>(4);
-
-            Random rand = new Random();
-            List<Integer> numbers = new ArrayList<>();
-            int max = 100;
-            for (int i = 0; i < max; i++) {
-                numbers.add(rand.nextInt());
-                b.add(numbers.get(i));
-                if(i % (max / 10) == 0) {
-                    System.out.println(i / (max/100) + "%");
-                }
-
-            }
-
-            b.saveFile("/Users/franciscosanguineti/Desktop/archivo.txt");
-
-            b = new Blockchain<>(4);
-            System.out.println(b.readFile("/Users/franciscosanguineti/Desktop/archivo.txt"));
-
-            for(Integer i : b){
-                System.out.println(i);
-            }
-
-        }catch (NoSuchAlgorithmException e){
-            System.out.println("no algorithm matches the request");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args){
+//        /*
+//        try {
+//            AVLBlockchain<Integer> b = new AVLBlockchain<>(4, new Comparator<Integer>() {
+//                @Override
+//                public int compare(Integer o1, Integer o2) {
+//                    return o1 - o2;
+//                }
+//            });
+//
+//            Random rand = new Random();
+//            List<Integer> numbers = new ArrayList<>();
+//            int max = 100;
+//            for (int i = 0; i < max; i++) {
+//                numbers.add(rand.nextInt());
+//                b.add(numbers.get(i));
+//                if(i % (max / 10) == 0) {
+//                    System.out.println(i / 10 + "%");
+//                }
+//
+//            }
+//            List<Long> l = b.lookup(numbers.get(2));
+//
+//            System.out.println(l);
+//
+//            for(AVLOperationData<Integer> d : b.blockchain){
+//                System.out.println(d);
+//            }
+//
+//        }catch (NoSuchAlgorithmException e){
+//            System.out.println("no algorithm matches the request");
+//        }
+//        */
+//        // este es para ver solo blockchain
+//
+//
+//        try {
+//
+//            Blockchain<Integer> b = new Blockchain<Integer>(4);
+//
+//            Random rand = new Random();
+//            List<Integer> numbers = new ArrayList<>();
+//            int max = 100;
+//            for (int i = 0; i < max; i++) {
+//                numbers.add(rand.nextInt());
+//                b.add(numbers.get(i));
+//                if(i % (max / 10) == 0) {
+//                    System.out.println(i / (max/100) + "%");
+//                }
+//
+//            }
+//
+//            b.saveFile("./archivo.txt");
+//
+//            b = new Blockchain<>(4);
+//            System.out.println(b.readFile("./archivo.txt"));
+//
+//            for(Integer i : b){
+//                System.out.println(i);
+//            }
+//
+//        }catch (NoSuchAlgorithmException e){
+//            System.out.println("no algorithm matches the request");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     }

@@ -1,8 +1,7 @@
-package Model.Test;
+package Test;
 
 import Model.DataStructures.Blockchain.Blockchain;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
