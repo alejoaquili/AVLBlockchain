@@ -11,28 +11,28 @@ import java.util.Scanner;
 
 
 public class AVLInterface {
+
+    private static boolean isRunning = true;
+
     public static void main(String [] args) {
         Scanner sc = new Scanner(System.in);
         AVLBlockchain<Integer> b = startWithSavedBlockchain(sc);
         System.out.println("Initializing blockchain... ");
         System.out.print("How many zeros do you want the blocks to mine for? :> ");
 
-
-
-
         try {
             if(b == null){
-            int zeros = sc.nextInt();b = new AVLBlockchain<>(zeros, new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o1 - o2;
+                while(!sc.hasNextInt()){
+                    System.out.println("Not a number. Please say how many zeros you want the blocks to mine for");
+                       sc.next();
                 }
-            });
+            int zeros = sc.nextInt();
+            b = new AVLBlockchain<>(zeros, (Integer i1, Integer i2)->(i1-i2));
             }
 
 
-            while (true) {
-                System.out.print("What do you want to do? (add, remove, lookup, modify, verify, save or read, printblockchain, printtree) :> ");
+            while (isRunning) {
+                System.out.print("What do you want to do? (add, remove, lookup, modify, verify, save or read, printblockchain, printtree, exit) :> ");
                 String answer = sc.next().toLowerCase();
 
                 switch (answer) {
@@ -117,7 +117,8 @@ public class AVLInterface {
                     case "printblockchain":
                         b.printBlockchain();
                         break;
-
+                    case "exit":
+                        isRunning = false;
                     default:
                         break;
                 }
