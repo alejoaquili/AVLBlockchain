@@ -22,7 +22,7 @@ public class Block <S extends Serializable> implements Serializable{
      * @param index index of this node on the Blockchain.
      * @param data information to store in this Block.
      * @param prevHash the hash encoded in MD5 of the previous Block.
-     * @param zeros the number of zeros that the block has to validate.
+     * @param zeros the number of zeros that the block has to verify.
      */
     public Block(long index, S data, String prevHash, String zeros){
         if(index < 0 ) throw new IllegalArgumentException("Index were incorrect.");
@@ -50,7 +50,7 @@ public class Block <S extends Serializable> implements Serializable{
     }
 
     /**
-     *This method validate the hash of the {@code Block} object.
+     *This method verify the hash of the {@code Block} object.
      * @return true if the hash of this block begins with the specified number of zeros, false otherwise.
      */
     public boolean isValidHash() {
@@ -89,6 +89,12 @@ public class Block <S extends Serializable> implements Serializable{
      */
     public String getPrevHash(){
         return prevHash;
+    }
+
+    @Override
+    public String toString() {
+        return "Indice: " + index + " - Nounce: " + nounce +
+                " - Data: " + data + " - PreHash: " + prevHash + " - Hash: " + hash;
     }
 
 }

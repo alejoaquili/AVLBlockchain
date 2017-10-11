@@ -1,8 +1,7 @@
 package Interface;
 
 import Model.AVLBlockchain;
-import Model.DataStructures.AVL.AVLOperationData;
-import Model.DataStructures.Blockchain.Blockchain;
+import Model.Exceptions.InvalidAVLOperationDataException;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -81,7 +80,7 @@ public class AVLInterface {
                     case "verify":
                         System.out.println("The blockchain is ...");
 
-                        if(b.validate()){
+                        if(b.verify()){
                             System.out.println("Safe");
                         }else{
                             System.out.println("Raped.... so sorry");
@@ -91,7 +90,7 @@ public class AVLInterface {
                     case "save":
                         System.out.println("Specify path :> ");
                         String pathToSave = sc.next();
-                        b.saveFile(pathToSave);
+                        b.save(pathToSave);
                         break;
 
                     case "read":
@@ -100,15 +99,21 @@ public class AVLInterface {
                         if (!sc.hasNext())
                             break;
                         String pathToRead = sc.next();
-                        Blockchain<AVLOperationData<?>> aux =b.readFile(pathToRead);
-                        if( aux != null){
-                            System.out.println("file read correctly");
+                        if(b.read(pathToRead)){
+                            System.out.println("File read correctly");
                         }else{
-                            System.out.println("the file was corrupted");
+                            System.out.println("The file was corrupted");
                         }
-
-
                         break;
+
+                    case "printtree":
+                        b.printTree();
+                        break;
+
+                    case "printblockchain":
+                        b.printBlockchain();
+                        break;
+
                     default:
                         break;
                 }
@@ -125,7 +130,10 @@ public class AVLInterface {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (InvalidAVLOperationDataException e) {
+            e.printStackTrace();
         }
+
     }
     private static boolean isValidData(Scanner sc){
         if (!sc.hasNextInt()){

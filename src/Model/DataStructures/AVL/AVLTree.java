@@ -7,19 +7,19 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
-     * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
-     * @param <T> the type of data to be store in each node of the tree
-     */
+ * This class represents an AVL Tree, that is a binary tree which verify the AVL balance in the structure.
+ * @param <T> the type of data to be store in each node of the tree
+ */
 public class AVLTree<T extends Serializable> {
 
     private AVLNode head;
-    private SerializableComparator<T> cmp;
+    private Comparator<T> cmp;
 
     /**
      * Returns a new {@code AVLTree} object.
      * @param cmp a {@code Comparator<T>} that represents the sorting criteria of the tree.
      */
-    public AVLTree(SerializableComparator<T> cmp){
+    public AVLTree(Comparator<T> cmp){
 
         if(cmp == null) throw new IllegalArgumentException("Comparator should not be null.");
         head = null;
@@ -36,6 +36,15 @@ public class AVLTree<T extends Serializable> {
 
     private int getBalance(AVLNode node) {
         return height(node.right) - height(node.left);
+    }
+
+
+    /**
+     * This method return the {@code Comparator<T>} used in the {@code AVLTree}.
+     * @return a {@code Comparator<T>} object.
+     */
+    public Comparator<T> getComparator() {
+        return cmp;
     }
 
     /**
@@ -235,6 +244,21 @@ public class AVLTree<T extends Serializable> {
                 return this.search(operation.getElement());
             default:
                 throw new InvalidAVLOperationDataException("The operation were invalid");
+        }
+    }
+
+    /**
+     * falta docear
+     */
+    public void printInOrder() {
+        printInOrder(head);
+    }
+
+    private void printInOrder(AVLNode node) {
+        if(node != null) {
+            printInOrder(node.left);
+            System.out.println("Element: " + node.element + " - Height: " + node.height);
+            printInOrder(node.right);
         }
     }
 

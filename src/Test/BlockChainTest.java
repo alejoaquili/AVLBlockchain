@@ -74,11 +74,12 @@ public class BlockChainTest
         array[11] != null);
     }
 
+    /*
     @Test
     public void saveTest(){
         Exception ex = null;
         try{
-            b.saveFile("src/Model/ads.txt");
+            b.save("src/Model/ads.txt");
         }catch(IOException e) {
             ex = e;
         }
@@ -99,5 +100,78 @@ public class BlockChainTest
         assertTrue(ex == null && bool == true);
     }
 
+    */
+    //lo iba a borrar
+
+
+//    public static void main(String[] args){
+//        /*
+//        try {
+//            AVLBlockchain<Integer> b = new AVLBlockchain<>(4, new Comparator<Integer>() {
+//                @Override
+//                public int compare(Integer o1, Integer o2) {
+//                    return o1 - o2;
+//                }
+//            });
+//
+//            Random rand = new Random();
+//            List<Integer> numbers = new ArrayList<>();
+//            int max = 100;
+//            for (int i = 0; i < max; i++) {
+//                numbers.add(rand.nextInt());
+//                b.add(numbers.get(i));
+//                if(i % (max / 10) == 0) {
+//                    System.out.println(i / 10 + "%");
+//                }
+//
+//            }
+//            List<Long> l = b.lookup(numbers.get(2));
+//
+//            System.out.println(l);
+//
+//            for(AVLOperationData<Integer> d : b.blockchain){
+//                System.out.println(d);
+//            }
+//
+//        }catch (NoSuchAlgorithmException e){
+//            System.out.println("no algorithm matches the request");
+//        }
+//        */
+//        // este es para ver solo blockchain
+//
+//
+//        try {
+//
+//            Blockchain<Integer> b = new Blockchain<Integer>(4);
+//
+//            Random rand = new Random();
+//            List<Integer> numbers = new ArrayList<>();
+//            int max = 100;
+//            for (int i = 0; i < max; i++) {
+//                numbers.add(rand.nextInt());
+//                b.add(numbers.get(i));
+//                if(i % (max / 10) == 0) {
+//                    System.out.println(i / (max/100) + "%");
+//                }
+//
+//            }
+//
+//            b.saveFile("./archivo.txt");
+//
+//            b = new Blockchain<>(4);
+//            System.out.println(b.readFile("./archivo.txt"));
+//
+//            for(Integer i : b){
+//                System.out.println(i);
+//            }
+//
+//        }catch (NoSuchAlgorithmException e){
+//            System.out.println("no algorithm matches the request");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

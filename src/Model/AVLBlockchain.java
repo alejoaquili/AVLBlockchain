@@ -2,7 +2,6 @@ package Model;
 
 import Model.DataStructures.AVL.AVLOperationData;
 import Model.DataStructures.AVL.AVLTree;
-import Model.DataStructures.AVL.SerializableComparator;
 import Model.Exceptions.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
@@ -20,7 +19,6 @@ import java.util.List;
 public class AVLBlockchain<T extends Serializable> {
 
     private Blockchain<AVLOperationData<T>> blockchain;
-    private SerializableComparator<T> AVLcmp;
     private AVLTree<T> tree;
 
     /**
@@ -29,10 +27,9 @@ public class AVLBlockchain<T extends Serializable> {
      * @param cmp the {@code Comparator<T>} for the elements in the {@code AVLTree}.
      * @throws NoSuchAlgorithmException if a new instance of {@code HashFunction} is required.
      */
-    public AVLBlockchain(int zeros, SerializableComparator<T> cmp) throws NoSuchAlgorithmException {
+    public AVLBlockchain(int zeros, Comparator<T> cmp) throws NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
         this.tree = new AVLTree<>(cmp);
-        AVLcmp = cmp;
     }
 
     /**
@@ -119,40 +116,19 @@ public class AVLBlockchain<T extends Serializable> {
         blockchain.setBlock(index, voidSentinelAVLData);
     }
 
-    private void rebaseTree(SerializableComparator<T> cmp) throws InvalidAVLOperationDataException {
-        AVLTree<T> tree = new AVLTree<>(cmp);
+    private void rebaseTree() throws InvalidAVLOperationDataException {
+        this.tree = new AVLTree<>(this.tree.getComparator());
         for(AVLOperationData<T> opData: blockchain) {
             tree.apply(opData);
         }
     }
 
-
     /**
      * This method return true if the {@code Blockchain} integrity was preserved.
      * @return return the result fo a {@code Blockchain} validation.
      */
-    public boolean validate(){
+    public boolean verify(){
         return blockchain.verify();
-    }
-
-    /**
-     * This method save the {@code Blockchain} in a specific file.
-     * @param path the absolute path of the file.
-     * @throws IOException if an I/O error occurs.
-     */
-    public void save(String path) throws IOException {
-        blockchain.saveFile(path);
-    }
-
-    /**
-     * This method read a {@code Blockchain} from a specific file.
-     * @param path the absolute path of the file.
-     * @throws IOException if an I/O error occurs.
-     * @throws ClassNotFoundException if an invalid cast occurs.
-     */
-    public boolean read(String path) throws IOException, ClassNotFoundException {
-        return blockchain.readFile(path);
-        //falta
     }
 
     /**
@@ -160,10 +136,11 @@ public class AVLBlockchain<T extends Serializable> {
      * @param path the file path to save the {@code Blockchain}.
      * @throws IOException if an I/O error occurs.
      */
-    public static void saveFile(String path, AVLBlockchain<?> b) throws IOException {
+    public void save(String path) throws IOException {
         if(path == null) throw new IllegalArgumentException("Wrong path.");
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
-        oos.writeObject(b);
+        oos.writeObject(blockchain);
+
         oos.flush();
     }
 
@@ -174,90 +151,29 @@ public class AVLBlockchain<T extends Serializable> {
      * @throws IOException if an I/O error occurs.
      * @throws ClassNotFoundException if the read object is not compatible.
      */
-    public static AVLBlockchain<AVLOperationData<?>> readFile(String path) throws IOException, ClassNotFoundException {
+    public boolean read(String path) throws IOException, ClassNotFoundException, InvalidAVLOperationDataException {
         if(path == null) throw new IllegalArgumentException("Wrong path.");
         ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
-        Object  obj = oos.readObject();
-        if(!(obj instanceof AVLBlockchain)) return null;
 
-        //Blockchain<AVLOperationData<? extends  Serializable>> b = (Blockchain<AVLOperationData<? extends Serializable>>) obj;
+        Object blockchainAux = oos.readObject();
+        if(!(blockchainAux instanceof Blockchain)) return false;
 
-        AVLBlockchain<AVLOperationData<?>> b = (AVLBlockchain<AVLOperationData<?>>) obj;
+        this.blockchain = (Blockchain) blockchainAux;
 
-        return b;
+        if(!blockchain.reHashNounce() || !verify()) {
+            return false;
+        }
+        rebaseTree();
 
+        return true;
     }
 
-    //Cosas para borrar
-
-//    public static void main(String[] args){
-//        /*
-//        try {
-//            AVLBlockchain<Integer> b = new AVLBlockchain<>(4, new Comparator<Integer>() {
-//                @Override
-//                public int compare(Integer o1, Integer o2) {
-//                    return o1 - o2;
-//                }
-//            });
-//
-//            Random rand = new Random();
-//            List<Integer> numbers = new ArrayList<>();
-//            int max = 100;
-//            for (int i = 0; i < max; i++) {
-//                numbers.add(rand.nextInt());
-//                b.add(numbers.get(i));
-//                if(i % (max / 10) == 0) {
-//                    System.out.println(i / 10 + "%");
-//                }
-//
-//            }
-//            List<Long> l = b.lookup(numbers.get(2));
-//
-//            System.out.println(l);
-//
-//            for(AVLOperationData<Integer> d : b.blockchain){
-//                System.out.println(d);
-//            }
-//
-//        }catch (NoSuchAlgorithmException e){
-//            System.out.println("no algorithm matches the request");
-//        }
-//        */
-//        // este es para ver solo blockchain
-//
-//
-//        try {
-//
-//            Blockchain<Integer> b = new Blockchain<Integer>(4);
-//
-//            Random rand = new Random();
-//            List<Integer> numbers = new ArrayList<>();
-//            int max = 100;
-//            for (int i = 0; i < max; i++) {
-//                numbers.add(rand.nextInt());
-//                b.add(numbers.get(i));
-//                if(i % (max / 10) == 0) {
-//                    System.out.println(i / (max/100) + "%");
-//                }
-//
-//            }
-//
-//            b.saveFile("./archivo.txt");
-//
-//            b = new Blockchain<>(4);
-//            System.out.println(b.readFile("./archivo.txt"));
-//
-//            for(Integer i : b){
-//                System.out.println(i);
-//            }
-//
-//        }catch (NoSuchAlgorithmException e){
-//            System.out.println("no algorithm matches the request");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
+    public void printTree() {
+        tree.printInOrder();
     }
+
+    public void printBlockchain() {
+        blockchain.print();
+    }
+
+}

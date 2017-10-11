@@ -100,39 +100,18 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
      }
 
     /**
-     * This method save the {@code Blockchain} which is {@code Serializable} in an output steam file.
-     * @param path the file path to save the {@code Blockchain}.
-     * @throws IOException if an I/O error occurs.
+     * Return true if each {@code Block} of the {@code Blockchain}is mined.
+     * Return false otherwise. This method also rehash all the {@code Blockchain}.
+     * @return a boolean with the status of the mining process.
      */
-    public void saveFile(String path) throws IOException {
-        if(path == null) throw new IllegalArgumentException("Wrong path.");
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
-        oos.writeObject(blocks);
-        oos.flush();
+    public boolean reHashNounce() {
+         for(Block<T> block: blocks) {
+             if(!block.isValidHash())
+                 return false;
+         }
+         return true;
     }
 
-    /**
-     * This method read a {@code Blockchain} from a specific text file.
-     * @param path the file path.
-     * @return true if the {@code Blockchain} was read without error. Return false otherwise.
-     * @throws IOException if an I/O error occurs.
-     * @throws ClassNotFoundException if the read object is not compatible.
-     */
-    public boolean readFile(String path) throws IOException, ClassNotFoundException {
-        if(path == null) throw new IllegalArgumentException("Wrong path.");
-        ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
-            Object  obj = oos.readObject();
-        if(!(obj instanceof List)) return false;
-
-        List<?> list = (List<?>) obj;
-        blocks = new ArrayList<>();
-        for(Object elem: list) {
-            if(!(elem instanceof Block)) return false;
-            Block block = (Block) elem;
-            this.blocks.add(block);
-        }
-        return  true;
-    }
     /**
      * Returns a Custom  Data Iterator, allows a {@code Blockchain} Object to be the target of
      * the "for-each loop" statement.
@@ -140,6 +119,15 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
      */
     public Iterator<T> iterator() {
         return new DataIterator(blocks.iterator());
+    }
+
+    /**
+     * falta docear
+     */
+    public void print() {
+        for(Block<T> block: blocks) {
+            System.out.println(block);
+        }
     }
 
     private class DataIterator implements Iterator<T> {
