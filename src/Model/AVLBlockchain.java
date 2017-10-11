@@ -2,18 +2,15 @@ package Model;
 
 import Model.DataStructures.AVL.AVLOperationData;
 import Model.DataStructures.AVL.AVLTree;
+import Model.DataStructures.AVL.SerializableComparator;
 import Model.Exceptions.InvalidAVLOperationDataException;
 import Model.DataStructures.Blockchain.Blockchain;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * This class represents a {@code AVLTree} with a {@code Blockchain} to register all the operations in
@@ -23,6 +20,7 @@ import java.util.Random;
 public class AVLBlockchain<T extends Serializable> {
 
     private Blockchain<AVLOperationData<T>> blockchain;
+    private SerializableComparator<T> AVLcmp;
     private AVLTree<T> tree;
 
     /**
@@ -31,9 +29,10 @@ public class AVLBlockchain<T extends Serializable> {
      * @param cmp the {@code Comparator<T>} for the elements in the {@code AVLTree}.
      * @throws NoSuchAlgorithmException if a new instance of {@code HashFunction} is required.
      */
-    public AVLBlockchain(int zeros, Comparator<T> cmp) throws NoSuchAlgorithmException {
+    public AVLBlockchain(int zeros, SerializableComparator<T> cmp) throws NoSuchAlgorithmException {
         this.blockchain = new Blockchain<>(zeros);
         this.tree = new AVLTree<>(cmp);
+        AVLcmp = cmp;
     }
 
     /**
@@ -120,7 +119,7 @@ public class AVLBlockchain<T extends Serializable> {
         blockchain.setBlock(index, voidSentinelAVLData);
     }
 
-    private void rebaseTree(Comparator<T> cmp) throws InvalidAVLOperationDataException {
+    private void rebaseTree(SerializableComparator<T> cmp) throws InvalidAVLOperationDataException {
         AVLTree<T> tree = new AVLTree<>(cmp);
         for(AVLOperationData<T> opData: blockchain) {
             tree.apply(opData);
@@ -151,9 +150,42 @@ public class AVLBlockchain<T extends Serializable> {
      * @throws IOException if an I/O error occurs.
      * @throws ClassNotFoundException if an invalid cast occurs.
      */
-    public void read(String path) throws IOException, ClassNotFoundException {
-        blockchain.readFile(path);
+    public boolean read(String path) throws IOException, ClassNotFoundException {
+        return blockchain.readFile(path);
         //falta
+    }
+
+    /**
+     * This method save the {@code Blockchain} which is {@code Serializable} in an output steam file.
+     * @param path the file path to save the {@code Blockchain}.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void saveFile(String path, AVLBlockchain<?> b) throws IOException {
+        if(path == null) throw new IllegalArgumentException("Wrong path.");
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
+        oos.writeObject(b);
+        oos.flush();
+    }
+
+    /**
+     * This method read a {@code Blockchain} from a specific text file.
+     * @param path the file path.
+     * @return true if the {@code Blockchain} was read without error. Return false otherwise.
+     * @throws IOException if an I/O error occurs.
+     * @throws ClassNotFoundException if the read object is not compatible.
+     */
+    public static AVLBlockchain<AVLOperationData<?>> readFile(String path) throws IOException, ClassNotFoundException {
+        if(path == null) throw new IllegalArgumentException("Wrong path.");
+        ObjectInputStream oos = new ObjectInputStream(new FileInputStream(path));
+        Object  obj = oos.readObject();
+        if(!(obj instanceof AVLBlockchain)) return null;
+
+        //Blockchain<AVLOperationData<? extends  Serializable>> b = (Blockchain<AVLOperationData<? extends Serializable>>) obj;
+
+        AVLBlockchain<AVLOperationData<?>> b = (AVLBlockchain<AVLOperationData<?>>) obj;
+
+        return b;
+
     }
 
     //Cosas para borrar

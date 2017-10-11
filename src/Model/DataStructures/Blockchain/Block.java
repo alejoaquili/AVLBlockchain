@@ -1,6 +1,7 @@
 package Model.DataStructures.Blockchain;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -9,12 +10,12 @@ import java.io.Serializable;
  */
 public class Block <S extends Serializable> implements Serializable{
     static final long serialVersionUID = 42L;
-    private transient long index;
-    private transient S data;
-    private transient long nounce;
-    private transient String prevHash;
-    private transient String hash;
-    private transient String zeros;
+    private  long index;
+    private  S data;
+    private  long nounce;
+    private  String prevHash;
+    private  String hash;
+    private  String zeros;
 
     /**
      *Creates a {@code Block} object for a {@code Blockchain}.
@@ -25,7 +26,7 @@ public class Block <S extends Serializable> implements Serializable{
      */
     public Block(long index, S data, String prevHash, String zeros){
         if(index < 0 ) throw new IllegalArgumentException("Index were incorrect.");
-        if(prevHash == null ) throw new IllegalArgumentException("Previous hash were incorrect.");
+        if(prevHash == null ) throw new IllegalArgumentException("Previous hash was incorrect.");
         if(zeros == null) throw new IllegalArgumentException("Zeros were incorrect.");
         this.data = data;
         this.index = index;

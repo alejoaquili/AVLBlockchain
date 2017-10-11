@@ -13,13 +13,13 @@ import java.util.Comparator;
 public class AVLTree<T extends Serializable> {
 
     private AVLNode head;
-    private Comparator<T> cmp;
+    private SerializableComparator<T> cmp;
 
     /**
      * Returns a new {@code AVLTree} object.
      * @param cmp a {@code Comparator<T>} that represents the sorting criteria of the tree.
      */
-    public AVLTree(Comparator<T> cmp){
+    public AVLTree(SerializableComparator<T> cmp){
 
         if(cmp == null) throw new IllegalArgumentException("Comparator should not be null.");
         head = null;

@@ -1,6 +1,8 @@
 package Interface;
 
 import Model.AVLBlockchain;
+import Model.DataStructures.AVL.AVLOperationData;
+import Model.DataStructures.Blockchain.Blockchain;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -16,8 +18,9 @@ public class AVLInterface {
 
         Scanner sc = new Scanner(System.in);
 
-        int zeros = sc.nextInt();
+
         try {
+            int zeros = sc.nextInt();
             AVLBlockchain<Integer> b = new AVLBlockchain<>(zeros, new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
@@ -33,7 +36,6 @@ public class AVLInterface {
                 switch (answer) {
 
                     case "add":
-                        System.out.print("Which element? :> ");
                         if (!isValidData(sc)) {
                             System.out.println(" Not valid element");
                             break;
@@ -43,7 +45,7 @@ public class AVLInterface {
                         break;
 
                     case "remove":
-                        System.out.print("Which element? :> ");
+
                         if (!isValidData(sc))
                             break;
                         int elementToRemove = sc.nextInt();
@@ -51,7 +53,6 @@ public class AVLInterface {
                         b.remove(elementToRemove);
                         break;
                     case "lookup":
-                        System.out.print("Which element? :> ");
                         if (!isValidData(sc))
                             break;
                         int elementToSearch = sc.nextInt();
@@ -64,7 +65,6 @@ public class AVLInterface {
                         break;
 
                     case "modify":
-                        System.out.print("Which block? :> ");
                         if (!isValidData(sc))
                             break;
                         int index = sc.nextInt();
@@ -91,7 +91,7 @@ public class AVLInterface {
                     case "save":
                         System.out.println("Specify path :> ");
                         String pathToSave = sc.next();
-                        b.save(pathToSave);
+                        b.saveFile(pathToSave);
                         break;
 
                     case "read":
@@ -100,8 +100,14 @@ public class AVLInterface {
                         if (!sc.hasNext())
                             break;
                         String pathToRead = sc.next();
+                        Blockchain<AVLOperationData<?>> aux =b.readFile(pathToRead);
+                        if( aux != null){
+                            System.out.println("file read correctly");
+                        }else{
+                            System.out.println("the file was corrupted");
+                        }
 
-                        b.read(pathToRead);
+
                         break;
                     default:
                         break;
@@ -114,6 +120,7 @@ public class AVLInterface {
         }
         catch (IllegalArgumentException e){
             System.out.println("You enter an invalid path");
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

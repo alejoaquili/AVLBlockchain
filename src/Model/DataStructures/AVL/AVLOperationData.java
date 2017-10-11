@@ -11,14 +11,14 @@ import java.util.List;
  */
 public class AVLOperationData<T extends Serializable> implements Serializable {
     static final long serialVersionUID = 42L;
-    private transient List<T> modifiedElements ;
-    private transient T element;
-    private transient String operation;
-    private transient boolean result;
+    private  List<T> modifiedElements ;
+    private  T element;
+    private  String operation;
+    private  boolean result;
 
-    static transient final String INSERT = "Added";
-    static transient final String REMOVE = "Removed";
-    static transient final String SEARCH = "Searched";
+    static  final String INSERT = "Added";
+    static  final String REMOVE = "Removed";
+    static  final String SEARCH = "Searched";
 
     /**
      *Returns a new {@code AVLOperationData} object.

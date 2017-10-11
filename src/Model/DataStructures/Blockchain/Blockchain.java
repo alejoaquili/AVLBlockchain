@@ -12,10 +12,10 @@ import java.util.List;
  */
 public class Blockchain <T extends Serializable> implements Iterable<T>, Serializable {
     static final long serialVersionUID = 42L;
-    private transient List<Block<T>> blocks;
-    private final transient static String HASH_FUNCTION = "MD5";
-    private final transient String GENESIS = "0000000000000000000000000000000";
-    private  transient String zeros;
+    private  List<Block<T>> blocks;
+    private final  static String HASH_FUNCTION = "MD5";
+    private final  String GENESIS = "0000000000000000000000000000000";
+    private   String zeros;
 
 
     /**
