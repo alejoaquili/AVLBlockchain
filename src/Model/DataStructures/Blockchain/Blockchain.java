@@ -122,7 +122,7 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
     }
 
     /**
-     * falta docear
+     * This method print all the {@code Block} in the {@code Blockchain}.
      */
     public void print() {
         for(Block<T> block: blocks) {

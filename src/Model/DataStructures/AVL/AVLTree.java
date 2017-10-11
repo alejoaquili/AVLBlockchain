@@ -248,7 +248,7 @@ public class AVLTree<T extends Serializable> {
     }
 
     /**
-     * falta docear
+     * This method print the {@code AVLTree} inOrder.
      */
     public void printInOrder() {
         printInOrder(head);
