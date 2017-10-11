@@ -16,8 +16,8 @@ import java.util.List;
  * the {@code AVLTree}.
  * @param <T> the generic type of data for the tree.
  */
-public class AVLBlockchain<T extends Serializable> {
-
+public class AVLBlockchain<T extends Serializable> implements Serializable {
+    static final long serialVersionUID = 42L;
     private Blockchain<AVLOperationData<T>> blockchain;
     private AVLTree<T> tree;
 
