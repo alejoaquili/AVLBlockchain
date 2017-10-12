@@ -257,7 +257,7 @@ public class AVLTree<T extends Serializable> {
     private void printInOrder(AVLNode node) {
         if(node != null) {
             printInOrder(node.left);
-            System.out.println("Element: " + node.element + " - Height: " + node.height);
+            System.out.println("Element: " + node.element + " - Height: " + (head.height - node.height));
             printInOrder(node.right);
         }
     }
