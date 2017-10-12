@@ -235,6 +235,7 @@ public class AVLTree<T extends Serializable> {
     }
 
     public AVLOperationData<T> apply(AVLOperationData<T> operation) throws InvalidAVLOperationDataException {
+        if(operation == null) throw  new IllegalArgumentException("Operation cannot be null");
         switch (operation.getOperation()) {
             case AVLOperationData.INSERT:
                 return this.insert(operation.getElement());
