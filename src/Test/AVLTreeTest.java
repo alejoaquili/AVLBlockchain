@@ -6,11 +6,10 @@ import Model.Exceptions.InvalidAVLOperationDataException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created by lautaro on 11/10/17.
- */
 public class AVLTreeTest {
 
     private AVLTree tree;
@@ -47,20 +46,15 @@ public class AVLTreeTest {
     }
 
     @Test
-    public void inOrderPrintTest(){
-        String expected = "123";
-        tree.insert(new Integer(2));
-        tree.insert(new Integer(1));
-        tree.insert(new Integer(3));
-    }
-
-    @Test
     public void applyTest1(){
+
         AVLOperationData<Integer> operation = null, result = null;
         Exception ex = null;
         try {
             result = tree.apply(operation);
-        }catch(Exception e){ //cambiar
+        }catch(NullPointerException e){ //cambiar
+            ex = e;
+        }catch(InvalidAVLOperationDataException e){
             ex = e;
         }
         assertNotNull(ex);
@@ -73,6 +67,48 @@ public class AVLTreeTest {
         AVLOperationData<Integer> result = null;
         result = tree.apply(operation);
         assertNotNull(result);
+    }
+
+    @Test
+    public void inOrderPrintTest1() throws FileNotFoundException, IOException{
+        FileOutputStream f = new FileOutputStream("src/Test/inOrderTest1.txt");
+        System.setOut(new PrintStream(f));
+        tree.insert(new Integer(2));
+        tree.insert(new Integer(1));
+        tree.insert(new Integer(3));
+        tree.printInOrder();
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+        FileReader reader = new FileReader("src/Test/inOrderTest1.txt");
+        BufferedReader lineReader = new BufferedReader(reader);
+        String expected = "123";
+        StringBuffer inOrder = new StringBuffer();
+        for(int i = 0; i < 3; i++) {
+            String s[] = lineReader.readLine().split("\\D+");
+            inOrder.append(s[1]);
+        }
+        String result = inOrder.toString();
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void inOrderPrintTest2() throws FileNotFoundException, IOException{
+        FileOutputStream f = new FileOutputStream("src/Test/inOrderTest2.txt");
+        System.setOut(new PrintStream(f));
+        tree.insert(new Integer(3));
+        tree.insert(new Integer(2));
+        tree.insert(new Integer(1));
+        tree.printInOrder();
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+        FileReader reader = new FileReader("src/Test/inOrderTest2.txt");
+        BufferedReader lineReader = new BufferedReader(reader);
+        String expected = "123";
+        StringBuilder inOrder = new StringBuilder();
+        for(int i = 0; i < 3; i++) {
+            String s[] = lineReader.readLine().split("\\D+");
+            inOrder.append(s[1]);
+        }
+        String result = inOrder.toString();
+        assertEquals(expected, result);
     }
 
 
