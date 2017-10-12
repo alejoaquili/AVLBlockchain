@@ -19,12 +19,12 @@ public class AVLInterface {
         AVLBlockchain<Integer> b = startWithSavedBlockchain(sc);
         System.out.println("Initializing blockchain... ");
         System.out.print("How many zeros do you want the blocks to mine for? :> ");
-
+        String input = new String();
         try {
             if(b == null){
                 while(!sc.hasNextInt()){
                     System.out.println("Not a number. Please say how many zeros you want the blocks to mine for");
-                       sc.next();
+                    sc.next();
                 }
             int zeros = sc.nextInt();
             b = new AVLBlockchain<>(zeros, (Integer i1, Integer i2)->(i1-i2));
