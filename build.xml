@@ -229,9 +229,13 @@
   
   <target name="all" depends="build.modules" description="build all">
 
-    <java classname="Interface.AVLInterface">
-      <classpath path="out"></classpath>
-    </java>
-
+      <jar destfile="${blockchain.output.dir}/jar/AVLBlockchain.jar"
+           basedir="${module.blockchain.basedir}/"
+           >
+          <manifest >
+              <attribute name="Main-Class" value="Interface.AVLInterface">
+              </attribute>
+          </manifest>
+      </jar>
   </target>
 </project>

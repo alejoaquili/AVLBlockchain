@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="Blockchain:jar">
+    <output-path>$PROJECT_DIR$/AVLBlockchain_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Blockchain.jar">
+        <element id="module-output" name="Blockchain" />
+      </element>
+      <element id="library" level="module" name="JUnit5" module-name="Blockchain" />
+      <element id="library" level="module" name="JUnit4" module-name="Blockchain" />
+    </root>
+  </artifact>
+</component>
