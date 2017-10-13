@@ -30,12 +30,12 @@ public class AVLTree<T extends Serializable> {
         return (a > b)? a : b;
     }
 
-    private int height(AVLNode node) {
-        return (node == null) ? -1 : node.height;
+    private int weight(AVLNode node) {
+        return (node == null) ? -1 : node.weight;
     }
 
     private int getBalance(AVLNode node) {
-        return height(node.right) - height(node.left);
+        return weight(node.right) - weight(node.left);
     }
 
 
@@ -90,7 +90,7 @@ public class AVLTree<T extends Serializable> {
                 }
             }
         }
-        node.height = max(height(node.right), height(node.left)) + 1;
+        node.weight = max(weight(node.right), weight(node.left)) + 1;
         return node;
     }
 
@@ -98,8 +98,8 @@ public class AVLTree<T extends Serializable> {
         AVLNode aux = node.left;
         node.left = aux.right;
         aux.right = node;
-        node.height = max(height(node.right), height(node.left)) + 1;
-        aux.height = max(height(node.right), height(node.left)) + 1;
+        node.weight = max(weight(node.right), weight(node.left)) + 1;
+        aux.weight = max(weight(node.right), weight(node.left)) + 1;
         data.addModified(aux.element);
         if(aux.left != null) {
             data.addModified(aux.left.element);
@@ -114,8 +114,8 @@ public class AVLTree<T extends Serializable> {
         AVLNode aux = node.right;
         node.right = aux.left;
         aux.left = node;
-        node.height = max(height(node.right), height(node.left)) + 1;
-        aux.height = max(height(node.right), height(node.left)) + 1;
+        node.weight = max(weight(node.right), weight(node.left)) + 1;
+        aux.weight = max(weight(node.right), weight(node.left)) + 1;
         data.addModified(aux.element);
         if(aux.left != null) {
             data.addModified(aux.left.element);
@@ -200,7 +200,7 @@ public class AVLTree<T extends Serializable> {
                 return node.left;
             }
         }
-        node.height = max(height(node.right), height(node.left)) + 1;
+        node.weight = max(weight(node.right), weight(node.left)) + 1;
         return node;
     }
 
@@ -258,7 +258,7 @@ public class AVLTree<T extends Serializable> {
     private void printInOrder(AVLNode node) {
         if(node != null) {
             printInOrder(node.left);
-            System.out.println("Element: " + node.element + " - Height: " + (head.height - node.height));
+            System.out.println("Element: " + node.element + " - Weight: " + (node.weight));
             printInOrder(node.right);
         }
     }
@@ -268,13 +268,13 @@ public class AVLTree<T extends Serializable> {
         T element;
         AVLNode left;
         AVLNode right;
-        int height;
+        int weight;
 
         public AVLNode(T element) {
             this.element = element;
             left = null;
             right = null;
-            height = 0;
+            weight = 0;
         }
 
     }
