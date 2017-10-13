@@ -227,5 +227,11 @@
   
   <target name="build.modules" depends="init, clean, compile.module.blockchain" description="build all modules"/>
   
-  <target name="all" depends="build.modules" description="build all"/>
+  <target name="all" depends="build.modules" description="build all">
+
+    <java classname="Interface.AVLInterface">
+      <classpath path="out"></classpath>
+    </java>
+
+  </target>
 </project>
