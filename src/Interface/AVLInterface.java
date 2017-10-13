@@ -25,33 +25,22 @@ public class AVLInterface {
         Scanner sc = new Scanner(System.in);
         AVLBlockchain<Integer> b = startWithSavedBlockchain(sc);
         System.out.println("Initializing blockchain... ");
-
-        pathForModifyElement =setPathForMidyElement(sc);
         lastOperation = null;
-
 
         try {
             if(b == null){
                 System.out.print("How many zeros do you want the blocks to mine for? :> ");
-                int zeros = sc.nextInt();
-                b = new AVLBlockchain<>(zeros, new Comparator<Integer>() {
-                    @Override
-                    public int compare(Integer o1, Integer o2) {
-                        return o1 - o2;
-                    }
-                });
                 while(!sc.hasNextInt()){
                     System.out.println("Not a number. Please say how many zeros you want the blocks to mine for");
                     sc.next();
                 }
-                zeros = sc.nextInt();
+                int zeros = sc.nextInt();
                 b = new AVLBlockchain<>(zeros, (Integer i1, Integer i2)->(i1-i2));
             }
 
 
-
             while (isRunning) {
-                System.out.print("What do you want to do? (add, remove, lookup, modify, verify, save or read, printblockchain, printtree, exit) :> ");
+                System.out.print("What do you want to do? (add, remove, lookup, modify, verify, save, read, printblockchain, printtree, savelastop or exit) :> ");
                 String answer = sc.next().toLowerCase();
 
                 switch (answer) {
@@ -63,8 +52,6 @@ public class AVLInterface {
                         }
                         int elementToAdd = sc.nextInt();
                         lastOperation = b.add(elementToAdd);
-                        saveLastOperation(lastOperation);
-
                         break;
 
                     case "remove":
@@ -74,7 +61,6 @@ public class AVLInterface {
                         int elementToRemove = sc.nextInt();
 
                         lastOperation = b.remove(elementToRemove);
-                        saveLastOperation(lastOperation);
                         break;
                     case "lookup":
                         if (!isValidData(sc))
@@ -94,7 +80,7 @@ public class AVLInterface {
                         int index = sc.nextInt();
                         System.out.println("Which file_path (the path must start with \" ./\" to be recognized else an empty block will be added)");
                         String path = sc.next();
-                        System.out.println(path);
+
                         if(path.matches("^[./].*"))
                             b.modify(index, path);
                         else
@@ -131,7 +117,10 @@ public class AVLInterface {
                             System.out.println("The file was corrupted");
                         }
                         break;
-
+                    case "savelastop":
+                        pathForModifyElement =setPathForMidyElement(sc);
+                        saveLastOperation(lastOperation);
+                        break;
                     case "printtree":
                         b.printTree();
                         break;
