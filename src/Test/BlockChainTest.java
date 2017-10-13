@@ -46,6 +46,11 @@ public class BlockChainTest
 
 
     @Test
+    public void reHashTest(){
+        assertTrue(b.reHashNounce());
+    }
+
+    @Test
     public void setTest(){
         for(int i = 0; i < 3; i++){
             b.add(new Integer(i));
@@ -59,21 +64,6 @@ public class BlockChainTest
         Iterator<Integer> it;
         it = b.iterator();
         assertNotNull(it);
-    }
-
-    @Test
-    public void iteratorTest(){
-        Object array[] = new Object[17];
-        for(int i = 0 ; i < 3; i++){
-            b.add(new Integer(i));
-        }
-        Iterator<Integer> it = b.iterator();
-        int j = 0;
-        while(it.hasNext()){
-            array[j++] = it.next();
-        }
-        assertTrue(array[13] != null && array[12] != null &&
-        array[11] != null);
     }
 
 }

@@ -35,7 +35,7 @@ public class AVLBlockchainTest {
     @Test
     public void initialLookUpTest(){
         List<Long> result = null;
-        result = chain.lookup(null);
+        result  = chain.lookup(null);
         assertNull(result);
     }
 
