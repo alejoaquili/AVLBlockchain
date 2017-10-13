@@ -52,9 +52,11 @@ public class AVLTreeTest {
         Exception ex = null;
         try {
             result = tree.apply(operation);
-        }catch(NullPointerException e){ //cambiar
+        }catch(NullPointerException e){
             ex = e;
         }catch(InvalidAVLOperationDataException e){
+            ex = e;
+        }catch(IllegalArgumentException e){
             ex = e;
         }
         assertNotNull(ex);
