@@ -68,10 +68,7 @@ public class Blockchain <T extends Serializable> implements Iterable<T>, Seriali
         if(index < 0 || index >= blocks.size()) throw  new IndexOutOfBoundsException("Invalid index.");
         Block<T> oldBlock = blocks.get(index);
         oldBlock.setData(data);
-        oldBlock.mine();
-
-        //Block<T> newBlock = new Block<>(oldBlock.getIndex(), data, oldBlock.getPrevHash(), zeros);
-        //blocks.add(index, newBlock);
+        oldBlock.isValidHash();
     }
 
     /**
