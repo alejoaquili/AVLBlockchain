@@ -1,0 +1,3 @@
+Element: 1 - Height: 1
+Element: 2 - Height: 0
+Element: 3 - Height: 1
