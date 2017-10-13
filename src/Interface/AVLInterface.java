@@ -18,7 +18,6 @@ public class AVLInterface {
     private static  AVLOperationData<Integer> lastOperation ;
     private static String pathForModifyElement;
 
-
     private static boolean isRunning = true;
 
     public static void main(String [] args)  {
