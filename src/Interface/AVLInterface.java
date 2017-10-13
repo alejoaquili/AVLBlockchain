@@ -1,9 +1,12 @@
 package Interface;
 
 import Model.AVLBlockchain;
+import Model.DataStructures.AVL.AVLOperationData;
 import Model.Exceptions.InvalidAVLOperationDataException;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.List;
@@ -12,23 +15,39 @@ import java.util.Scanner;
 
 public class AVLInterface {
 
+    private static  AVLOperationData<Integer> lastOperation ;
+    private static String pathForModifyElement;
+
+
     private static boolean isRunning = true;
 
-    public static void main(String [] args) {
+    public static void main(String [] args)  {
         Scanner sc = new Scanner(System.in);
         AVLBlockchain<Integer> b = startWithSavedBlockchain(sc);
         System.out.println("Initializing blockchain... ");
-        System.out.print("How many zeros do you want the blocks to mine for? :> ");
-        String input = new String();
+
+        pathForModifyElement =setPathForMidyElement(sc);
+        lastOperation = null;
+
+
         try {
             if(b == null){
+                System.out.print("How many zeros do you want the blocks to mine for? :> ");
+                int zeros = sc.nextInt();
+                b = new AVLBlockchain<>(zeros, new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o1 - o2;
+                    }
+                });
                 while(!sc.hasNextInt()){
                     System.out.println("Not a number. Please say how many zeros you want the blocks to mine for");
                     sc.next();
                 }
-            int zeros = sc.nextInt();
-            b = new AVLBlockchain<>(zeros, (Integer i1, Integer i2)->(i1-i2));
+                zeros = sc.nextInt();
+                b = new AVLBlockchain<>(zeros, (Integer i1, Integer i2)->(i1-i2));
             }
+
 
 
             while (isRunning) {
@@ -43,7 +62,9 @@ public class AVLInterface {
                             break;
                         }
                         int elementToAdd = sc.nextInt();
-                        b.add(elementToAdd);
+                        lastOperation = b.add(elementToAdd);
+                        saveLastOperation(lastOperation);
+
                         break;
 
                     case "remove":
@@ -52,7 +73,8 @@ public class AVLInterface {
                             break;
                         int elementToRemove = sc.nextInt();
 
-                        b.remove(elementToRemove);
+                        lastOperation = b.remove(elementToRemove);
+                        saveLastOperation(lastOperation);
                         break;
                     case "lookup":
                         if (!isValidData(sc))
@@ -70,7 +92,7 @@ public class AVLInterface {
                         if (!isValidData(sc))
                             break;
                         int index = sc.nextInt();
-                        System.out.println("Which file_path (leave black to replace for an empty block)");
+                        System.out.println("Which file_path (the path must start with \" ./\" to be recognized else an empty block will be added)");
                         String path = sc.next();
                         System.out.println(path);
                         if(path.matches("^[./].*"))
@@ -194,5 +216,22 @@ public class AVLInterface {
             return false;
         }
         return true;
+    }
+
+    private static String setPathForMidyElement(Scanner sc) {
+        System.out.println("specify the path in which you want the last element to be saved");
+
+        String path = sc.next();
+        return path;
+    }
+
+    private static void saveLastOperation(AVLOperationData operation){
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(pathForModifyElement));
+            oos.writeObject(operation);
+        } catch (IOException e) {
+            System.out.println("operation couldn't be saved , check the path");
+        }
+
     }
 }

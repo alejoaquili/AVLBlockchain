@@ -97,4 +97,7 @@ public class Block <S extends Serializable> implements Serializable{
                 " - Data: " + data + " - PreHash: " + prevHash + " - Hash: " + hash;
     }
 
+    public void setData(S data) {
+        this.data = data;
+    }
 }

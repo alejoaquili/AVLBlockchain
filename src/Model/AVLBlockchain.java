@@ -36,18 +36,20 @@ public class AVLBlockchain<T extends Serializable> implements Serializable {
      * This method add a new element to the {@code AVLTree}.
      * @param element a new element.
      */
-    public void add(T element) {
+    public AVLOperationData add(T element) {
         AVLOperationData<T> data = tree.insert(element);
         blockchain.add(data);
+        return data;
     }
 
     /**
      * This method remove a element from the {@code AVLTree}.
      * @param element a element to remove.
      */
-    public void remove(T element) {
+    public AVLOperationData remove(T element) {
         AVLOperationData<T> data = tree.remove(element);
         blockchain.add(data);
+        return  data;
     }
 
     /**
@@ -103,7 +105,6 @@ public class AVLBlockchain<T extends Serializable> implements Serializable {
         }
         AVLOperationData<T> newdata = (AVLOperationData<T>)obj;
         blockchain.setBlock(index, newdata);
-
     }
 
     /**
