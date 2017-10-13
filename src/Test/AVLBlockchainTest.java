@@ -20,6 +20,7 @@ public class AVLBlockchainTest {
     public static void beforeAll(){
         try {
             chain = new AVLBlockchain<>(3, (Integer i1, Integer i2) -> (i1 - i2));
+
         }catch(NoSuchAlgorithmException e){
             e.printStackTrace();
         }
@@ -77,6 +78,7 @@ public class AVLBlockchainTest {
     @Test
     public void lookUpTest(){
         List<Long> result = null;
+        chain.add(1);
         result = chain.lookup(new Integer(1));
         assertNotNull(result);
     }
